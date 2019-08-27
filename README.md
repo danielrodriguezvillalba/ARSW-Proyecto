@@ -7,7 +7,7 @@
 * Sergio Alejandro Nuñez Mendivelso
 * Etienne Maxence Eugene Reitz
 * Daniel Felipe Rodriguez Villalba
-* Miguel Angel Rojas
+* Miguel Angel Rojas Martinez
 
 ## Resumen 
 
