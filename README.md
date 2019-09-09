@@ -40,6 +40,28 @@ A continuación encontrará una rápida descripción de las diferentes reglas de
 - Rojo o negro (red or black) Apostar exclusivamente por el color que saldrá.El cero no cuenta ni para uno ni para otro. Gana lo equivalente a su apuesta si ésta resulta ganadora.
 - Par o impar (Odd or even) Apostar exclusivamente por que el número que salga sea par o impar. El cero no cuenta ni para uno ni para otro. Gana lo equivalente a su apuesta si ésta resulta ganadora siguiendo las reglas de la ruleta de casino.
 
+## Interfaz de usuario 
+
+La particularidad de nuestra aplicación es que permite a los usuarios jugar hasta 4 mesas diferentes al mismo tiempo. Por lo tanto, la interfaz debe ser capaz de adaptarse a un jugador que juega de 1 a 4 mesas al mismo tiempo : 
+
+![](https://i.imgur.com/bpHMjpF.png)
+
+En este diagrama, podemos ver cómo se verá la interfaz de usuario cuando esté conectada. Podemos ver una barra de menú, que permite al usuario acceder a su cuenta, recargar o retirar su saldo. 
+
+En la parte izquierda de la pantalla, podemos ver una lista de las mesas abiertas, y cuántos jugadores están jugando actualmente en cada una de ellas. Haciendo clic en el nombre de una mesa, si todavía tiene plazas libres, el usuario podrá, si aún no está jugando en 4 mesas, unirse a la mesa deseada.
+
+Finalmente, en el centro de la pantalla, tenemos la mesa de juego compuesta por la rueda de la ruleta, el tablero en el que el jugador puede apostar, la historia de los números ganadores así como la lista de jugadores en la mesa.
+
+![](https://i.imgur.com/gHIZgjA.png)
+
+En este diagrama, el usuario decidió jugar en dos mesas al mismo tiempo. Para adaptar la pantalla y permitir al usuario jugar en estas dos mesas en paralelo sin afectar a la visibilidad, la pantalla del juego se divide en dos horizontalmente, y ambas mesas son accesibles sin que el usuario tenga que desplazarse por la pantalla.
+
+![](https://i.imgur.com/WZi0pEI.png)
+
+Por último, para mostrar tres o cuatro mesas al mismo tiempo, las partes horizontales se cortan por la mitad, lo que permite mostrar hasta 4 mesas al mismo tiempo.
+
+
+
 ## Historias de usuario
 
 https://tree.taiga.io/project/danielrodriguez-vi-arsw-proyecto/backlog
