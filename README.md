@@ -13,6 +13,7 @@
 
 
 Se realizara una aplicacion web de una ruleta, adaptandola a una experiencia multiusuario y un valor agregado muy atractivo.
+
 Para esta aplicacion se plantea el siguiente diagrama de clases:
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/DiagramaClases.PNG)
