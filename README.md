@@ -20,7 +20,7 @@ El proyecto que se realizara es una aplicación web, representando una ruleta de
 ## Valor Agregado
 
 - El usuario puede estar jugando en varias salas al mismo tiempo.
-- Historial de todos los Usuarios que posee el casino, donde se podra ver cuanta plata tienen y si estan en el casino en ese momento que se revisa el historial.
+- Historial de los 10 Usuarios que poseen mas dinero en el casino, donde se podra ver cuanta plata tienen y si estan en el casino en ese momento en que se revisa el historial.
 
 ## Reglas de la Ruleta
 
