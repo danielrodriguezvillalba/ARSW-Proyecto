@@ -11,11 +11,11 @@
 
 ## Resumen 
 
-Se realizara una aplicacion web de una ruleta, adaptandola a una experiencia multiusuario.
+Se realizara una aplicacion web de una ruleta, adaptandola a una experiencia multiusuario y un var agregado muy atractivo.
 
 ## Descripcion
 
-El proyecto que se realizara es una aplicación web, representando una ruleta, permitiendo asi la experiencia multiusuario, haciendo asi que cada uno apueste una cuota definida por el administrador y este total se divide entre el numero ganadores con este numero, en caso de no haber ningun ganador, la aplicacion es la que se queda con el total apostado.
+El proyecto que se realizara es una aplicación web, representando una ruleta de casino, permitiendo asi la experiencia multiusuario, haciendo asi que cada uno apueste una cuota definida y se ganara con las reglas normales de una ruleta ademas tendra un valor agregado para que la aplicacion sea mas atractiva para los usuarios, en caso de no haber ningun ganador, la aplicacion es la que se queda con el total apostado.
 
 ## Valor Agregado
 
@@ -26,6 +26,7 @@ El proyecto que se realizara es una aplicación web, representando una ruleta, p
 
 A continuación encontrará una rápida descripción de las diferentes reglas de la ruleta, así como los distintos tipos de apuestas posibles y sus respectivas ganancias.
 
+- Por cada sala solo podran estar 5 usuarios jugando a la vez, si se desocupa un puesto otro usuario podra ocuparlo si asi lo desea.
 - Simple (Sencilla) Apostar por un solo número. Gana 36 veces su apuesta si la ruleta se detiene sobre el número que ha elegido.
 - Doble (Split) Apostar por 2 números. Gana 18 veces sus apuesta si la ruleta se detiene sobre uno de los números que usted ha elegido. Una apuesta a caballo se realiza colocando sus fichas sobre la línea común de 2 números.
 - Ángulo (en Esquina) Apostar por 4 números. Gana 9 veces su apuesta si la ruleta se detiene sobre uno de los números que usted ha elegido. Para realizar esta apuesta, coloque sus fichas en la intersección de 4 números.
