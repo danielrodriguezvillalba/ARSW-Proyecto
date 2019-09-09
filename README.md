@@ -18,7 +18,7 @@ Para esta aplicacion se plantea el siguiente diagrama de clases:
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/DiagramaClases.PNG)
 
-![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/DiagramaClases2.PNG)
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/DiagramaClases2.png)
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Bizagi.png)
 
