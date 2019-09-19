@@ -91,9 +91,10 @@ class Apuesta {
     
     public boolean stringArrayContains(String[] array, String valor){
         boolean test = false;
-        for (int i = 0; i < array.length; i++) {
-            if(array[i].equals(valor))
+        for (String valToCompare : array) {
+            if (valToCompare.equals(valor)) {
                 test = true;
+            }
         }
         return test;
     }
