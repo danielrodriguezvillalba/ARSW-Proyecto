@@ -7,6 +7,9 @@ package application;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,11 +25,11 @@ public class Sala extends Thread {
         "2to1-2", "2to1-3", "1to12", "13to24", "25to36"};
     private int numJugadores;
     private HistorialJugadas historial;
-    private Map< String, Apuesta> apuestas;
+    private Map< Usuario, Apuesta> apuestas;
 
     public Sala() {
         historial = new HistorialJugadas();
-        apuestas = new HashMap< String, Apuesta>();
+        apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
     }
 
@@ -34,13 +37,13 @@ public class Sala extends Thread {
         if (numJugadores == 5) {
             throw new RuletaException("Sala llena");
         } else {
-            apuestas.put(us.getCorreo(), new Apuesta());
+            apuestas.put(us, new Apuesta());
             numJugadores++;
         }
     }
 
     public void elimineUsuario(Usuario us) throws RuletaException {
-        Apuesta valor = apuestas.get(us.getCorreo());
+        Apuesta valor = apuestas.get(us);
         if (valor == null) {
             throw new RuletaException("Usuario a eliminar no encontrado");
         } else {
@@ -49,7 +52,7 @@ public class Sala extends Thread {
     }
 
     public void reinicieApuestas() {
-        for (Map.Entry<String, Apuesta> entry : apuestas.entrySet()) {
+        for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
             Apuesta value = entry.getValue();
             value.reinicie();
         }
@@ -58,7 +61,48 @@ public class Sala extends Thread {
     @Override
     public void run() {
         while (true) {
+            while(apuestas.size()==0 || !atLeastOnePlayedBet()){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             
+            long startTime = System.currentTimeMillis();
+            
+            while(System.currentTimeMillis() < startTime + tiempoEspera * 1000){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Random rdn = new Random();
+            int numero = rdn.nextInt(39);
+            String numeroGanador;
+            if(numero != 38)
+                numeroGanador = Integer.toString(numero);
+            else
+                numeroGanador = "00";
+            
+            for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
+                Usuario usuario = entry.getKey();
+                Apuesta apuesta = entry.getValue();
+                
+                usuario.setSaldo(usuario.getSaldo() + apuesta.ganancia(numeroGanador).floatValue());
+            }
+            reinicieApuestas();
         }
+    }
+    
+    private boolean atLeastOnePlayedBet(){
+        boolean test = false;
+        for(Apuesta a : apuestas.values()){
+            if(a.aposto())
+                test = true;
+        }
+        
+        return test;
     }
 }

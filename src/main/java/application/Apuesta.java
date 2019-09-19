@@ -32,6 +32,8 @@ class Apuesta {
     private final String[] twotoone3 = {"3", "6", "9", "12", "15", "18", "21", "24", "27", "30", "33", "36"};
     
     private Map<String, Double> apuestas; 
+    private boolean aposto;
+
    
     
     public Apuesta() {
@@ -39,17 +41,20 @@ class Apuesta {
         for(String s : numbers){
             apuestas.put(s, 0.0);
         }
+        aposto = false;
     }
     
     public void reinicie(){
         for(String s : apuestas.keySet()){
             apuestas.put(s, 0.0);
         }
+        aposto = false;
     }
     
-    public void apuestar(final String casilla, Double value){
+    public void apostar(final String casilla, Double value){
         value += apuestas.get(casilla);
         apuestas.put(casilla, value);
+        aposto = true;
     }
     
     public Double ganancia(final String numeroGanador){
@@ -97,5 +102,10 @@ class Apuesta {
             }
         }
         return test;
+    }
+    
+    
+    public boolean aposto() {
+        return aposto;
     }
 }
