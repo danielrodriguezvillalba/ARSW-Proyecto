@@ -77,3 +77,11 @@ https://tree.taiga.io/project/danielrodriguez-vi-arsw-proyecto/backlog
 ## Referencias:
 
 - Reglas predeterminadas de la Ruleta: https://www.juegos-casino.org/reglas-ruleta.html
+
+## Conexion base de datos 
+
+Host: ec2-23-21-115-109.compute-1.amazonaws.com
+Database: dcjlcvlpuum728
+User: unkwzcvdxtrfys
+Port: 5432
+Password: 03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052
