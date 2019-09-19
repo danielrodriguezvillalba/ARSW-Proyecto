@@ -68,16 +68,6 @@ En este diagrama, el usuario decidió jugar en dos mesas al mismo tiempo. Para a
 
 Por último, para mostrar tres o cuatro mesas al mismo tiempo, las partes horizontales se cortan por la mitad, lo que permite mostrar hasta 4 mesas al mismo tiempo.
 
-
-
-## Historias de usuario
-
-https://tree.taiga.io/project/danielrodriguez-vi-arsw-proyecto/backlog
-
-## Referencias:
-
-- Reglas predeterminadas de la Ruleta: https://www.juegos-casino.org/reglas-ruleta.html
-
 ## Conexion base de datos 
 
 Host: ec2-23-21-115-109.compute-1.amazonaws.com
@@ -89,3 +79,13 @@ User: unkwzcvdxtrfys
 Port: 5432
 
 Password: 03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052
+
+## Historias de usuario
+
+https://tree.taiga.io/project/danielrodriguez-vi-arsw-proyecto/backlog
+
+## Referencias:
+
+- Reglas predeterminadas de la Ruleta: https://www.juegos-casino.org/reglas-ruleta.html
+
+
