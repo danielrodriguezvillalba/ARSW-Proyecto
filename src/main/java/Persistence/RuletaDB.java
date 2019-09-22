@@ -5,7 +5,7 @@
  */
 package Persistence;
 
-import application.Usuario;
+import application.model.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -44,7 +44,7 @@ public class RuletaDB {
         } catch (SQLException e) {
             System.out.println("Ocurrio un error : "+e.getMessage());
         }
-        System.out.println("La conexión se realizo sin problemas!");
+        System.out.println("La conexiï¿½n se realizo sin problemas!");
     }
     
     public static void createTable(){
@@ -60,7 +60,7 @@ public class RuletaDB {
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexión se realizo sin problemas! =) ");
+            System.out.println("La conexiï¿½n se realizo sin problemas! =) ");
         }
         try{
             Class.forName("org.postgresql.Driver");
@@ -96,14 +96,14 @@ public class RuletaDB {
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexión se realizo sin problemas! =) ");
+            System.out.println("La conexiï¿½n se realizo sin problemas! =) ");
         }
         try{
             Class.forName("org.postgresql.Driver");
             c.setAutoCommit(false);
             stmt = c.createStatement();
             //SQL de ejemplo mientras se define lo que se va a ingresar a la base de datos
-            String sql = "INSERT INTO usuario (nombre,apellido,correo,contraseña,saldo,numerocedula) "
+            String sql = "INSERT INTO usuario (nombre,apellido,correo,contraseï¿½a,saldo,numerocedula) "
                +"VALUES ('"+usr.getNombre()+"','"+usr.getApellido()+"','"+usr.getCorreo()+"','"+usr.getContra()+"',"+usr.getSaldo()+","+usr.getId()+");";
             stmt.executeUpdate(sql);
             stmt.close();
@@ -129,7 +129,7 @@ public class RuletaDB {
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexión se realizo sin problemas! =) ");
+            System.out.println("La conexiï¿½n se realizo sin problemas! =) ");
         }
         
         try {
@@ -163,7 +163,7 @@ public class RuletaDB {
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexión se realizo sin problemas! =) ");
+            System.out.println("La conexiï¿½n se realizo sin problemas! =) ");
         }
         try {
             stmt = c.createStatement();
