@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package application;
+package application.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +44,7 @@ class Apuesta {
     }
     
     /**
-     * Resets the bets of the user
+     * Resets the bets of the user  
      */
     public void reinicie(){
         for(String s : apuestas.keySet()){
