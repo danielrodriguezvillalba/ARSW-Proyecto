@@ -5,13 +5,12 @@
  */
 package application;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- *
- * @author 2115253
+ * @author Tylones
  */
 class Apuesta {
     
@@ -44,6 +43,9 @@ class Apuesta {
         aposto = false;
     }
     
+    /**
+     * Resets the bets of the user
+     */
     public void reinicie(){
         for(String s : apuestas.keySet()){
             apuestas.put(s, 0.0);
@@ -51,12 +53,23 @@ class Apuesta {
         aposto = false;
     }
     
+    /**
+     * This function allows the user to bet on a number or a specific case
+     * @param casilla The case on which to bet
+     * @param value The value to bet
+     */
     public void apostar(final String casilla, Double value){
         value += apuestas.get(casilla);
         apuestas.put(casilla, value);
         aposto = true;
     }
     
+
+    /**
+     * This function calculates the winnings of the user depending on the winning number
+     * @param numeroGanador The number that won the roulette
+     * @return The winning of the user
+     */
     public Double ganancia(final String numeroGanador){
         Double valor = 0.0;
         valor += apuestas.get(numeroGanador) * 36;
@@ -94,6 +107,12 @@ class Apuesta {
         return valor;
     }   
     
+    /**
+     * This function returns a boolean indicating if the String Array contains a specific String
+     * @param array The array to analyse
+     * @param valor The String 
+     * @return a boolean indicating if the array contains the String
+     */
     public boolean stringArrayContains(String[] array, String valor){
         boolean test = false;
         for (String valToCompare : array) {
@@ -105,6 +124,10 @@ class Apuesta {
     }
     
     
+    /**
+     * This function returns if the user did bet something
+     * @return boolean indicating if the user bet
+     */
     public boolean aposto() {
         return aposto;
     }
