@@ -33,6 +33,11 @@ public class Sala extends Thread {
         numJugadores = 0;
     }
 
+    /**
+     * This function adds a user to the room
+     * @param us the user to be added
+     * @throws RuletaException
+     */
     public void inserteUsuario(Usuario us) throws RuletaException {
         if (numJugadores == 5) {
             throw new RuletaException("Sala llena");
@@ -42,15 +47,23 @@ public class Sala extends Thread {
         }
     }
 
+    /**
+     * This function removes a user from the room
+     * @param us the user to be removed
+     * @throws RuletaException
+     */
     public void elimineUsuario(Usuario us) throws RuletaException {
         Apuesta valor = apuestas.get(us);
         if (valor == null) {
             throw new RuletaException("Usuario a eliminar no encontrado");
         } else {
-            apuestas.remove(us.getCorreo());
+            apuestas.remove(us);
         }
     }
 
+    /**
+     * This function resets the bets of all the players in the room
+     */
     public void reinicieApuestas() {
         for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
             Apuesta value = entry.getValue();
@@ -96,6 +109,10 @@ public class Sala extends Thread {
         }
     }
     
+    /**
+     * This function verifies if at least one player placed a bet in the room
+     * @return returns a boolean indicating if at least a user placed a bet
+     */
     private boolean atLeastOnePlayedBet(){
         boolean test = false;
         for(Apuesta a : apuestas.values()){
