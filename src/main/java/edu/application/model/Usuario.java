@@ -1,4 +1,4 @@
-package application.model;
+package edu.application.model;
 
 public class Usuario {
 

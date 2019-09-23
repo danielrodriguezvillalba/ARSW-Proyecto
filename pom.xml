@@ -9,6 +9,7 @@
   <packaging>jar</packaging>
   <version>1</version>
   <name>Roulette Application</name>
+  <description>Demo project for Spring Boot</description>
 
   <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
+  
   <dependencies>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -42,6 +44,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+    
+
+
 	 <dependency>
 	  <groupId>org.json</groupId>
 	  <artifactId>json</artifactId>
