@@ -145,3 +145,14 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/java,maven,windows,eclipse,netbeans
 /nbproject/
+
+### Gradle ###
+.gradle
+build/
+
+### Gradle Patch ###
+**/build/
+
+
+# attach
+.attach*
