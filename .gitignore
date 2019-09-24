@@ -147,7 +147,7 @@ $RECYCLE.BIN/
 /nbproject/
 
 ### Gradle ###
-.gradle
+.gradle/
 build/
 
 ### Gradle Patch ###
