@@ -16,12 +16,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/blueprints")
 public class RouletteAPIController{
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> GetAllBlueprintFilter(){
-        try {
-            return new ResponseEntity("",HttpStatus.ACCEPTED);
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
-    }
 }

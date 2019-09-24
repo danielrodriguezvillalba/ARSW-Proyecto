@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * @author Tylones
  */
-class Apuesta {
+public class Apuesta {
     
     private final String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
@@ -70,10 +70,10 @@ class Apuesta {
      * @param numeroGanador The number that won the roulette
      * @return The winning of the user
      */
-    public Double ganancia(final String numeroGanador){
+    public Double ganancia(String numeroGanador){
         Double valor = 0.0;
         valor += apuestas.get(numeroGanador) * 36;
-        int numero = Integer.getInteger(numeroGanador);
+        int numero = Integer.parseInt(numeroGanador);
         if(numero <= 1 && numero <=18)
             valor += apuestas.get("1to18") * 2;
         else if(numero <= 19 && numero <=36)
@@ -90,18 +90,18 @@ class Apuesta {
             valor += apuestas.get("even") * 2;
         
         if(stringArrayContains(negro, numeroGanador))
-            valor += apuestas.get("black");
+            valor += apuestas.get("black") * 2;
         else if(!stringArrayContains(verde, numeroGanador))
-            valor += apuestas.get("red");
+            valor += apuestas.get("red") * 2;
         
         if(stringArrayContains(twotoone1, numeroGanador))
-            valor += apuestas.get("2to1-1");
+            valor += apuestas.get("2to1-1") * 2;
         
         else if(stringArrayContains(twotoone2, numeroGanador))
-            valor += apuestas.get("2to1-2");
+            valor += apuestas.get("2to1-2") * 2;
         
         else if(stringArrayContains(twotoone3, numeroGanador))
-            valor += apuestas.get("2to1-3");
+            valor += apuestas.get("2to1-3") * 2;
         
         
         return valor;
