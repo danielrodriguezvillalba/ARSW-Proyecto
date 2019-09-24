@@ -90,9 +90,9 @@ public class Apuesta {
             valor += apuestas.get("even") * 2;
         
         if(stringArrayContains(negro, numeroGanador))
-            valor += apuestas.get("black");
+            valor += apuestas.get("black") * 2;
         else if(!stringArrayContains(verde, numeroGanador))
-            valor += apuestas.get("red");
+            valor += apuestas.get("red") * 2;
         
         if(stringArrayContains(twotoone1, numeroGanador))
             valor += apuestas.get("2to1-1") * 2;
