@@ -16,7 +16,7 @@ import java.sql.Statement;
  *
  * @author Usuario
  */
-public class RuletaDB {
+public class RouletteDB {
     //Direccion del DB de prueba
     static String urlDatabase = "jdbc:postgresql://ec2-23-21-115-109.compute-1.amazonaws.com:5432/dcjlcvlpuum728";
     static String usuarioDb = "unkwzcvdxtrfys";
@@ -103,7 +103,7 @@ public class RuletaDB {
             c.setAutoCommit(false);
             stmt = c.createStatement();
             //SQL de ejemplo mientras se define lo que se va a ingresar a la base de datos
-            String sql = "INSERT INTO usuario (nombre,apellido,correo,contrase�a,saldo,numerocedula) "
+            String sql = "INSERT INTO usuario (nombre,apellido,correo,contraseña,saldo,numerocedula) "
                +"VALUES ('"+usr.getNombre()+"','"+usr.getApellido()+"','"+usr.getCorreo()+"','"+usr.getContra()+"',"+usr.getSaldo()+","+usr.getId()+");";
             stmt.executeUpdate(sql);
             stmt.close();
