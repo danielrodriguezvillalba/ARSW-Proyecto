@@ -25,14 +25,14 @@ public class RouletteDB {
     
    
      //Main provicional para realizar pruebas a la base de datos
-    public static void main(String[] args) {
+    /**public static void main(String[] args) {
         Usuario user = new Usuario(768903,"Didio", "Osorio", "dosorasdsaio@sywork.net","contra");
         realizaConexion();
         insertarUsuario(user);
         //createTable();
         //insertarRegistro();
         //selectRegistros();
-    }
+    }*/
 
 
     public static void realizaConexion(){
