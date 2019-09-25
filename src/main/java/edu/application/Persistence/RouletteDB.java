@@ -23,16 +23,16 @@ public class RouletteDB {
     static String passwordDb= "03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052";
     static Connection conn = null;
     
-    /**
-     * Main provicional para realizar pruebas a la base de datos
-    public static void main(String args[]) {
-        Usuario user = new Usuario(768903,"Didio", "Osorio", "dosorio@sywork.net","contra");
+   
+     //Main provicional para realizar pruebas a la base de datos
+    public static void main(String[] args) {
+        Usuario user = new Usuario(768903,"Didio", "Osorio", "dosorasdsaio@sywork.net","contra");
         realizaConexion();
         insertarUsuario(user);
         //createTable();
         //insertarRegistro();
         //selectRegistros();
-    }**/
+    }
 
 
     public static void realizaConexion(){
