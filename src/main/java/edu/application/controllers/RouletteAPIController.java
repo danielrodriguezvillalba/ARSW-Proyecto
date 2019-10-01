@@ -20,30 +20,18 @@ public class RouletteAPIController{
     @Autowired
     RouletteServices services = null;
     
-    @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
-    public ResponseEntity<?> manejadorRecursoRecarga() {
-        Usuario us;
-        services.recargarSaldoUsuario(us, 0);
-        return null;
-    }
+        
     
     @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
     public ResponseEntity<?> manejadorInicio() {
-        services.Inicio(us, 0);
-        return null;
-    }
-    /**
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> manejadorGetRecursoXX() {
+        Usuario us = null;
         try {
-            //obtener datos que se enviarán a través del API
-            Set<Blueprint> data = bps.getAllBlueprints();
-            return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
+            services.recargarSaldoUsuario(us,00);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
-            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }
-    */
+    
     
 }

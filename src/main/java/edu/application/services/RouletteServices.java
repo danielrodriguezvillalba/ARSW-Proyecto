@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RouletteServices {
     
+    
     @Autowired
     RoulettePersistence rtp=null;
     

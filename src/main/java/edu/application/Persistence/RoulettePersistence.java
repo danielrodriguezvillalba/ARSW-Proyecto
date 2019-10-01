@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author danie
+ * @author sergio
  */
-@Service
 public interface RoulettePersistence {
 
     public void alterarSaldo(Usuario us, float valor);
-    
     
 }
