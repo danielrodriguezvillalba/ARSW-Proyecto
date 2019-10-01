@@ -19,8 +19,9 @@ public class RouletteAPIController{
     @Autowired
     RouletteServices services = null;
     
-    @RequestMapping(method = RequestMethod.PUT, path = "{usuario}/{recarga}")
+    @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
     public ResponseEntity<?> manejadorRecursoRecarga() {
+        services.recargarSaldoUsuario(us, 0);
         return null;
     }
     
