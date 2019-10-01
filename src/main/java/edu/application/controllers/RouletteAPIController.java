@@ -25,6 +25,11 @@ public class RouletteAPIController{
         return null;
     }
     
+    @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
+    public ResponseEntity<?> manejadorInicio() {
+        services.Inicio(us, 0);
+        return null;
+    }
     /**
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> manejadorGetRecursoXX() {
