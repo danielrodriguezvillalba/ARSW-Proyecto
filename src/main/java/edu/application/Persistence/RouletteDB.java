@@ -22,9 +22,8 @@ public class RouletteDB {
     static String usuarioDb = "unkwzcvdxtrfys";
     static String passwordDb= "03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052";
     static Connection conn = null;
-    
-   
-     //Main provicional para realizar pruebas a la base de datos
+
+    //Main provicional para realizar pruebas a la base de datos
     /**public static void main(String[] args) {
         Usuario user = new Usuario(768903,"Didio", "Osorio", "dosorasdsaio@sywork.net","contra");
         realizaConexion();
@@ -39,12 +38,12 @@ public class RouletteDB {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
+            System.out.println("La conexion se realizo sin problemas!");
         } catch (ClassNotFoundException e) {
             System.out.println("Ocurrio un error not found: "+e.getMessage());
         } catch (SQLException e) {
             System.out.println("Ocurrio un error : "+e.getMessage());
-        }
-        System.out.println("La conexi�n se realizo sin problemas!");
+        }        
     }
     
     public static void createTable(){
@@ -60,7 +59,7 @@ public class RouletteDB {
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexi�n se realizo sin problemas! =) ");
+            System.out.println("La conexion se realizo sin problemas! ");
         }
         try{
             Class.forName("org.postgresql.Driver");
@@ -92,11 +91,10 @@ public class RouletteDB {
         if(c == null){
             try {
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
-                
+                System.out.println("La conexion se realizo sin problemas!");
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexi�n se realizo sin problemas! =) ");
         }
         try{
             Class.forName("org.postgresql.Driver");
@@ -109,10 +107,11 @@ public class RouletteDB {
             stmt.close();
             c.commit();
             c.close();
+            System.out.println("Se ingreso correctamente el usuario");
         }catch(Exception e){
             System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());
         }
-        System.out.println("Se ingreso correctamente el usuario");
+        
     }
     
     
@@ -184,10 +183,11 @@ public class RouletteDB {
             rs.close();
             stmt.close();
             c.close();
+            System.out.println("Operation done successfully");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Operation done successfully");
+        
     }
 }

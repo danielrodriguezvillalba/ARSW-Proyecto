@@ -1,6 +1,7 @@
 package edu.application.controllers;
 
 
+import edu.application.model.Usuario;
 import edu.application.services.RouletteServices;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class RouletteAPIController{
     
     @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
     public ResponseEntity<?> manejadorRecursoRecarga() {
+        Usuario us;
         services.recargarSaldoUsuario(us, 0);
         return null;
     }
