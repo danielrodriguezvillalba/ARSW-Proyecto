@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InMemoryRoulettePersistence implements RoulettePersistence{
     
-    RouletteDB rb; 
+    RouletteDB rb = new RouletteDB(); 
 
     @Override
     public void alterarSaldo(Usuario us, float valor) {

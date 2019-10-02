@@ -34,7 +34,7 @@ public class RouletteAPIController{
     }
     
     @RequestMapping(path = "/users/{idUser1}", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllUsers(@PathVariable("idUser1") String idUser1) {
+    public ResponseEntity<?> getUsers(@PathVariable("idUser1") String idUser1) {
         try {
             //obtener datos que se enviarán a través del API
             return new ResponseEntity<>(services.ConsultarUsuario(idUser1), HttpStatus.ACCEPTED);
@@ -43,6 +43,17 @@ public class RouletteAPIController{
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
         }
     }
+    
+    @RequestMapping(path = "/addUser", method = RequestMethod.POST)
+    public ResponseEntity<?> InsertUsers(@PathVariable("name") String name,@PathVariable("lastname") String lastname,@PathVariable("email") String email,@PathVariable("contrasena") String contrasena,@PathVariable("taxID") int taxID) {
+        //obtener datos que se enviarán a través del API
+        System.out.println("Va a ingreas");
+        Usuario idUser1 = new Usuario(taxID, name, lastname, email, contrasena);
+        services.insertarUsuario(idUser1);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    
+    
     
     
 }

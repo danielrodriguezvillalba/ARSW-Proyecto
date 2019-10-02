@@ -7,6 +7,11 @@
 var module =(function(){
     var usuario;
     var password;
+    var name;
+    var lastname;
+    var TaxID;
+    var email;
+    var password1;
     
     return{
         init:function (){
@@ -36,9 +41,18 @@ var module =(function(){
             email = document.getElementById("email").value;
             password1 = document.getElementById("password").value;            
             
-            $.post("/addUser/"+name+"/"+lastname+"/"+email+"/"+password1+"/"+TaxID,function(data){
-                
+            var newUser = "{\"id\":"+name+ ",\""+lastname+ ",\""+TaxID++ ",\""+email+ ",\""+password1+"}";
+            console.log(newUser);
+            var crear = $.ajax({
+                url: "/ruleta/addUser",
+                type: 'POST',
+                data: newUser,
+                contentType: "application/json"
             });
+            crear.then(
+                    function () {
+                        module.login();
+                    },
         }
     };
 })();
