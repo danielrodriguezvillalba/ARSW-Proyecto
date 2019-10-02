@@ -6,6 +6,7 @@ import edu.application.persistence.RoulettePersistenceException;
 import edu.application.services.RouletteServices;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,11 +46,13 @@ public class RouletteAPIController{
     }
     
     @RequestMapping(path = "/addUser", method = RequestMethod.POST)
-    public ResponseEntity<?> InsertUsers(@RequestBody Usuario user) {
+    public ResponseEntity<?> InsertUsers(@RequestBody String body) {
         //obtener datos que se enviarán a través del API
+        JSONObject obj = new JSONObject(body);
+        Usuario us = new Usuario(obj.getInt("TaxID"), obj.getString("name"), obj.getString("lastname"), obj.getString("email"), obj.getString("password1"));
         System.out.println("Va a ingreas");
         try {
-            services.insertarUsuario(user);
+            services.insertarUsuario(us);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
             Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);

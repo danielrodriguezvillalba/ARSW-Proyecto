@@ -5,6 +5,14 @@
  */
 
 var module =(function(){
+    
+    var user = {
+         name: null,
+         lastname: null,
+         TaxID: null,
+         email: null,
+         password1: null
+    }   
     var usuario;
     var password;
     var name;
@@ -24,10 +32,9 @@ var module =(function(){
                 console.log("entro al login"+usuario);
                 console.log("entro al contra "+contra);
                 if(password == contra){
-                    //location.href ="http://localhost:8080/inicio.html";
-                    alert("Usuario identificado exitosamente");
+                    location.href ="inicio.html";
                 }else{
-                    alert("Verifique los datos");
+                    alert("Credenciales incorectas");
                 }
             });
             
@@ -35,19 +42,25 @@ var module =(function(){
         
         insert: function(){
             
-            name = document.getElementById("username").value;
-            lastname = document.getElementById("lastname").value;
-            TaxID = document.getElementById("TaxID").value;
-            email = document.getElementById("email").value;
-            password1 = document.getElementById("password").value;            
+            user.name = document.getElementById("username").value;
+            user.lastname = document.getElementById("lastname").value;
+            user.TaxID = document.getElementById("TaxID").value;
+            user.email = document.getElementById("email").value;
+            user.password1 = document.getElementById("password").value;            
             
             var newUser = "{\"id\":"+TaxID+",\"nombre\":'"+name+"',\"apellido\":'"+lastname+"',\"correo\":'"+email+"',\"contra\":'"+password1+"'}";
             console.log(newUser);
             var crear = $.ajax({
                 url: "/ruleta/addUser",
                 type: 'POST',
-                data: newUser,
-                contentType: "application/json"
+                data: JSON.stringify(user),
+                contentType: "application/json",
+                success: function(){
+                    location.href ="index.html";
+                },
+                error: function(){
+                    
+                }
             });
         }   
     };
