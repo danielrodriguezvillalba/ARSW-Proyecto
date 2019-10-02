@@ -26,11 +26,17 @@ public class Sala extends Thread {
     private int numJugadores;
     private HistorialJugadas historial;
     private Map< Usuario, Apuesta> apuestas;
+    private String Nombre;
 
-    public Sala() {
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public Sala(String Nombre) {
         historial = new HistorialJugadas();
         apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
+        this.Nombre = Nombre;
     }
 
     /**
@@ -121,5 +127,9 @@ public class Sala extends Thread {
         }
         
         return test;
+    }
+    
+    public int getNumeroParticipantes(){
+        return apuestas.size();
     }
 }
