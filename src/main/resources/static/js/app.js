@@ -14,8 +14,6 @@ var module =(function(){
     var password1;
     
     return{
-        init:function (){
-        },
         
         login: function(){
             usuario = document.getElementById("username").value;
@@ -32,6 +30,7 @@ var module =(function(){
                     alert("Verifique los datos");
                 }
             });
+            
         },
         
         insert: function(){
@@ -42,7 +41,7 @@ var module =(function(){
             email = document.getElementById("email").value;
             password1 = document.getElementById("password").value;            
             
-            var newUser = "{\"id\":"+name+ ",\""+lastname+ ",\""+TaxID++ ",\""+email+ ",\""+password1+"}";
+            var newUser = "{\"id\":"+TaxID+",\"nombre\":'"+name+"',\"apellido\":'"+lastname+"',\"correo\":'"+email+"',\"contra\":'"+password1+"'}";
             console.log(newUser);
             var crear = $.ajax({
                 url: "/ruleta/addUser",
@@ -50,10 +49,6 @@ var module =(function(){
                 data: newUser,
                 contentType: "application/json"
             });
-            crear.then(
-                    function () {
-                        module.login();
-                    },
-        }
+        }   
     };
 })();

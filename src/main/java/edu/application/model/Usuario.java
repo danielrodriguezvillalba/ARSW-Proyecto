@@ -17,6 +17,9 @@ public class Usuario {
         this.contra = contra;
         this.saldo = 0;
     }
+    
+    public Usuario(){
+    }
 
     public int getId() {
         return id;

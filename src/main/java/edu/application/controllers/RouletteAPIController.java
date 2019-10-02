@@ -45,12 +45,16 @@ public class RouletteAPIController{
     }
     
     @RequestMapping(path = "/addUser", method = RequestMethod.POST)
-    public ResponseEntity<?> InsertUsers(@PathVariable("name") String name,@PathVariable("lastname") String lastname,@PathVariable("email") String email,@PathVariable("contrasena") String contrasena,@PathVariable("taxID") int taxID) {
+    public ResponseEntity<?> InsertUsers(@RequestBody Usuario user) {
         //obtener datos que se enviarán a través del API
         System.out.println("Va a ingreas");
-        Usuario idUser1 = new Usuario(taxID, name, lastname, email, contrasena);
-        services.insertarUsuario(idUser1);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try {
+            services.insertarUsuario(user);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {
+            Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
+        }
     }
     
     
