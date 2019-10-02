@@ -26,6 +26,7 @@ var module =(function(){
                 console.log("entro al login"+usuario);
                 console.log("entro al contra "+contra);
                 if(password == contra){
+                    //location.href ="http://localhost:8080/inicio.html";
                     alert("Usuario identificado exitosamente");
                 }else{
                     alert("Verifique los datos");
