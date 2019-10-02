@@ -2,6 +2,7 @@ package edu.application.controllers;
 
 
 import edu.application.model.Usuario;
+import edu.application.persistence.RoulettePersistenceException;
 import edu.application.services.RouletteServices;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,10 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/ruleta")
 public class RouletteAPIController{
-    @Autowired
-    RouletteServices services = null;
     
-        
+    @Autowired
+    private RouletteServices services;
     
     @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
     public ResponseEntity<?> manejadorInicio() {
@@ -30,6 +30,17 @@ public class RouletteAPIController{
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
+        }
+    }
+    
+    @RequestMapping(path = "/users/{idUser1}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllUsers(@PathVariable("idUser1") String idUser1) {
+        try {
+            //obtener datos que se enviarán a través del API
+            return new ResponseEntity<>(services.ConsultarUsuario(idUser1), HttpStatus.ACCEPTED);
+        } catch (RoulettePersistenceException ex) {
+            Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
         }
     }
     

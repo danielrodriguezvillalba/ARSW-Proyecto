@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Registro Roulette</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+        <script  src = "js/apimock.js" > </script>
+        <script  src = "js/app.js" > </script>
+    </head>
+    
+    <body style="background-image:url('imagen/ruleta5.jpg');">
+        <div class="container">
+            <div class="d-flex justify-content-center h-100">
+		<div class="card">
+                    <div class="card-header">
+                        <h3>Sign up</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="name" id="username">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Lastname" id="lastname">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"></span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="TaxID" id="TaxID">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"></span>
+                                </div>
+                                <input type="email" class="form-control" placeholder="email" id="email">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="password" id="password">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="SingUp" class="btn float-right login_btn" onclick="module.insert()" id="login">
+                            </div>
+                        </form>
+                    </div>
+		</div>
+            </div>
+        </div>
+    </body>
+</html>

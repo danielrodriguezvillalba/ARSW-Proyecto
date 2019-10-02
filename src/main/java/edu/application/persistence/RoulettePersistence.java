@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.Persistence;
+package edu.application.persistence;
 
 import edu.application.model.Usuario;
 import org.springframework.stereotype.Service;
@@ -15,5 +15,8 @@ import org.springframework.stereotype.Service;
 public interface RoulettePersistence {
 
     public void alterarSaldo(Usuario us, float valor);
-    
+    public void realizaConexion() throws RoulettePersistenceException;
+    public void insertarUsuario(Usuario user);
+    public String ConsultarUsuario(String user) throws RoulettePersistenceException;
+ 
 }

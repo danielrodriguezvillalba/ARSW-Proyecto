@@ -5,8 +5,10 @@
  */
 package edu.application.services.impl;
 
-import edu.application.Persistence.RoulettePersistence;
+import edu.application.persistence.RoulettePersistence;
 import edu.application.model.Usuario;
+import edu.application.persistence.impl.RouletteDB;
+import edu.application.persistence.RoulettePersistenceException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,10 +17,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InMemoryRoulettePersistence implements RoulettePersistence{
+    
+    RouletteDB rb; 
 
     @Override
     public void alterarSaldo(Usuario us, float valor) {
         us.setSaldo(valor);
+    }
+
+    @Override
+    public void realizaConexion() throws RoulettePersistenceException {
+        rb.realizaConexion();
+    }
+
+    @Override
+    public void insertarUsuario(Usuario user) {
+        rb.insertarUsuario(user);
+    }
+
+    @Override
+    public String ConsultarUsuario(String user) throws RoulettePersistenceException {
+        return rb.ConsultarUsuario(user);
     }
     
 }
