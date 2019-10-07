@@ -12,8 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import org.springframework.stereotype.Service;
-import edu.application.persistence.RoulettePersistence;
-import edu.application.persistence.RoulettePersistenceException;
+import edu.application.Exceptions.RoulettePersistenceException;
 
 /**
  *
@@ -201,7 +200,7 @@ public class RouletteDB{
     }
 
     
-    public String ConsultarUsuario(String user) throws RoulettePersistenceException {
+    public String consultarUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
         System.err.println(user);
         Connection c = conn;

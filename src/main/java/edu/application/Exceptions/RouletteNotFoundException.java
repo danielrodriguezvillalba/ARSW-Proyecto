@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.persistence;
+package edu.application.Exceptions;
 
 /**
  *
  * @author Usuario
  */
-public class RoulettePersistenceException extends Exception{
+public class RouletteNotFoundException extends Exception{
     
-    public RoulettePersistenceException(String message) {
+    public RouletteNotFoundException(String message) {
         super(message);
     }
 
-    public RoulettePersistenceException(String message, Throwable cause) {
+    public RouletteNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
+    
 }

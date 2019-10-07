@@ -3,8 +3,9 @@ package edu.application.controllers;
 
 import edu.application.model.Sala;
 import edu.application.model.Usuario;
-import edu.application.persistence.RoulettePersistenceException;
-import edu.application.services.RouletteServices;
+import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.services.Services;
+import edu.application.services.impl.UsuarioServices;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,12 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/ruleta")
-public class RouletteAPIController{
-    
-    ArrayList<Sala> salas  = new ArrayList<Sala>();
+public class UsuarioAPIController{
     
     @Autowired
-    private RouletteServices services;
+    private UsuarioServices services = null;
     
     @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
     public ResponseEntity<?> manejadorInicio() {
@@ -43,9 +42,9 @@ public class RouletteAPIController{
     public ResponseEntity<?> getUsers(@PathVariable("idUser1") String idUser1) {
         try {
             //obtener datos que se enviarán a través del API
-            return new ResponseEntity<>(services.ConsultarUsuario(idUser1), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(services.getElement(idUser1), HttpStatus.ACCEPTED);
         } catch (RoulettePersistenceException ex) {
-            Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
         }
     }
@@ -60,32 +59,10 @@ public class RouletteAPIController{
             services.insertarUsuario(us);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
-            Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
         }
     }
-    
-    @RequestMapping(path = "/Salas", method = RequestMethod.GET)
-    public ResponseEntity<?> getSalas() {
-        
-        salas.add(new Sala("Prueba"));
-        
-        try {
-            JSONArray response = new JSONArray();
-            for(Sala s : salas){
-                JSONObject obj = new JSONObject();
-                obj.append("nombre", s.getNombre());
-                obj.append("participantes", s.getNumeroParticipantes());
-                response.put(obj);
-            }
-            
-            return new ResponseEntity<>(response.toString(),HttpStatus.OK);
-        } catch (Exception ex) {
-            Logger.getLogger(RouletteAPIController.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
-        }
-    }
-    
-    
+
     
 }

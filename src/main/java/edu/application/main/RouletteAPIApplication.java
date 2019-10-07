@@ -1,4 +1,4 @@
-package edu.applicationapi;
+package edu.application.main;
 
 
 import org.springframework.boot.SpringApplication;
