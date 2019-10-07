@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author danie
  */
 @RestController
-@RequestMapping(value = "/sala")
+@RequestMapping(value = "/Sala")
 public class SalasAPIController {
     
     @Autowired
@@ -32,8 +32,9 @@ public class SalasAPIController {
     
     ArrayList<Sala> salas  = new ArrayList<Sala>();
     
-    @RequestMapping(path = "/salas", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getSalas() {
+
         
         try {
             JSONArray response = new JSONArray();
