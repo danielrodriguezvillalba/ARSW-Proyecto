@@ -34,5 +34,6 @@ dependencies {
     compile group: 'org.webjars', name: 'webjars-locator', version: '0.14'
     compile group: 'org.webjars', name: 'bootstrap', version: '4.1.2'
     compile group: 'org.webjars', name: 'jquery', version: '3.1.0'
+    compile group: 'org.json', name: 'json', version: '20190722'
 
 }
