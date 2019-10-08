@@ -2,6 +2,10 @@
 
 ## Aplicación de ruleta 
 
+## Asignatura
+
+* ARSW
+
 ## Integrantes
 
 * Sergio Alejandro Nuñez Mendivelso
@@ -10,7 +14,6 @@
 * Miguel Angel Rojas Martinez
 
 ## Resumen 
-
 
 Se realizara una aplicacion web de una ruleta, adaptandola a una experiencia multiusuario y un valor agregado muy atractivo.
 
