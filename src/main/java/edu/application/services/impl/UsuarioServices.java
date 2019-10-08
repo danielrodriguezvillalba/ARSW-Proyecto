@@ -10,11 +10,12 @@ import edu.application.Persistence.impl.UsuarioPersistence;
 import edu.application.model.Usuario;
 
 import edu.application.services.Services;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -40,7 +41,7 @@ public class UsuarioServices implements Services{
     }
 
     @Override
-    public Set<Object> allElements() {
+    public ArrayList<Object> allElements() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

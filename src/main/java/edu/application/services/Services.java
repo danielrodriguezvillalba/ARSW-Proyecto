@@ -5,14 +5,15 @@
  */
 package edu.application.services;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public interface Services {
     
-    public Set<Object> allElements();
+    public ArrayList<Object> allElements();
     
     public Object getElement( Object obj) throws Exception;
 }

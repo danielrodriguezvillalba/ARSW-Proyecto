@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author 2115253
  */
-public class Sala extends Thread {
+public class Sala extends Thread{
 
     private static final int maxJugadores = 5;
     private static final int tiempoEspera = 15;

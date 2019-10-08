@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package edu.application.services.impl;
-
+import edu.application.model.Sala;
 import edu.application.services.Services;
-import java.util.Set;
+import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,15 +15,29 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SalasServices implements Services{
-
+    
+    ArrayList<Object> salas = new ArrayList<Object>();
+    
     @Override
-    public Set<Object> allElements() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Object> allElements() {
+        return salas;
     }
 
     @Override
     public Object getElement(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Sala temp = null;
+        for (Object sala : salas) {
+            Sala act = (Sala)sala;
+            if(act.getNombre() == (String)obj){
+                temp = act;
+            }
+        }
+        return temp;
     }
     
+    public void crearSala(String nombre){
+        Sala nuevaSala = new Sala(nombre);
+        salas.add(nuevaSala);
+    }
+      
 }
