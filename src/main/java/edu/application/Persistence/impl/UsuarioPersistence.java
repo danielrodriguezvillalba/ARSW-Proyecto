@@ -7,7 +7,7 @@ package edu.application.Persistence.impl;
 
 import edu.application.Persistence.Persistences;
 import edu.application.model.Usuario;
-import edu.application.persistence.impl.RouletteDB;
+import edu.application.Persistence.impl.RouletteDB;
 import edu.application.Exceptions.RoulettePersistenceException;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +35,8 @@ public class UsuarioPersistence implements Persistences{
     }
 
     
-    public String consultarUsuario(String user) throws RoulettePersistenceException {
-        return rb.consultarUsuario(user);
+    public Usuario getUsuario(String user) throws RoulettePersistenceException {
+        return rb.getUsuario(user);
     }
     
 }

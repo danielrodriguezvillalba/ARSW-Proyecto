@@ -35,5 +35,7 @@ dependencies {
     compile group: 'org.webjars', name: 'bootstrap', version: '4.1.2'
     compile group: 'org.webjars', name: 'jquery', version: '3.1.0'
     compile group: 'org.json', name: 'json', version: '20190722'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+
 
 }

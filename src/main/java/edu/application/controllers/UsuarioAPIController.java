@@ -37,12 +37,20 @@ public class UsuarioAPIController{
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }
-    
-    @RequestMapping(path = "/users/{idUser1}", method = RequestMethod.GET)
-    public ResponseEntity<?> getUsers(@PathVariable("idUser1") String idUser1) {
+
+    @RequestMapping(path = "/Users", method = RequestMethod.POST)
+    public ResponseEntity<?> getUsers(@RequestBody String body) {
         try {
             //obtener datos que se enviarán a través del API
-            return new ResponseEntity<>(services.getElement(idUser1), HttpStatus.ACCEPTED);
+            JSONObject obj = new JSONObject(body);
+            String username = obj.getString("email");
+            String password = obj.getString("password");
+            Usuario u = (Usuario) services.getElement(username);
+            if(u.getContra().equals(password))
+                return new ResponseEntity<>(services.getElement(username), HttpStatus.OK);
+            else
+                return new ResponseEntity<>("Wrong password", HttpStatus.UNAUTHORIZED);
+
         } catch (RoulettePersistenceException ex) {
             Logger.getLogger(UsuarioAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);

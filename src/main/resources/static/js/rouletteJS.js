@@ -22,7 +22,7 @@ var  inicioModule = (function () {
         );
 
         return postPromise;
-    }
+    };
 
     var getSalas = function () {
         var getPromise = $.get("/Salas");
@@ -44,7 +44,7 @@ var  inicioModule = (function () {
         );
 
         return getPromise;
-    }
+    };
 
 
     return{

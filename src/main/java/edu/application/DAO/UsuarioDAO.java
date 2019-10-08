@@ -14,7 +14,7 @@ import edu.application.Exceptions.RoulettePersistenceException;
  */
 public interface UsuarioDAO {
     
-    public String consultarUsuario(String correo)throws RoulettePersistenceException;
+    public Usuario consultarUsuario(String correo)throws RoulettePersistenceException;
     
     void insertarUsuario(int cedula, String nombre, String apellido, String correo,String contra);
     

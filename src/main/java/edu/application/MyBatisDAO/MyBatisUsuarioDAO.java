@@ -21,8 +21,8 @@ public class MyBatisUsuarioDAO implements UsuarioDAO {
     UsuarioPersistence usPer = null;
 
     @Override
-    public String consultarUsuario(String correo) throws RoulettePersistenceException{
-        return usPer.consultarUsuario(correo);
+    public Usuario consultarUsuario(String correo) throws RoulettePersistenceException{
+        return usPer.getUsuario(correo);
     }
 
     @Override

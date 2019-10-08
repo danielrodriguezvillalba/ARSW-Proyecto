@@ -20,20 +20,23 @@ var module =(function(){
     var TaxID;
     var email;
     var password1;
-    
+
+
+
     return{
         
         login: function(){
-            usuario = document.getElementById("username").value;
-            password = document.getElementById("password").value;
-            console.log("entro al login"+usuario);
-            $.get("/ruleta/users/"+ usuario+".", function (data){
-                var contra = data;
-                console.log("entro al login"+usuario);
-                console.log("entro al contra "+contra);
-                if(password == contra){
+            user.email = document.getElementById("username").value;
+            user.password = document.getElementById("password").value;
+            $.ajax({
+                url: "/ruleta/Users",
+                type: 'POST',
+                data: JSON.stringify(user),
+                contentType: 'application/json',
+                success:function () {
                     location.href ="inicio.html";
-                }else{
+                },
+                error: function () {
                     alert("Credenciales incorectas");
                 }
             });

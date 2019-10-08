@@ -17,7 +17,16 @@ public class Usuario {
         this.contra = contra;
         this.saldo = 0;
     }
-    
+
+    public Usuario(int id, String nombre, String apellido, String correo, String contra, float saldo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.contra = contra;
+        this.saldo = saldo;
+    }
+
     public Usuario(){
     }
 

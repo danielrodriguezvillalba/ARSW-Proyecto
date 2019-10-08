@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.persistence.impl;
+package edu.application.Persistence.impl;
 
 import edu.application.model.*;
 import java.sql.Connection;
@@ -200,7 +200,7 @@ public class RouletteDB{
     }
 
     
-    public String consultarUsuario(String user) throws RoulettePersistenceException {
+    public Usuario getUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
         System.err.println(user);
         Connection c = conn;
@@ -224,16 +224,19 @@ public class RouletteDB{
             System.out.println(sql);
             String rsl = null;
             ResultSet rs = stmt.executeQuery(sql);
+            Usuario u = null;
             while (rs.next()) {
                  rsl = rs.getString("contraseña");
                  System.out.println(rsl);
+                 u = new Usuario(rs.getInt("numerocedula"),rs.getString("nombre"), rs.getString("apellido"),
+                         rs.getString("correo"), rs.getString("contraseña"), rs.getFloat("saldo"));
             }
             rs.close();
             stmt.close();
             c.close();
             System.out.println("Operation done successfully");
             System.out.println(rsl);
-            return rsl;
+            return u;
             
         }catch(Exception e){
             System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());

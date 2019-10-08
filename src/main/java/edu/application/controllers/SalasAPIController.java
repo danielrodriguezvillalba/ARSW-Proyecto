@@ -58,14 +58,24 @@ public class SalasAPIController {
     
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> crearSala(@RequestBody String nombre){
-
-        System.out.println("Name of the Sala = " + nombre);
-        try {
+            try {
             services.crearSala(nombre);
             return new ResponseEntity<>("OK", HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);
         }
         
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{salaNombre}")
+    public ResponseEntity<?> getSala(@PathVariable String salaNombre){
+
+        try{
+
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        }catch (Exception e){
+
+            return new ResponseEntity<>("NOT FOUND", HttpStatus.NOT_FOUND);
+        }
     }
 }

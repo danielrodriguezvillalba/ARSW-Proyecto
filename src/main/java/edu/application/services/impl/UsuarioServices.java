@@ -48,7 +48,7 @@ public class UsuarioServices implements Services{
 
     @Override
     public Object getElement(Object obj) throws RoulettePersistenceException {
-        return rtp.consultarUsuario((String) obj);
+        return rtp.getUsuario((String) obj);
         
     }
     
