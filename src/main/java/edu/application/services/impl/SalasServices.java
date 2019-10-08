@@ -17,9 +17,15 @@ import org.springframework.stereotype.Service;
 public class SalasServices implements Services{
     
     ArrayList<Object> salas = new ArrayList<Object>();
+
+    public SalasServices(){
+        crearSala("Sala 1");
+        crearSala("Sala 2");
+    }
     
     @Override
     public ArrayList<Object> allElements() {
+
         return salas;
     }
 

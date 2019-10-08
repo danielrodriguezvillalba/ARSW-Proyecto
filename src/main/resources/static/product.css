@@ -23,6 +23,11 @@
     color: #999;
     transition: ease-in-out color .15s;
 }
+
+.site-header span {
+    color: #999;
+    transition: ease-in-out color .15s;
+}
 .site-header a:hover {
     color: #fff;
     text-decoration: none;

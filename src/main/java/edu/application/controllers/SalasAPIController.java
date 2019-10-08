@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author danie
  */
 @RestController
-@RequestMapping(value = "/Sala")
+@RequestMapping(value = "/Salas")
 public class SalasAPIController {
     
     @Autowired
@@ -56,8 +56,10 @@ public class SalasAPIController {
     }
     
     
-    @RequestMapping(path = "/addSala",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> crearSala(@RequestBody String nombre){
+
+        System.out.println("Name of the Sala = " + nombre);
         try {
             services.crearSala(nombre);
             return new ResponseEntity<>("OK", HttpStatus.CREATED);

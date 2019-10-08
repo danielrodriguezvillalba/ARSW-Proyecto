@@ -1,4 +1,4 @@
-.table {
+#tableRoulette {
     width: 698px;
     heigth:400px;
     display:grid;
@@ -138,4 +138,46 @@
     grid-template-rows: repeat(3,50px);
     grid-gap: 1px;
     font-size: 0.8em;
+}
+
+sidebar
+{
+    display: block;
+    width: 350px;
+    float: left;
+    z-index: 4;
+    position: fixed;
+    height: 100%;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+#container
+{
+    height: 100%;
+}
+
+sidebar
+{
+    display: block;
+    width: 350px;
+    float: left;
+    z-index: 4;
+    position: fixed;
+    height: 100%;
+}
+
+.middle-panel
+{
+    float: left;
+    width: 80px;
+    height: 100%;
+}
+
+.main-content
+{
+    height: 100%
 }
