@@ -30,19 +30,56 @@ public class UsuarioAPIController{
     @Autowired
     private UsuarioServices services = null;
     
-    @RequestMapping(method = RequestMethod.PUT, path = "{recarga}")
-    public ResponseEntity<?> manejadorInicio() {
-        Usuario us = null;
+    @RequestMapping(method = RequestMethod.PUT, path = "/Users/{userEmail}")
+    public ResponseEntity<?> manejadorInicio(@PathVariable String userEmail, @RequestBody String body) {
         try {
-            services.recargarSaldoUsuario(us,00);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Usuario us = (Usuario) services.getElement(userEmail);
+            JSONObject obj = new JSONObject(body);
+            String newPassword = obj.optString("newPassword");
+            String oldPassword = obj.optString("oldPassword");
+            if(!newPassword.equals("") && !oldPassword.equals("")){
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] bytes = digest.digest(newPassword.getBytes());
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i < bytes.length; i++){
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                }
+                String newPsswdHash = sb.toString();
+
+                bytes = digest.digest(oldPassword.getBytes());
+                sb = new StringBuilder();
+                for(int i = 0; i < bytes.length; i++){
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                }
+                String oldPsswdHash = sb.toString();
+
+                if(oldPsswdHash.equals(us.getContra()))
+                    services.updatePassword(us,newPsswdHash);
+                else
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Integer saldo = obj.optInt("amount", -1);
+            if(saldo > 0)
+                services.recargarSaldoUsuario(us,saldo);
+
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }
 
+    @RequestMapping(path = "/Users/{userEmail}", method = RequestMethod.GET)
+    public  ResponseEntity<?> getUsers(@PathVariable String userEmail){
+        try{
+            return new ResponseEntity<>((Usuario) services.getElement(userEmail), HttpStatus.OK);
+        } catch (RoulettePersistenceException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
+        }
+    }
+
     @RequestMapping(path = "/Users", method = RequestMethod.POST)
-    public ResponseEntity<?> getUsers(@RequestBody String body) {
+    public ResponseEntity<?> postUsers(@RequestBody String body) {
         try {
             //obtener datos que se enviarán a través del API
             JSONObject obj = new JSONObject(body);

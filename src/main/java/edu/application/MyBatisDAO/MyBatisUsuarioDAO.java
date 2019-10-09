@@ -31,4 +31,9 @@ public class MyBatisUsuarioDAO implements UsuarioDAO {
         usPer.insertarUsuario(user);
     }
 
+    @Override
+    public void updateUsuario(Usuario us) {
+
+    }
+
 }

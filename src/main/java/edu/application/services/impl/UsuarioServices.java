@@ -29,7 +29,8 @@ public class UsuarioServices implements Services{
     UsuarioPersistence rtp = null;
     
     public void recargarSaldoUsuario(Usuario us, float recarga){
-        rtp.alterarSaldo(us,recarga);
+
+        rtp.alterarSaldo(us,us.getSaldo()+recarga);
     }
     /**
     public String ConsultarUsuario(String user) throws RoulettePersistenceException{
@@ -50,6 +51,12 @@ public class UsuarioServices implements Services{
     public Object getElement(Object obj) throws RoulettePersistenceException {
         return rtp.getUsuario((String) obj);
         
+    }
+
+    public void updatePassword(Usuario us, String psswdHash){
+        us.setContra(psswdHash);
+        rtp.updateUsuario(us);
+
     }
     
    

@@ -34,6 +34,7 @@ var module =(function(){
                 data: JSON.stringify(user),
                 contentType: 'application/json',
                 success:function () {
+                    cookieModule.setCookies("usuario",user.email,0.1);
                     location.href ="inicio.html";
                 },
                 error: function () {

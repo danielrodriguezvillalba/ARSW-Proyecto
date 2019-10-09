@@ -17,5 +17,7 @@ public interface UsuarioDAO {
     public Usuario consultarUsuario(String correo)throws RoulettePersistenceException;
     
     void insertarUsuario(int cedula, String nombre, String apellido, String correo,String contra);
+
+    void updateUsuario(Usuario us);
     
 }

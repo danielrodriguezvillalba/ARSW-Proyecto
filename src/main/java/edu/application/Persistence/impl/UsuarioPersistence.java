@@ -23,6 +23,7 @@ public class UsuarioPersistence implements Persistences{
     
     public void alterarSaldo(Usuario us, float valor) {
         us.setSaldo(valor);
+        rb.updateUsuario(us);
     }
 
     @Override
@@ -37,6 +38,10 @@ public class UsuarioPersistence implements Persistences{
     
     public Usuario getUsuario(String user) throws RoulettePersistenceException {
         return rb.getUsuario(user);
+    }
+
+    public void updateUsuario(Usuario us){
+        rb.updateUsuario(us);
     }
     
 }

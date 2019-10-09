@@ -14,15 +14,25 @@
 <link rel="stylesheet" type="text/css" href="rouletteCSS.css" />
 <script src="js/apimock.js"></script>
 <script src="js/app.js"></script>
+<script src="js/cookieManagement.js"></script>
+<script src="js/manageAccount.js"></script>
 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        manageModule.getSaldo();
+    });
+
+</script>
 
 </head>
 <body>
 
 <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <span class="py-2 d-none d-md-inline-block" style="cursor:pointer" onclick="openNav()">&#9776; Salas</span>
+        <a class="py-2 d-none d-md-inline-block" href="inicio.html">Home</a>
         <a class="py-2 d-none d-md-inline-block" href="">Recargar Cuenta</a>
+        <p class="py-2 d-none d-md-inline-block">Saldo : $<label id="saldoHeader"></label></p>
         <!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
                 <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
                 <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
@@ -40,7 +50,7 @@
         <div class="input-group">
             <input type="number" class="form-control width100 rounded" id="saldoRecargar">
             <span class="input-group-btn">
-                <button type="button" class="btn btn-secondary" style="margin-left: 4px;" onclick="">Recargar</button>
+                <button type="button" class="btn btn-secondary" style="margin-left: 4px;" onclick="manageModule.updateSaldo()">Recargar</button>
             </span>
         </div>
     </div>
@@ -65,7 +75,7 @@
 
         </div>
         <span class="input-group-btn" style="float: right">
-                <button type="button" class="btn btn-secondary" style="margin-left: 4px;float: right" onclick="">Recargar</button>
+                <button type="button" class="btn btn-secondary" style="margin-left: 4px;float: right" onclick="manageModule.updatePassword()">Cambiar Contraseña</button>
         </span>
     </div>
 

@@ -33,6 +33,23 @@
     text-decoration: none;
 }
 
+.site-header p {
+    color: #999;
+    transition: ease-in-out color .15s;
+    margin-bottom: 0rem;
+}
+
+.site-header label {
+    margin-bottom: 0rem;
+}
+
+.site-header p:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
 .site-header span:hover {
     color: #fff;
     text-decoration: none;

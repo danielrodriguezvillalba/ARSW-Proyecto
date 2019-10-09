@@ -199,6 +199,37 @@ public class RouletteDB{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void updateUsuario(Usuario us){
+        Connection c = conn;
+        Statement stmt = null;
+        //Valida si existe una conexion abierta al db y si no trata de abrir una
+        if(c == null){
+            try {
+                c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
+                c.setAutoCommit(false);
+            } catch (Exception e) {
+                System.out.println("Ocurrio un error : "+e.getMessage());
+            }
+            System.out.println("La conexion se realizo sin problemas! =) ");
+        }
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            String sql = "UPDATE usuario SET nombre='"+ us.getNombre() + "', apellido='" + us.getApellido() +"', correo='"
+                    + us.getCorreo() + "', contraseña='" + us.getContra() + "', saldo='" + us.getSaldo() + "', numerocedula='"
+                    + us.getId()+"' WHERE correo='" + us.getCorreo() +"';";
+            int n = stmt.executeUpdate(sql);
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     
     public Usuario getUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
