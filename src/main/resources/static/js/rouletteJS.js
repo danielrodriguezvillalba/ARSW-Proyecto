@@ -92,6 +92,11 @@ var  inicioModule = (function () {
 
         updateTable: function () {
             getSalas();
+        },
+
+        apostar: function (val) {
+            alert(val);
+
         }
 
 
