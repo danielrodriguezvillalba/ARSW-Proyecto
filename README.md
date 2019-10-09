@@ -87,6 +87,8 @@ Password: 03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052
 
 https://arsw-proyecto.herokuapp.com
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e735ab13b7064ba9bae5a4de4c47250c)](https://www.codacy.com/manual/ProyectoARSW/ARSW-Proyecto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=danielrodriguezvillalba/ARSW-Proyecto&amp;utm_campaign=Badge_Grade)
+
 ## Historias de usuario
 
 https://tree.taiga.io/project/danielrodriguez-vi-arsw-proyecto/backlog
