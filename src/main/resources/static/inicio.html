@@ -12,6 +12,9 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="product.css">
 <link rel="stylesheet" type="text/css" href="rouletteCSS.css" />
+<link rel="stylesheet/less" type="text/css" href="testRoulette.less" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+
 <script src="js/apimock.js"></script>
 <script src="js/app.js"></script>
 <script src="js/rouletteJS.js"></script>
@@ -20,11 +23,12 @@
 
 
 
+
 <script type="text/javascript">
 
-        if(cookieModule.getCookies("usuario") == ""){
-            location.href ="index.html";
-        }
+    if(cookieModule.getCookies("usuario") == ""){
+        location.href ="index.html";
+    }
 
 
     $(document).ready(function(){
@@ -41,13 +45,13 @@
         <span class="py-2 d-none d-md-inline-block" style="cursor:pointer" onclick="openNav()">&#9776; Salas</span>
         <a class="py-2 d-none d-md-inline-block" href="recargar.html">Recargar Cuenta</a>
         <p class="py-2 d-none d-md-inline-block">Saldo : $<label id="saldoHeader"></label></p>
-<!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Enterprise</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Support</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Pricing</a>
-        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Cart</a>-->
+        <!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Enterprise</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Support</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Pricing</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Cart</a>-->
     </div>
 </nav>
 <div class="row">
@@ -94,79 +98,141 @@
             <h1 style="margin-left: 150px">Sala : <label id="tableNombre"></label> </h1>
         </div>
         <div class="row">
-            <div class="table" id="tableRoulette">
-                <div class="contain">
-                    <div class="bl2 zero">
-                        <button class="greenitems" value="0" onclick="inicioModule.apostar(this.value)">0</button>
-                        <button class="greenitems" value="00" onclick="inicioModule.apostar(this.value)">00</button>
-                    </div>
+            <div class="col">
+                <div class="table" id="tableRoulette">
+                    <div class="contain">
+                        <div class="bl2 zero">
+                            <button class="greenitems" value="0" onclick="inicioModule.apostar(this.value)">0</button>
+                            <button class="greenitems" value="00" onclick="inicioModule.apostar(this.value)">00</button>
+                        </div>
 
-                    <div class="bl">
-                        <button class="items red" value="3" onclick="inicioModule.apostar(this.value)"><span>3</span></button>
-                        <button class="items black" value="6" onclick="inicioModule.apostar(this.value)">6</button>
-                        <button class="items red" value="9"  onclick="inicioModule.apostar(this.value)">9</button>
-                        <button class="items red" value="12" onclick="inicioModule.apostar(this.value)">12</button>
-                        <button class="items black" value="2" onclick="inicioModule.apostar(this.value)">2</button>
-                        <button class="items red" value="5" onclick="inicioModule.apostar(this.value)">5</button>
-                        <button class="items black" value="8" onclick="inicioModule.apostar(this.value)">8</button>
-                        <button class="items black" value="11" onclick="inicioModule.apostar(this.value)">11</button>
-                        <button class="items red" value="1" onclick="inicioModule.apostar(this.value)">1</button>
-                        <button class="items black" value="4" onclick="inicioModule.apostar(this.value)">4</button>
-                        <button class="items red" value="7" onclick="inicioModule.apostar(this.value)">7</button>
-                        <button class="items black" value="10" onclick="inicioModule.apostar(this.value)">10</button>
+                        <div class="bl">
+                            <button class="items red" value="3" onclick="inicioModule.apostar(this.value)"><span>3</span></button>
+                            <button class="items black" value="6" onclick="inicioModule.apostar(this.value)">6</button>
+                            <button class="items red" value="9"  onclick="inicioModule.apostar(this.value)">9</button>
+                            <button class="items red" value="12" onclick="inicioModule.apostar(this.value)">12</button>
+                            <button class="items black" value="2" onclick="inicioModule.apostar(this.value)">2</button>
+                            <button class="items red" value="5" onclick="inicioModule.apostar(this.value)">5</button>
+                            <button class="items black" value="8" onclick="inicioModule.apostar(this.value)">8</button>
+                            <button class="items black" value="11" onclick="inicioModule.apostar(this.value)">11</button>
+                            <button class="items red" value="1" onclick="inicioModule.apostar(this.value)">1</button>
+                            <button class="items black" value="4" onclick="inicioModule.apostar(this.value)">4</button>
+                            <button class="items red" value="7" onclick="inicioModule.apostar(this.value)">7</button>
+                            <button class="items black" value="10" onclick="inicioModule.apostar(this.value)">10</button>
+                        </div>
+                        <div class="bl">
+                            <button class="items black" value="15" onclick="inicioModule.apostar(this.value)">15</button>
+                            <button class="items red" value="18"onclick="inicioModule.apostar(this.value)">18</button>
+                            <button class="items red" value="21"onclick="inicioModule.apostar(this.value)">21</button>
+                            <button class="items black" value="24" onclick="inicioModule.apostar(this.value)">24</button>
+                            <button class="items red" value="14" onclick="inicioModule.apostar(this.value)">14</button>
+                            <button class="items black" value="17" onclick="inicioModule.apostar(this.value)">17</button>
+                            <button class="items black" value="20" onclick="inicioModule.apostar(this.value)">20</button>
+                            <button class="items red" value="23" onclick="inicioModule.apostar(this.value)">23</button>
+                            <button class="items black" value="13" onclick="inicioModule.apostar(this.value)">13</button>
+                            <button class="items red" value="16" onclick="inicioModule.apostar(this.value)">16</button>
+                            <button class="items red" value="19" onclick="inicioModule.apostar(this.value)">19</button>
+                            <button class="items black" value="22" onclick="inicioModule.apostar(this.value)">22</button>
+                        </div>
+                        <div class="bl">
+                            <button class="items red" value="27" onclick="inicioModule.apostar(this.value)">27</button>
+                            <button class="items red" value="30" onclick="inicioModule.apostar(this.value)">30</button>
+                            <button class="items black" value="33" onclick="inicioModule.apostar(this.value)">33</button>
+                            <button class="items red" value="36" onclick="inicioModule.apostar(this.value)">36</button>
+                            <button class="items black" value="26" onclick="inicioModule.apostar(this.value)">26</button>
+                            <button class="items black" value="29" onclick="inicioModule.apostar(this.value)">29</button>
+                            <button class="items red" value="32" onclick="inicioModule.apostar(this.value)">32</button>
+                            <button class="items black" value="35" onclick="inicioModule.apostar(this.value)">35</button>
+                            <button class="items red" value="25" onclick="inicioModule.apostar(this.value)">25</button>
+                            <button class="items black" value="28" onclick="inicioModule.apostar(this.value)">28</button>
+                            <button class="items black" value="31" onclick="inicioModule.apostar(this.value)">31</button>
+                            <button class="items red" value="34" onclick="inicioModule.apostar(this.value)">34</button>
+                        </div>
+                        <div class="order">
+                            <button class="items" value="2to1-3" onclick="inicioModule.apostar(this.value)">2 to 1</button>
+                            <button class="items" value="2to1-2" onclick="inicioModule.apostar(this.value)">2 to 1</button>
+                            <button class="items" value="2to1-1" onclick="inicioModule.apostar(this.value)">2 to 1</button>
+                        </div>
+                        <button class="items box-1" value="1to12" onclick="inicioModule.apostar(this.value)">1 to 12</button>
+                        <button class="items box-2" value="13to24" onclick="inicioModule.apostar(this.value)">13 to 24</button>
+                        <button class="items box-3" value="25to36" onclick="inicioModule.apostar(this.value)">25 to 26</button>
+                        <div class=" box-4">
+                            <button class="items" value="1to18" onclick="inicioModule.apostar(this.value)">1 to 18</button>
+                            <button class="items" value="even" onclick="inicioModule.apostar(this.value)">Even</button>
+                        </div>
+                        <div class=" box-5">
+                            <button class="items black" value="black" onclick="inicioModule.apostar(this.value)">Black</button>
+                            <button class="items red" value="red" onclick="inicioModule.apostar(this.value)">Red</button>
+                        </div>
+                        <div class=" box-6">
+                            <button class="items" value="odd" onclick="inicioModule.apostar(this.value)">Odd</button>
+                            <button class="items" value="19to36" onclick="inicioModule.apostar(this.value)">19 to 36</button>
+                        </div>
                     </div>
-                    <div class="bl">
-                        <button class="items black" value="15" onclick="inicioModule.apostar(this.value)">15</button>
-                        <button class="items red" value="18"onclick="inicioModule.apostar(this.value)">18</button>
-                        <button class="items red" value="21"onclick="inicioModule.apostar(this.value)">21</button>
-                        <button class="items black" value="24" onclick="inicioModule.apostar(this.value)">24</button>
-                        <button class="items red" value="14" onclick="inicioModule.apostar(this.value)">14</button>
-                        <button class="items black" value="17" onclick="inicioModule.apostar(this.value)">17</button>
-                        <button class="items black" value="20" onclick="inicioModule.apostar(this.value)">20</button>
-                        <button class="items red" value="23" onclick="inicioModule.apostar(this.value)">23</button>
-                        <button class="items black" value="13" onclick="inicioModule.apostar(this.value)">13</button>
-                        <button class="items red" value="16" onclick="inicioModule.apostar(this.value)">16</button>
-                        <button class="items red" value="19" onclick="inicioModule.apostar(this.value)">19</button>
-                        <button class="items black" value="22" onclick="inicioModule.apostar(this.value)">22</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="main">
+                    <button type="button" class="btn" id="spin"><span class="btn-label">Spin</span></button>
+                    <button type="button" class="btn btn-reset" id="reset"><span class="btn-label">New Game</span></button>
+                    <div class="plate" id="plate">
+                        <ul class="inner">
+                            <li class="number"><label><input type="radio" name="pit" value="32" /><span class="pit">32</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="15" /><span class="pit">15</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="19" /><span class="pit">19</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="4" /><span class="pit">4</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="21" /><span class="pit">21</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="2" /><span class="pit">2</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="25" /><span class="pit">25</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="17" /><span class="pit">17</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="34" /><span class="pit">34</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="6" /><span class="pit">6</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="27" /><span class="pit">27</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="13" /><span class="pit">13</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="36" /><span class="pit">36</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="11" /><span class="pit">11</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="30" /><span class="pit">30</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="8" /><span class="pit">8</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="23" /><span class="pit">23</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="10" /><span class="pit">10</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="5" /><span class="pit">5</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="24" /><span class="pit">24</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="16" /><span class="pit">16</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="33" /><span class="pit">33</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="1" /><span class="pit">1</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="20" /><span class="pit">20</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="14" /><span class="pit">14</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="31" /><span class="pit">31</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="9" /><span class="pit">9</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="22" /><span class="pit">22</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="18" /><span class="pit">18</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="29" /><span class="pit">29</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="7" /><span class="pit">7</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="28" /><span class="pit">28</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="12" /><span class="pit">12</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="35" /><span class="pit">35</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="3" /><span class="pit">3</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="26" /><span class="pit">26</span></label></li>
+                            <li class="number"><label><input type="radio" name="pit" value="0" /><span class="pit">0</span></label></li>
+                        </ul>
+                        <div class="data">
+                            <div class="data-inner">
+                                <div class="mask"></div>
+                                <div class="result">
+                                    <div class="result-number">00</div>
+                                    <div class="result-color">red</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bl">
-                        <button class="items red" value="27" onclick="inicioModule.apostar(this.value)">27</button>
-                        <button class="items red" value="30" onclick="inicioModule.apostar(this.value)">30</button>
-                        <button class="items black" value="33" onclick="inicioModule.apostar(this.value)">33</button>
-                        <button class="items red" value="36" onclick="inicioModule.apostar(this.value)">36</button>
-                        <button class="items black" value="26" onclick="inicioModule.apostar(this.value)">26</button>
-                        <button class="items black" value="29" onclick="inicioModule.apostar(this.value)">29</button>
-                        <button class="items red" value="32" onclick="inicioModule.apostar(this.value)">32</button>
-                        <button class="items black" value="35" onclick="inicioModule.apostar(this.value)">35</button>
-                        <button class="items red" value="25" onclick="inicioModule.apostar(this.value)">25</button>
-                        <button class="items black" value="28" onclick="inicioModule.apostar(this.value)">28</button>
-                        <button class="items black" value="31" onclick="inicioModule.apostar(this.value)">31</button>
-                        <button class="items red" value="34" onclick="inicioModule.apostar(this.value)">34</button>
-                    </div>
-                    <div class="order">
-                        <button class="items" value="2to1-3" onclick="inicioModule.apostar(this.value)">2 to 1</button>
-                        <button class="items" value="2to1-2" onclick="inicioModule.apostar(this.value)">2 to 1</button>
-                        <button class="items" value="2to1-1" onclick="inicioModule.apostar(this.value)">2 to 1</button>
-                    </div>
-                    <button class="items box-1" value="1to12" onclick="inicioModule.apostar(this.value)">1 to 12</button>
-                    <button class="items box-2" value="13to24" onclick="inicioModule.apostar(this.value)">13 to 24</button>
-                    <button class="items box-3" value="25to36" onclick="inicioModule.apostar(this.value)">25 to 26</button>
-                    <div class=" box-4">
-                        <button class="items" value="1to18" onclick="inicioModule.apostar(this.value)">1 to 18</button>
-                        <button class="items" value="even" onclick="inicioModule.apostar(this.value)">Even</button>
-                    </div>
-                    <div class=" box-5">
-                        <button class="items black" value="black" onclick="inicioModule.apostar(this.value)">Black</button>
-                        <button class="items red" value="red" onclick="inicioModule.apostar(this.value)">Red</button>
-                    </div>
-                    <div class=" box-6">
-                        <button class="items" value="odd" onclick="inicioModule.apostar(this.value)">Odd</button>
-                        <button class="items" value="19to36" onclick="inicioModule.apostar(this.value)">19 to 36</button>
+                    <div class="previous-results">
+                        <ol class="previous-list">
+                            <li class='visuallyhidden placeholder'>No results yet.</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 </div>
@@ -185,6 +251,7 @@
 
 </body>
 
+<script src="js/testRoulette.js"></script>
 
 </html>
 
