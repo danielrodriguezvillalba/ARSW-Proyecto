@@ -21,7 +21,14 @@
 
 
 <script type="text/javascript">
+
+        if(cookieModule.getCookies("usuario") == ""){
+            location.href ="index.html";
+        }
+    
+
     $(document).ready(function(){
+
         inicioModule.updateTable();
         manageModule.getSaldo();
     });
