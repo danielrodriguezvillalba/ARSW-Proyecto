@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<title>Ruleta</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="product.css">
+<link rel="stylesheet" type="text/css" href="rouletteCSS.css" />
+<script src="js/apimock.js"></script>
+<script src="js/app.js"></script>
+
+
+</head>
+<body>
+
+<nav class="site-header sticky-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <span class="py-2 d-none d-md-inline-block" style="cursor:pointer" onclick="openNav()">&#9776; Salas</span>
+        <a class="py-2 d-none d-md-inline-block" href="">Recargar Cuenta</a>
+        <!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Enterprise</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Support</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Pricing</a>
+                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Cart</a>-->
+    </div>
+</nav>
+<div class="container">
+    <div class="row" style="border-bottom: 1px black solid; margin-bottom: 15px">
+        <h1 style="">Recargar su cuenta</h1>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="input-group">
+            <input type="number" class="form-control width100 rounded" id="saldoRecargar">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-secondary" style="margin-left: 4px;" onclick="">Recargar</button>
+            </span>
+        </div>
+    </div>
+    <div class="row" style="border-bottom: 1px black solid; margin-bottom: 15px">
+        <h1 style="">Cambiar su contreseña</h1>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="input-group">
+            <div class="col-sm-3">
+                <p>Contraseña anterior :</p>
+            </div>
+
+            <input type="password" class="form-control width100 rounded" id="oldPassword">
+
+        </div>
+        <div class="input-group">
+            <div class="col-sm-3">
+                <p>Contraseña nueva :</p>
+            </div>
+
+            <input type="password" class="form-control width100 rounded" id="newPassword" >
+
+        </div>
+        <span class="input-group-btn" style="float: right">
+                <button type="button" class="btn btn-secondary" style="margin-left: 4px;float: right" onclick="">Recargar</button>
+        </span>
+    </div>
+
+
+
+</div>
+</body>
+</html>
