@@ -77,6 +77,17 @@ public class Usuario {
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        return this.getCorreo() == ((Usuario) o).getCorreo();
+    }
     
    
 }

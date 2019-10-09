@@ -15,19 +15,15 @@
 <script src="js/apimock.js"></script>
 <script src="js/app.js"></script>
 <script src="js/rouletteJS.js"></script>
+<script src="js/cookieManagement.js"></script>
+<script src="js/manageAccount.js"></script>
+
 
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $.get("/Salas", function(data){
-            var obj = JSON.parse(data);
-            obj.map(function(val, index){
-                console.log(val + " " + index);
-                var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
-                    'onclick="Module.drawBluePrint(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
-                $("#salasTable tbody").append(toAdd);
-            })
-        });
+        inicioModule.updateTable();
+        manageModule.getSaldo();
     });
 
 </script>
@@ -37,6 +33,7 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between">
         <span class="py-2 d-none d-md-inline-block" style="cursor:pointer" onclick="openNav()">&#9776; Salas</span>
         <a class="py-2 d-none d-md-inline-block" href="recargar.html">Recargar Cuenta</a>
+        <p class="py-2 d-none d-md-inline-block">Saldo : $<label id="saldoHeader"></label></p>
 <!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
         <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
         <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
@@ -82,7 +79,13 @@
             </tbody>
         </table>
     </sidebar>-->
-    <div id="main" style="display: none;">
+    <div id="Welcome" class="container">
+        <h1 align="center" style="margin-top: 150px ">Join a table to play</h1>
+    </div>
+    <div id="main" style="display: none;" class="container">
+        <div class="row">
+            <h1 style="margin-left: 150px">Sala : <label id="tableNombre"></label> </h1>
+        </div>
         <div class="row">
             <div class="table" id="tableRoulette">
                 <div class="contain">

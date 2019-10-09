@@ -44,9 +44,9 @@ public class Sala extends Thread{
      * @param us the user to be added
      * @throws RuletaException
      */
-    public void inserteUsuario(Usuario us) throws RuletaException {
+    public void inserteUsuario(Usuario us)  {
         if (numJugadores == 5) {
-            throw new RuletaException("Sala llena");
+            System.out.println("Sala llena");
         } else {
             apuestas.put(us, new Apuesta());
             numJugadores++;
@@ -131,5 +131,9 @@ public class Sala extends Thread{
     
     public int getNumeroParticipantes(){
         return apuestas.size();
+    }
+
+    public boolean containsUsuario(Usuario us){
+        return apuestas.containsKey(us);
     }
 }

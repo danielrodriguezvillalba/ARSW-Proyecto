@@ -6,11 +6,14 @@
 package edu.application.controllers;
 
 import edu.application.model.Sala;
+import edu.application.model.Usuario;
 import edu.application.services.impl.SalasServices;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.application.services.impl.UsuarioServices;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +34,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class SalasAPIController {
     
     @Autowired
-    private SalasServices services;
+    private SalasServices salasServices;
+
+    @Autowired
+    private UsuarioServices usuarioServices;
     
        
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getSalas() {
 
-        ArrayList<Object> salas =  services.allElements();
+        ArrayList<Object> salas =   salasServices.allElements();
         try {
             JSONArray response = new JSONArray();
             for(Object s : salas){
@@ -54,12 +60,25 @@ public class SalasAPIController {
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
         }
     }
+
+    @RequestMapping(method = RequestMethod.PUT, path ="/{salaNombre}")
+    public ResponseEntity<?> joinSala(@RequestBody String body, @PathVariable String salaNombre){
+        try {
+            JSONObject obj = new JSONObject(body);
+            Usuario us = (Usuario) usuarioServices.getElement(obj.getString("usuario"));
+            if(!salasServices.containsUsuario(salaNombre,us))
+                salasServices.addUsuario(salaNombre,us);
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);
+        }
+    }
     
     
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> crearSala(@RequestBody String nombre){
             try {
-            services.crearSala(nombre);
+                salasServices.crearSala(nombre);
             return new ResponseEntity<>("OK", HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);

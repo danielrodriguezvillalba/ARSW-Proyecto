@@ -5,6 +5,7 @@
  */
 package edu.application.services.impl;
 import edu.application.model.Sala;
+import edu.application.model.Usuario;
 import edu.application.services.Services;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class SalasServices implements Services{
         Sala temp = null;
         for (Object sala : salas) {
             Sala act = (Sala)sala;
-            if(act.getNombre() == (String)obj){
+            if(act.getNombre().equals(obj.toString())){
                 temp = act;
             }
         }
@@ -45,5 +46,17 @@ public class SalasServices implements Services{
         Sala nuevaSala = new Sala(nombre);
         salas.add(nuevaSala);
     }
+
+    public void addUsuario(String nombre, Usuario us) {
+        Sala s = (Sala) getElement(nombre);
+        s.inserteUsuario(us);
+    }
+
+    public boolean containsUsuario(String nombre, Usuario us){
+        Sala s = (Sala) getElement(nombre);
+        return s.containsUsuario(us);
+    }
+
+
       
 }
