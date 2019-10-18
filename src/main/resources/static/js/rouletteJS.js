@@ -99,7 +99,8 @@ var  inicioModule = (function () {
         nuevaSala: function () {
             var salaNombre = document.getElementById("nuevaSalaNombre").value;
             dataToSend.salaNombre = salaNombre;
-            postSala(salaNombre).then(getSalas);
+            stompClient.send("/app/createSala."+dataToSend.salaNombre, {}, null);
+            //postSala(salaNombre).then(getSalas);
         },
 
         updateTable: function () {
