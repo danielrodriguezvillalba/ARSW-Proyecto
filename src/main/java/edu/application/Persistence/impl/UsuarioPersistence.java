@@ -22,7 +22,8 @@ public class UsuarioPersistence implements Persistences{
 
     
     public void alterarSaldo(Usuario us, float valor) {
-        us.setSaldo(valor);
+        
+        us.setSaldo(us.getSaldo()+valor);
         rb.updateUsuario(us);
     }
 

@@ -58,7 +58,7 @@ public class Apuesta {
      * @param casilla The case on which to bet
      * @param value The value to bet
      */
-    public void apostar(final String casilla, Double value){
+    public void apostar(String casilla, Double value){
         value += apuestas.get(casilla);
         apuestas.put(casilla, value);
         aposto = true;

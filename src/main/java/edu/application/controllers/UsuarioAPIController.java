@@ -6,6 +6,7 @@ import edu.application.model.Usuario;
 import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.services.Services;
 import edu.application.services.impl.UsuarioServices;
+import edu.application.services.impl.SalasServices;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,6 +30,9 @@ public class UsuarioAPIController{
     
     @Autowired
     private UsuarioServices services = null;
+    
+    @Autowired
+    private SalasServices servicess = null;
     
     @RequestMapping(method = RequestMethod.PUT, path = "/Users/{userEmail}")
     public ResponseEntity<?> manejadorInicio(@PathVariable String userEmail, @RequestBody String body) {
@@ -125,6 +129,25 @@ public class UsuarioAPIController{
             Logger.getLogger(UsuarioAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
         }
+    }
+    
+    
+    @RequestMapping(path = "/apuestaUser", method = RequestMethod.POST)
+    public ResponseEntity<?> inserteApuesta(@RequestBody String body)  {
+       try {
+           
+            JSONObject obj = new JSONObject(body);
+            Usuario us = (Usuario) services.getElement(obj.getString("usuario"));
+            String numero = obj.getString("numero");
+            System.out.println(obj.getString("sala"));
+            Sala sal = (Sala) servicess.getElement(obj.getString("sala"));
+            System.out.println(us.getCorreo()+" asdasd "+numero+" sala "+sal.getNombre());
+            services.apostar(us,numero,sal);
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("ERROR AL INSERTAR APUESTA", HttpStatus.FORBIDDEN);
+        }
+        
     }
 
     

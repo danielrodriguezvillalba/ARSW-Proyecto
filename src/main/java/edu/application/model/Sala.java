@@ -28,15 +28,37 @@ public class Sala extends Thread{
     private Map< Usuario, Apuesta> apuestas;
     private String Nombre;
 
-    public String getNombre() {
-        return Nombre;
-    }
-
     public Sala(String Nombre) {
         historial = new HistorialJugadas();
         apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
         this.Nombre = Nombre;
+    }
+    
+    public void apuesteNum(Usuario user,String numero){
+        Apuesta value = getByCorreo(user.getCorreo());
+        value.apostar(numero,100.0);
+    }
+    
+    private Apuesta getByCorreo(String correo) {
+        Apuesta res = null;
+        for (Map.Entry<Usuario, Apuesta> entrySet : apuestas.entrySet()) {
+            Usuario key = entrySet.getKey();
+            Apuesta value = entrySet.getValue();
+            if (key.getCorreo().equals(correo)){
+                res = value;
+            }
+        }
+        return res;
+    }
+   
+    public void setApuestas(Map<Usuario, Apuesta> apuestas) {
+        this.apuestas = apuestas;
+    }
+    
+
+    public String getNombre() {
+        return Nombre;
     }
 
     /**
@@ -136,4 +158,8 @@ public class Sala extends Thread{
     public boolean containsUsuario(Usuario us){
         return apuestas.containsKey(us);
     }
+
+    
+    
+    
 }

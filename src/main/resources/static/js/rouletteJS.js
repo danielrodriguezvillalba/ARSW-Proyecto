@@ -4,6 +4,12 @@ var  inicioModule = (function () {
         salaNombre: null,
         usuario: null
     }
+    
+    var dataToUser ={
+        usuario: null,
+        numero: null,
+        sala: null
+    }
 
     var postSala = function (salaNombre) {
         var postPromise = $.ajax({
@@ -66,11 +72,35 @@ var  inicioModule = (function () {
 
         return putPromise;
     };
+    
+    var postApuestaUsuario = function () {
+        var postPromise = $.ajax({
+            url:"/ruleta/apuestaUser",
+            type:'POST',
+            data: JSON.stringify(dataToUser),
+            contentType: 'application/json'
+        });
+
+        postPromise.then(
+            function () {
+                console.info('POST OK');
+            },
+            function () {
+                console.info('POST NOK');
+            }
+        );
+
+        return postPromise;
+    };
+    
 
 
     return{
-        apostar: function (casilleroVal) {
-
+        apostar: function (casilleroVal,salaNombre) {
+            dataToUser.usuario = cookieModule.getCookies("usuario");
+            dataToUser.numero = casilleroVal;
+            dataToUser.sala =  document.getElementById("tableNombre").innerHTML;
+            postApuestaUsuario();
         },
 
         joinSala: function (salaNombre){
@@ -92,12 +122,9 @@ var  inicioModule = (function () {
 
         updateTable: function () {
             getSalas();
-        },
-
-        apostar: function (val) {
-            alert(val);
-
         }
+
+     
 
 
     };

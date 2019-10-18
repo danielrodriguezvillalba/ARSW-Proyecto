@@ -8,6 +8,7 @@ package edu.application.services.impl;
 import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.Persistence.impl.UsuarioPersistence;
 import edu.application.model.Usuario;
+import edu.application.model.Sala;
 
 import edu.application.services.Services;
 import java.util.ArrayList;
@@ -58,6 +59,12 @@ public class UsuarioServices implements Services{
         rtp.updateUsuario(us);
 
     }
+    
+    public void apostar(Usuario us , String numero, Sala sala){
+        rtp.alterarSaldo(us, -100);
+        sala.apuesteNum(us, numero);
+    }
+            
     
    
 }
