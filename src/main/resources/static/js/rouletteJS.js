@@ -29,9 +29,8 @@ var  inicioModule = (function () {
     };
 
     var updateTableSalas = function (data) {
-        var obj = JSON.parse(data);
         $("#salasTable tbody").empty();
-        obj.map(function(val, index){
+        data.map(function(val, index){
             console.log(val + " " + index);
             var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
                 'onclick="inicioModule.joinSala(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
@@ -116,7 +115,7 @@ var  inicioModule = (function () {
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
                 stompClient.subscribe('/topic/salas', function (eventbody) {
-                    updateTableSalas(JSON.parse(eventbody).body);
+                    updateTableSalas(JSON.parse(eventbody.body));
                 });
 
             });
