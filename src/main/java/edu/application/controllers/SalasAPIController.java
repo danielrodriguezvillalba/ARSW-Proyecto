@@ -42,19 +42,8 @@ public class SalasAPIController {
        
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getSalas() {
-
-        ArrayList<Object> salas =   salasServices.allElements();
         try {
-            JSONArray response = new JSONArray();
-            for(Object s : salas){
-                Sala temp = (Sala)s; 
-                JSONObject obj = new JSONObject();
-                obj.append("nombre", temp.getNombre());
-                obj.append("participantes", temp.getNumeroParticipantes());
-                response.put(obj);
-            }
-            
-            return new ResponseEntity<>(response.toString(),HttpStatus.OK);
+            return new ResponseEntity<>(salasServices.createSalasListResponse().toString(),HttpStatus.OK);
         } catch (Exception ex) {
             Logger.getLogger(SalasAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error bla bla bla", HttpStatus.FORBIDDEN);
@@ -68,6 +57,7 @@ public class SalasAPIController {
             Usuario us = (Usuario) usuarioServices.getElement(obj.getString("usuario"));
             if(!salasServices.containsUsuario(salaNombre,us))
                 salasServices.addUsuario(salaNombre,us);
+
             return new ResponseEntity<>("OK", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);
