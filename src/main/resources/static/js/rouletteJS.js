@@ -43,7 +43,7 @@ var  inicioModule = (function () {
 
         getPromise.then(
             function (data) {
-                updateTableSalas(data);
+                updateTableSalas(JSON.parse(data));
             },
             function () {
                 console.log('get failed');
@@ -85,6 +85,9 @@ var  inicioModule = (function () {
             dataToSend.usuario = cookieModule.getCookies("usuario");
 
             stompClient.send("/app/joinSala."+dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
+            document.getElementById("main").style.display ='';
+            document.getElementById("Welcome").style.display ='none';
+            document.getElementById("tableNombre").innerHTML = salaNombre;
 
             /*putUsuarioSala().then(getSalas).then(function () {
                 document.getElementById("main").style.display ='';
