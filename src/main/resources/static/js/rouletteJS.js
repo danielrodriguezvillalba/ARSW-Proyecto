@@ -3,13 +3,10 @@ var  inicioModule = (function () {
     var dataToSend ={
         salaNombre: null,
         usuario: null
-    }
-    
-    var dataToUser ={
-        usuario: null,
-        numero: null,
-        sala: null
-    }
+    };
+
+    var stompClient = null;
+
 
     var postSala = function (salaNombre) {
         var postPromise = $.ajax({
@@ -31,19 +28,22 @@ var  inicioModule = (function () {
         return postPromise;
     };
 
+    var updateTableSalas = function (data) {
+        $("#salasTable tbody").empty();
+        data.map(function(val, index){
+            console.log(val + " " + index);
+            var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
+                'onclick="inicioModule.joinSala(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
+            $("#salasTable tbody").append(toAdd);
+        })
+    }
+
     var getSalas = function () {
         var getPromise = $.get("/Salas");
 
         getPromise.then(
             function (data) {
-                var obj = JSON.parse(data);
-                $("#salasTable tbody").empty();
-                obj.map(function(val, index){
-                    console.log(val + " " + index);
-                    var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
-                        'onclick="inicioModule.joinSala(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
-                    $("#salasTable tbody").append(toAdd);
-                })
+                updateTableSalas(JSON.parse(data));
             },
             function () {
                 console.log('get failed');
@@ -52,6 +52,7 @@ var  inicioModule = (function () {
 
         return getPromise;
     };
+
 
     var putUsuarioSala = function () {
         var putPromise = $.ajax({
@@ -107,17 +108,23 @@ var  inicioModule = (function () {
             dataToSend.salaNombre = salaNombre;
             dataToSend.usuario = cookieModule.getCookies("usuario");
 
-            putUsuarioSala().then(getSalas).then(function () {
+            stompClient.send("/app/joinSala."+dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
+            document.getElementById("main").style.display ='';
+            document.getElementById("Welcome").style.display ='none';
+            document.getElementById("tableNombre").innerHTML = salaNombre;
+
+            /*putUsuarioSala().then(getSalas).then(function () {
                 document.getElementById("main").style.display ='';
                 document.getElementById("Welcome").style.display ='none';
                 document.getElementById("tableNombre").innerHTML = salaNombre;
-            });
+            });*/
         },
         
         nuevaSala: function () {
             var salaNombre = document.getElementById("nuevaSalaNombre").value;
             dataToSend.salaNombre = salaNombre;
-            postSala(salaNombre).then(getSalas);
+            stompClient.send("/app/createSala."+dataToSend.salaNombre, {}, null);
+            //postSala(salaNombre).then(getSalas);
         },
 
         updateTable: function () {
@@ -126,6 +133,20 @@ var  inicioModule = (function () {
 
      
 
+        },
+        
+        init : function () {
+            var socket = new SockJS('/stompendpoint');
+            stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/salas', function (eventbody) {
+                    updateTableSalas(JSON.parse(eventbody.body));
+                });
+
+            });
+        }
 
     };
 
