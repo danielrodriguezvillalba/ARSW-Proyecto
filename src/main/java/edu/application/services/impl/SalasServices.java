@@ -28,8 +28,8 @@ public class SalasServices implements Services{
     UsuarioServices usuarioServices;
 
     public SalasServices(){
-        crearSala("1");
-        crearSala("2");
+        crearSala("1", 1000.0);
+        crearSala("2", 2000.0);
     }
     
     @Override
@@ -50,8 +50,8 @@ public class SalasServices implements Services{
         return temp;
     }
     
-    public void crearSala(String nombre){
-        Sala nuevaSala = new Sala(nombre);
+    public void crearSala(String nombre, Double nuevaSalaBetValue){
+        Sala nuevaSala = new Sala(nombre, nuevaSalaBetValue);
         salas.add(nuevaSala);
     }
 
@@ -80,6 +80,7 @@ public class SalasServices implements Services{
             JSONObject obj = new JSONObject();
             obj.append("nombre", temp.getNombre());
             obj.append("participantes", temp.getNumeroParticipantes());
+            obj.append("betValue", temp.getBetValue());
             response.put(obj);
         }
         return response;

@@ -38,7 +38,7 @@ var  inicioModule = (function () {
         $("#salasTable tbody").empty();
         data.map(function(val, index){
             console.log(val + " " + index);
-            var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
+            var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
                 'onclick="inicioModule.joinSala(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
         })
@@ -128,8 +128,9 @@ var  inicioModule = (function () {
         
         nuevaSala: function () {
             var salaNombre = document.getElementById("nuevaSalaNombre").value;
+            var defaultBet = document.getElementById("nuevaSalaBetValue").value;
             dataToSend.salaNombre = salaNombre;
-            stompClient.send("/app/createSala."+dataToSend.salaNombre, {}, null);
+            stompClient.send("/app/createSala."+salaNombre+"."+ defaultBet, {}, null);
             //postSala(salaNombre).then(getSalas);
         },
 

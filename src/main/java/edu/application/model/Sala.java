@@ -29,17 +29,19 @@ public class Sala extends Thread{
     private String Nombre , numeroGanador;
     private int numero = 90;
     private Random rdn = new Random();
+    private Double betValue;
 
-    public Sala(String Nombre) {
+    public Sala(String Nombre, Double betValue) {
         historial = new HistorialJugadas();
         apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
         this.Nombre = Nombre;
+        this.betValue = betValue;
     }
     
     public void apuesteNum(Usuario user,String numero){
         Apuesta value = getByCorreo(user.getCorreo());
-        value.apostar(numero,100.0);
+        value.apostar(numero, betValue);
     }
     
     private Apuesta getByCorreo(String correo) {
@@ -167,7 +169,12 @@ public class Sala extends Thread{
         return apuestas.containsKey(us);
     }
 
-    
-    
-    
+
+    public Double getBetValue() {
+        return betValue;
+    }
+
+    public void setBetValue(Double betValue) {
+        this.betValue = betValue;
+    }
 }

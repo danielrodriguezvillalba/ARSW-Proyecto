@@ -30,10 +30,15 @@ public class SalasSocketController {
         mgt.convertAndSend("/topic/salas", salasServices.createSalasListResponse().toString());
     }
 
-    @MessageMapping("/createSala.{salaNombre}")
-    public  void createSala(@DestinationVariable String salaNombre) throws RoulettePersistenceException{
-        salasServices.crearSala(salaNombre);
+    @MessageMapping("/createSala.{salaNombre}.{nuevaSalaBetValue}")
+    public  void createSala(@DestinationVariable String salaNombre, @DestinationVariable Double nuevaSalaBetValue) throws RoulettePersistenceException{
+        salasServices.crearSala(salaNombre, nuevaSalaBetValue);
         mgt.convertAndSend("/topic/salas", salasServices.createSalasListResponse().toString());
+    }
+
+    @MessageMapping("/apostar.{salaNombre}.{userEmail}.{casillero}")
+    public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero){
+
     }
 
 }

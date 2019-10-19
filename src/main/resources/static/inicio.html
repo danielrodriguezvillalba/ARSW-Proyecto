@@ -17,7 +17,7 @@
 
 <script src="js/apimock.js"></script>
 <script src="js/app.js"></script>
-<script src="js/rouletteJS.js"></script>
+<script src="js/inicio.js"></script>
 <script src="js/cookieManagement.js"></script>
 <script src="js/manageAccount.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -47,13 +47,6 @@
         <span class="py-2 d-none d-md-inline-block" style="cursor:pointer" onclick="openNav()">&#9776; Salas</span>
         <a class="py-2 d-none d-md-inline-block" href="recargar.html">Recargar Cuenta</a>
         <p class="py-2 d-none d-md-inline-block">Saldo : $<label id="saldoHeader"></label></p>
-        <!--        <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Tour</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Product</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Features</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Enterprise</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Support</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Pricing</a>
-                <a class="py-2 d-none d-md-inline-block" href="https://getbootstrap.com/docs/4.1/examples/product/#">Cart</a>-->
     </div>
 </nav>
 <div class="row">
@@ -64,34 +57,23 @@
             <tr>
                 <th>Sala nombre</th>
                 <th>Participantes</th>
+                <th>Apuesta Value</th>
                 <th>Join</th>
             </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-        <div class="input-group">
-            <input class="form-control width100 rounded" id="nuevaSalaNombre">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-secondary" style="margin-left: 4px;" onclick="inicioModule.nuevaSala()">Nueva Sala</button>
-            </span>
-        </div>
+
+        <input type="text" class="form-control width100 rounded" id="nuevaSalaNombre" placeholder="Sala Nombre" style="margin-bottom: 2px; margin-left: 4px">
+        <input type="number" class="form-control width100 rounded" id="nuevaSalaBetValue" placeholder="Sala Apuesta Valor" style="margin-bottom: 2px; margin-left: 4px">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-secondary" style="margin-left: 4px;" onclick="inicioModule.nuevaSala()">Nueva Sala</button>
+        </span>
+
 
 
     </div>
-    <!--<sidebar>
-        <table class="table table-striped table-dark" id="salasTable">
-            <thead class="thead-light">
-            <tr>
-                <th>Sala nombre</th>
-                <th>Participantes</th>
-                <th>Join</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </sidebar>-->
     <div id="Welcome" class="container">
         <h1 align="center" style="margin-top: 150px ">Join a table to play</h1>
     </div>
@@ -252,7 +234,7 @@
 
 </body>
 
-<script src="js/testRoulette.js"></script>
+<script src="js/roulette.js"></script>
 
 </html>
 
