@@ -244,7 +244,7 @@ public class RouletteDB{
             } catch (Exception e) {
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexion se realizo sin problemas! =) ");
+            //System.out.println("La conexion se realizo sin problemas! =) ");
         }
         try{
             Class.forName("org.postgresql.Driver");
@@ -265,8 +265,8 @@ public class RouletteDB{
             rs.close();
             stmt.close();
             c.close();
-            System.out.println("Operation done successfully");
-            System.out.println(rsl);
+            //System.out.println("Operation done successfully");
+            //System.out.println(rsl);
             return u;
             
         }catch(Exception e){

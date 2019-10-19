@@ -69,7 +69,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.8</version>
         </dependency>
-
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>

@@ -14,10 +14,31 @@ $reset.hide();
 $mask.text(maskDefault);
 
 $spin.on('click',function(){
-
+    
+    numeroGanador = function () {
+        sala = document.getElementById("tableNombre").innerHTML;
+        var getPromise = $.get('Salas/'+sala+'/numeroGanador');
+        var obj = null;
+        getPromise.then(
+            function (data) {
+                obj = data;
+                console.info('GET OK');
+            },
+            function () {
+                console.info('get failed');
+            }     
+        );
+        
+    }
     // get a random number between 0 and 36 and apply it to the nth-child selector
+    var numer = numeroGanador();
     var  randomNumber = Math.floor(Math.random() * 36),
+    
+    //else{
+        //alert(numer);
+        //jvar  randomNumber = numer,
         color = null;
+    
     $inner.attr('data-spinto', randomNumber).find('li:nth-child('+ randomNumber +') input').prop('checked','checked');
     // prevent repeated clicks on the spin button by hiding it
     $(this).hide();
@@ -57,6 +78,8 @@ $spin.on('click',function(){
 
     }, timer);
 
+    //}
+    
 });
 
 

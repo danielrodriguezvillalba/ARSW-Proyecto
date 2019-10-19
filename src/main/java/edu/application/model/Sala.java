@@ -26,17 +26,41 @@ public class Sala extends Thread{
     private int numJugadores;
     private HistorialJugadas historial;
     private Map< Usuario, Apuesta> apuestas;
-    private String Nombre;
-
-    public String getNombre() {
-        return Nombre;
-    }
+    private String Nombre , numeroGanador;
+    private int numero = 90;
+    private Random rdn = new Random();
 
     public Sala(String Nombre) {
         historial = new HistorialJugadas();
         apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
         this.Nombre = Nombre;
+    }
+    
+    public void apuesteNum(Usuario user,String numero){
+        Apuesta value = getByCorreo(user.getCorreo());
+        value.apostar(numero,100.0);
+    }
+    
+    private Apuesta getByCorreo(String correo) {
+        Apuesta res = null;
+        for (Map.Entry<Usuario, Apuesta> entrySet : apuestas.entrySet()) {
+            Usuario key = entrySet.getKey();
+            Apuesta value = entrySet.getValue();
+            if (key.getCorreo().equals(correo)){
+                res = value;
+            }
+        }
+        return res;
+    }
+   
+    public void setApuestas(Map<Usuario, Apuesta> apuestas) {
+        this.apuestas = apuestas;
+    }
+    
+
+    public String getNombre() {
+        return Nombre;
     }
 
     /**
@@ -76,13 +100,20 @@ public class Sala extends Thread{
             value.reinicie();
         }
     }
-
+    
+    public int getNumeroGanador(){
+        numero = rdn.nextInt(38);
+        //this.run();
+        System.out.println(numero);
+        return numero;
+    }
+    
     @Override
     public void run() {
         while (true) {
             while(apuestas.size()==0 || !atLeastOnePlayedBet()){
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(5);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -92,14 +123,13 @@ public class Sala extends Thread{
             
             while(System.currentTimeMillis() < startTime + tiempoEspera * 1000){
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(5);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            Random rdn = new Random();
-            int numero = rdn.nextInt(39);
-            String numeroGanador;
+            
+            
             if(numero != 38)
                 numeroGanador = Integer.toString(numero);
             else
@@ -136,4 +166,8 @@ public class Sala extends Thread{
     public boolean containsUsuario(Usuario us){
         return apuestas.containsKey(us);
     }
+
+    
+    
+    
 }
