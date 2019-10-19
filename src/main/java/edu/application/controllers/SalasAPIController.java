@@ -87,4 +87,15 @@ public class SalasAPIController {
             return new ResponseEntity<>("NOT FOUND", HttpStatus.NOT_FOUND);
         }
     }
+    
+    @RequestMapping(path = "/{sala}/numeroGanador", method = RequestMethod.GET)
+    public int getNumeroGanador(@PathVariable String sala)  {
+        try {
+            Sala sal = (Sala) salasServices.getElement(sala);
+            int nume = salasServices.getNumeroGanador(sal);
+            return nume;
+        }catch(Exception e){
+            return 1110000;
+        } 
+    }
 }

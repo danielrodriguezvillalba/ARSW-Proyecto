@@ -4,6 +4,12 @@ var  inicioModule = (function () {
         salaNombre: null,
         usuario: null
     };
+    
+    var dataToUser ={
+        sala: null,
+        usuario: null,
+        numero: null
+    };
 
     var stompClient = null;
 
@@ -129,11 +135,9 @@ var  inicioModule = (function () {
 
         updateTable: function () {
             getSalas();
-        }
-
-     
-
         },
+
+    
         
         init : function () {
             var socket = new SockJS('/stompendpoint');

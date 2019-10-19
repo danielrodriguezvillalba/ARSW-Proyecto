@@ -28,8 +28,8 @@ public class SalasServices implements Services{
     UsuarioServices usuarioServices;
 
     public SalasServices(){
-        crearSala("Sala 1");
-        crearSala("Sala 2");
+        crearSala("1");
+        crearSala("2");
     }
     
     @Override
@@ -85,5 +85,7 @@ public class SalasServices implements Services{
         return response;
     }
 
-      
+    public int getNumeroGanador(Sala sala){
+        return sala.getNumeroGanador();
+    }
 }

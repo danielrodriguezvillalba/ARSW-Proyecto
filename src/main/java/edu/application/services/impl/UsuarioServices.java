@@ -64,6 +64,8 @@ public class UsuarioServices implements Services{
         rtp.alterarSaldo(us, -100);
         sala.apuesteNum(us, numero);
     }
+    
+    
             
     
    

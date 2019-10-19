@@ -61,6 +61,7 @@ public class Apuesta {
     public void apostar(String casilla, Double value){
         value += apuestas.get(casilla);
         apuestas.put(casilla, value);
+        System.out.println(value);
         aposto = true;
     }
     
