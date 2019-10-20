@@ -36,9 +36,14 @@ public class SalasSocketController {
         mgt.convertAndSend("/topic/salas", salasServices.createSalasListResponse().toString());
     }
 
-    @MessageMapping("/apostar.{salaNombre}.{userEmail}.{casillero}")
-    public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero){
+    @MessageMapping("/apostar/{salaNombre}/{userEmail}/{casillero}")
+    public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero) throws RoulettePersistenceException {
+        salasServices.apostar(salaNombre,userEmail,casillero);
+        System.out.println("in the function");
+    }
 
+    public static void startCountDown(String salaNombre){
+        //mgt.convertAndSend("/topic/startcountdown."+salaNombre,"");
     }
 
 }

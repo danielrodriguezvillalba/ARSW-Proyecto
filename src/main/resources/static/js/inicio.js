@@ -103,11 +103,13 @@ var  inicioModule = (function () {
 
 
     return{
-        apostar: function (casilleroVal,salaNombre) {
-            dataToUser.usuario = cookieModule.getCookies("usuario");
+        apostar: function (casilleroVal) {
+            var userEmail = cookieModule.getCookies("usuario");
             dataToUser.numero = casilleroVal;
             dataToUser.sala =  document.getElementById("tableNombre").innerHTML;
-            postApuestaUsuario();
+
+            stompClient.send("/app/apostar/"+ dataToSend.salaNombre + "/" + userEmail + "/" +  casilleroVal, {}, null);
+            //postApuestaUsuario();
         },
 
         joinSala: function (salaNombre){
@@ -118,6 +120,18 @@ var  inicioModule = (function () {
             document.getElementById("main").style.display ='';
             document.getElementById("Welcome").style.display ='none';
             document.getElementById("tableNombre").innerHTML = salaNombre;
+
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/salas.'+salaNombre, function (eventbody) {
+                    updateTableSalas(JSON.parse(eventbody.body));
+                });
+
+                stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
+                   rouletteModule.countdown();
+                });
+
+            })
 
             /*putUsuarioSala().then(getSalas).then(function () {
                 document.getElementById("main").style.display ='';
@@ -149,7 +163,6 @@ var  inicioModule = (function () {
                 stompClient.subscribe('/topic/salas', function (eventbody) {
                     updateTableSalas(JSON.parse(eventbody.body));
                 });
-
             });
         }
 

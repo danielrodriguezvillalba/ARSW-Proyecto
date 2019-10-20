@@ -29,7 +29,7 @@ $spin.on('click',function(){
             }     
         );
         
-    }
+    };
     // get a random number between 0 and 36 and apply it to the nth-child selector
     var numer = numeroGanador();
     var  randomNumber = Math.floor(Math.random() * 36),
@@ -90,3 +90,23 @@ $reset.on('click',function(){
     $spin.show();
     $data.removeClass('reveal');
 });
+
+
+var  rouletteModule = (function () {
+
+
+    return{
+        countdown : function () {
+            var timeleft = 15;
+            var downloadTimer = setInterval(function(){
+                $mask.text(timeleft+"s")
+                timeleft -= 1;
+                if(timeleft <= 0){
+                    clearInterval(downloadTimer);
+                    document.getElementById("countdown").innerHTML = "Finished"
+                }
+            }, 1000);
+        }
+    }
+
+})();
