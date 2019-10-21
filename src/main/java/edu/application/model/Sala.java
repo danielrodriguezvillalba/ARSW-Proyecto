@@ -5,6 +5,12 @@
  */
 package edu.application.model;
 
+import edu.application.controllers.SalasSocketController;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -15,6 +21,9 @@ import java.util.logging.Logger;
  *
  * @author 2115253
  */
+
+/*@Component
+@Scope("prototype")*/
 public class Sala extends Thread{
 
     private static final int maxJugadores = 5;
@@ -29,17 +38,22 @@ public class Sala extends Thread{
     private String Nombre , numeroGanador;
     private int numero = 90;
     private Random rdn = new Random();
+    private Double betValue;
 
-    public Sala(String Nombre) {
+    public Sala() {
         historial = new HistorialJugadas();
         apuestas = new HashMap< Usuario, Apuesta>();
         numJugadores = 0;
+    }
+
+    public void setSala(String Nombre, Double betValue){
         this.Nombre = Nombre;
+        this.betValue = betValue;
     }
     
     public void apuesteNum(Usuario user,String numero){
         Apuesta value = getByCorreo(user.getCorreo());
-        value.apostar(numero,100.0);
+        value.apostar(numero, betValue);
     }
     
     private Apuesta getByCorreo(String correo) {
@@ -102,7 +116,7 @@ public class Sala extends Thread{
     }
     
     public int getNumeroGanador(){
-        numero = rdn.nextInt(38);
+        numero = rdn.nextInt(37);
         //this.run();
         System.out.println(numero);
         return numero;
@@ -120,6 +134,7 @@ public class Sala extends Thread{
             }
             
             long startTime = System.currentTimeMillis();
+            SalasSocketController.startCountDown(this.Nombre);
             
             while(System.currentTimeMillis() < startTime + tiempoEspera * 1000){
                 try {
@@ -128,13 +143,8 @@ public class Sala extends Thread{
                     Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-            
-            if(numero != 38)
-                numeroGanador = Integer.toString(numero);
-            else
-                numeroGanador = "00";
-            
+
+            numeroGanador = Integer.toString(numero);
             for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
                 Usuario usuario = entry.getKey();
                 Apuesta apuesta = entry.getValue();
@@ -167,7 +177,12 @@ public class Sala extends Thread{
         return apuestas.containsKey(us);
     }
 
-    
-    
-    
+
+    public Double getBetValue() {
+        return betValue;
+    }
+
+    public void setBetValue(Double betValue) {
+        this.betValue = betValue;
+    }
 }

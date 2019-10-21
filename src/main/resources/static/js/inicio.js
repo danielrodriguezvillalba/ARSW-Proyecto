@@ -1,5 +1,8 @@
 var  inicioModule = (function () {
 
+    var waiting = false;
+
+
     var dataToSend ={
         salaNombre: null,
         usuario: null
@@ -38,7 +41,7 @@ var  inicioModule = (function () {
         $("#salasTable tbody").empty();
         data.map(function(val, index){
             console.log(val + " " + index);
-            var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td><button type="button" class="btn btn-secondary" ' +
+            var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
                 'onclick="inicioModule.joinSala(this.value)" value="'+ val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
         })
@@ -103,11 +106,18 @@ var  inicioModule = (function () {
 
 
     return{
-        apostar: function (casilleroVal,salaNombre) {
-            dataToUser.usuario = cookieModule.getCookies("usuario");
+
+        setWaiting : function(value){
+            waiting = value;
+        },
+
+        apostar: function (casilleroVal) {
+            var userEmail = cookieModule.getCookies("usuario");
             dataToUser.numero = casilleroVal;
             dataToUser.sala =  document.getElementById("tableNombre").innerHTML;
-            postApuestaUsuario();
+
+            stompClient.send("/app/apostar/"+ dataToSend.salaNombre + "/" + userEmail + "/" +  casilleroVal, {}, null);
+            //postApuestaUsuario();
         },
 
         joinSala: function (salaNombre){
@@ -119,6 +129,18 @@ var  inicioModule = (function () {
             document.getElementById("Welcome").style.display ='none';
             document.getElementById("tableNombre").innerHTML = salaNombre;
 
+
+            stompClient.subscribe('/topic/salas.'+salaNombre, function (eventbody) {
+                updateTableSalas(JSON.parse(eventbody.body));
+            });
+
+            stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
+                if(waiting == false){
+                    waiting = true;
+                    rouletteModule.countdown(eventbody.body);
+                }
+            });
+
             /*putUsuarioSala().then(getSalas).then(function () {
                 document.getElementById("main").style.display ='';
                 document.getElementById("Welcome").style.display ='none';
@@ -128,8 +150,9 @@ var  inicioModule = (function () {
         
         nuevaSala: function () {
             var salaNombre = document.getElementById("nuevaSalaNombre").value;
+            var defaultBet = document.getElementById("nuevaSalaBetValue").value;
             dataToSend.salaNombre = salaNombre;
-            stompClient.send("/app/createSala."+dataToSend.salaNombre, {}, null);
+            stompClient.send("/app/createSala."+salaNombre+"."+ defaultBet, {}, null);
             //postSala(salaNombre).then(getSalas);
         },
 
@@ -148,7 +171,6 @@ var  inicioModule = (function () {
                 stompClient.subscribe('/topic/salas', function (eventbody) {
                     updateTableSalas(JSON.parse(eventbody.body));
                 });
-
             });
         }
 

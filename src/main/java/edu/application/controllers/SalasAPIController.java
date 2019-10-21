@@ -65,7 +65,7 @@ public class SalasAPIController {
     }
     
     
-    @RequestMapping(method = RequestMethod.POST)
+    /*@RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> crearSala(@RequestBody String nombre){
             try {
                 salasServices.crearSala(nombre);
@@ -74,7 +74,7 @@ public class SalasAPIController {
             return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);
         }
         
-    }
+    }*/
 
     @RequestMapping(method = RequestMethod.GET, path = "/{salaNombre}")
     public ResponseEntity<?> getSala(@PathVariable String salaNombre){

@@ -72,7 +72,7 @@ public class UsuarioAPIController{
         }
     }
 
-    @RequestMapping(path = "/Users/{userEmail}", method = RequestMethod.GET)
+    @RequestMapping(path = "/Users/{userEmail:.+}", method = RequestMethod.GET)
     public  ResponseEntity<?> getUsers(@PathVariable String userEmail){
         try{
             return new ResponseEntity<>((Usuario) services.getElement(userEmail), HttpStatus.OK);
