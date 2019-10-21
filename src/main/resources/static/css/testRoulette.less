@@ -1,9 +1,9 @@
 
-@platesize:230px; // sets width and height
-@pitwidth:16px; // the width of each pit. 32 seems to work best
+@platesize:350px; // sets width and height
+@pitwidth:32px; // the width of each pit. 32 seems to work best
 @rotate:(360/@to)+0deg; // how far to rotate each slice depends on how many slices you have
 
-@rimsize:2px; // size of the bevelled rim edge
+@rimsize:6px; // size of the bevelled rim edge
 @trim:gold; // or hex value
 @trimSecondary:silver; // or hex value
 @spinButton:green; // or hex value
@@ -87,17 +87,17 @@
 
 .number{
   width:@pitwidth;
-  height:@platesize/2 ;
+  height:@platesize/2;
   display:inline-block;
   text-align:center;
   position:absolute;
   top:0;
   left:calc(50% - (@pitwidth/2));
-  transform-origin:70% 100%;
+  transform-origin:50% 100%;
   background-color:transparent;
-  border-left: (@pitwidth/2) solid transparent;
-  border-right: (@pitwidth/2) solid transparent;
-  border-top: (@platesize/2) solid black;
+  border-left: @pitwidth/2 solid transparent;
+  border-right: @pitwidth/2 solid transparent;
+  border-top: @platesize/2 solid black;
   box-sizing:border-box;
   &:nth-child(odd){border-top-color:red;}
   &:nth-child(@{to}){
@@ -107,10 +107,10 @@
 
 .pit{
   color:#fff;
-  padding-top:6px;
+  padding-top:12px;
   width:@pitwidth;
   display:inline-block;
-  font-size:10px;
+  font-size:12px;
   transform:scale(1,1.8);
   position:absolute;
   top:-@platesize/2;
@@ -139,11 +139,10 @@
     border:3px solid darken(@trimSecondary, 25%);
   }
   &:before{
-    
-    top:17%;      // wonky numbers
-    bottom:17%;   // means a wonky ball path
-    left:17%;
-    right:17%;
+    top:22%;      // wonky numbers
+    bottom:22%;   // means a wonky ball path
+    left:22%;
+    right:22%;
     content:''; // the ball is hidden
     color:#fff;
     font-size:60px;
@@ -251,11 +250,11 @@
 .data{
   display:block;
   position:absolute;
-  top:20%;
-  right:20%;
-  bottom:20%;
-  left:20%;
-  border-radius:20%;
+  top:30%;
+  right:30%;
+  bottom:30%;
+  left:30%;
+  border-radius:50%;
   animation:rotate 24s reverse linear infinite;
   perspective: 2000px;
   z-index:100;
@@ -283,17 +282,17 @@
     left:0;
     position: absolute;
     backface-visibility: hidden;
-    border-radius:35%;
+    border-radius:50%;
     overflow:hidden;
     display:inline-block;
   }
 
   .mask{
     color: #fff;
-    font-size: 20px;
+    font-size: 24px;
     margin: auto;
-    line-height: 1;
-    padding-top: 43px;
+    line-height: 1.4;
+    padding-top: 36px;
   }
 
   .result{
