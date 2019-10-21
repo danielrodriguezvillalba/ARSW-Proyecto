@@ -34,7 +34,7 @@ public class UsuarioAPIController{
     @Autowired
     private SalasServices servicess = null;
     
-    @RequestMapping(method = RequestMethod.PUT, path = "/Users/{userEmail}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/Users/{userEmail:.+}")
     public ResponseEntity<?> manejadorInicio(@PathVariable String userEmail, @RequestBody String body) {
         try {
             Usuario us = (Usuario) services.getElement(userEmail);
