@@ -41,6 +41,7 @@ public class SalasSocketController {
     public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero) throws RoulettePersistenceException {
         salasServices.apostar(salaNombre,userEmail,casillero);
         int winningNumber = new Random().nextInt(37);
+        mgt.convertAndSend("/topic/apuestas/"+salaNombre, "{\"player\": \"" + userEmail + "\", \"casillero\":"+casillero+"}");
         mgt.convertAndSend("/topic/startcountdown."+salaNombre,Integer.toString(winningNumber));
         System.out.println("in the function");
     }

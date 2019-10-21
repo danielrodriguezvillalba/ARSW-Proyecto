@@ -134,6 +134,10 @@ var  inicioModule = (function () {
                 updateTableSalas(JSON.parse(eventbody.body));
             });
 
+            stompClient.subscribe('/topic/apuestas/'+salaNombre, function (eventbody) {
+                console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
+            });
+
             stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
                 if(waiting == false){
                     waiting = true;
