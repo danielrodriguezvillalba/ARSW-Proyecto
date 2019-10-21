@@ -1,6 +1,8 @@
 var  inicioModule = (function () {
 
     var waiting = false;
+    var chips=new Array();
+    var bets=new Array();
 
 
     var dataToSend ={
@@ -106,9 +108,18 @@ var  inicioModule = (function () {
 
 
     return{
+        
+        reInt: function(min,max){
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        },
 
         setWaiting : function(value){
             waiting = value;
+            var ncoins = bets.length;
+            for (var i=0;i<ncoins;i++){
+                document.body.removeChild(chips[bets[i]].pop());
+            }
+            bets = new Array();
         },
 
         apostar: function (casilleroVal) {
@@ -118,6 +129,30 @@ var  inicioModule = (function () {
 
             stompClient.send("/app/apostar/"+ dataToSend.salaNombre + "/" + userEmail + "/" +  casilleroVal, {}, null);
             //postApuestaUsuario();
+            
+            
+            var lugar = document.getElementById(casilleroVal);
+            var _x =  lugar.offsetLeft;
+            var _y = lugar.offsetTop;
+            var img = document.createElement('img');
+            img.src="../imagen/ficha.png";
+            img.style.zIndex="0";
+            img.style.position="absolute";
+
+            var rX=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+            var rY=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+
+            img.style.left=(_x+rX)+"px";
+            img.style.top=(_y+rY+150)+"px";
+
+            img.style.width="20px";
+            img.style.pointerEvents="none";
+            document.body.appendChild(img);
+            
+            if(chips[casilleroVal]==null)chips[casilleroVal]=new Array(0);
+            chips[casilleroVal].push(img);
+            bets.push(casilleroVal);
+
         },
 
         joinSala: function (salaNombre){
