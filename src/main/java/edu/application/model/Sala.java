@@ -86,8 +86,11 @@ public class Sala extends Thread{
         if (numJugadores == 5) {
             System.out.println("Sala llena");
         } else {
-            apuestas.put(us, new Apuesta());
-            numJugadores++;
+            if(getByCorreo(us.getCorreo()) == null){
+                apuestas.put(us, new Apuesta());
+                numJugadores++;
+            }
+            
         }
     }
 
