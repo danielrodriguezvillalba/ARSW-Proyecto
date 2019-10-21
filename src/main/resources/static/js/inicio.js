@@ -1,5 +1,8 @@
 var  inicioModule = (function () {
 
+    var waiting = false;
+
+
     var dataToSend ={
         salaNombre: null,
         usuario: null
@@ -103,6 +106,11 @@ var  inicioModule = (function () {
 
 
     return{
+
+        setWaiting : function(value){
+            waiting = value;
+        },
+
         apostar: function (casilleroVal) {
             var userEmail = cookieModule.getCookies("usuario");
             dataToUser.numero = casilleroVal;
@@ -121,17 +129,17 @@ var  inicioModule = (function () {
             document.getElementById("Welcome").style.display ='none';
             document.getElementById("tableNombre").innerHTML = salaNombre;
 
-            stompClient.connect({}, function (frame) {
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/topic/salas.'+salaNombre, function (eventbody) {
-                    updateTableSalas(JSON.parse(eventbody.body));
-                });
 
-                stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
-                   rouletteModule.countdown();
-                });
+            stompClient.subscribe('/topic/salas.'+salaNombre, function (eventbody) {
+                updateTableSalas(JSON.parse(eventbody.body));
+            });
 
-            })
+            stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
+                if(waiting == false){
+                    waiting = true;
+                    rouletteModule.countdown(eventbody.body);
+                }
+            });
 
             /*putUsuarioSala().then(getSalas).then(function () {
                 document.getElementById("main").style.display ='';

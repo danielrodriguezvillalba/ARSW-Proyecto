@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  * @author 2115253
  */
 
-@Component
-@Scope("prototype")
+/*@Component
+@Scope("prototype")*/
 public class Sala extends Thread{
 
     private static final int maxJugadores = 5;

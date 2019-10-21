@@ -13,6 +13,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 @Controller
 public class SalasSocketController {
@@ -39,6 +40,8 @@ public class SalasSocketController {
     @MessageMapping("/apostar/{salaNombre}/{userEmail}/{casillero}")
     public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero) throws RoulettePersistenceException {
         salasServices.apostar(salaNombre,userEmail,casillero);
+        int winningNumber = new Random().nextInt(37);
+        mgt.convertAndSend("/topic/startcountdown."+salaNombre,Integer.toString(winningNumber));
         System.out.println("in the function");
     }
 

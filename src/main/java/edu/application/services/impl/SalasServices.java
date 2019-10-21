@@ -38,8 +38,8 @@ public class SalasServices implements Services {
     UsuarioServices usuarioServices;
 
     public SalasServices(){
-/*        crearSala("1", 1000.0);
-        crearSala("2", 2000.0);*/
+        crearSala("1", 1000.0);
+        crearSala("2", 2000.0);
     }
     
     @Override
@@ -61,10 +61,11 @@ public class SalasServices implements Services {
     }
     
     public void crearSala(String nombre, Double nuevaSalaBetValue){
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(RouletteAPIApplication.class);
-        Sala nuevaSala = (Sala) ctx.getBean("Sala");
+        /*ApplicationContext ctx = new AnnotationConfigApplicationContext(RouletteAPIApplication.class);
+        Sala nuevaSala = (Sala) ctx.getBean("Sala");*/
+        Sala nuevaSala = new Sala();
         nuevaSala.setSala(nombre, nuevaSalaBetValue);
-        nuevaSala.start();
+        //nuevaSala.start();
         salas.add(nuevaSala);
     }
 
