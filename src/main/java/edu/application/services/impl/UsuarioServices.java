@@ -31,7 +31,7 @@ public class UsuarioServices implements Services{
     
     public void recargarSaldoUsuario(Usuario us, float recarga){
 
-        rtp.alterarSaldo(us,us.getSaldo()+recarga);
+        rtp.alterarSaldo(us,recarga);
     }
     /**
     public String ConsultarUsuario(String user) throws RoulettePersistenceException{
