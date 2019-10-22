@@ -4,16 +4,14 @@ package edu.application.controllers;
 import edu.application.model.Sala;
 import edu.application.model.Usuario;
 import edu.application.Exceptions.RoulettePersistenceException;
-import edu.application.services.Services;
 import edu.application.services.impl.UsuarioServices;
 import edu.application.services.impl.SalasServices;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONArray;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,15 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioAPIController{
     
     @Autowired
-    private UsuarioServices services = null;
+    private UsuarioServices usuarioServices = null;
     
     @Autowired
-    private SalasServices servicess = null;
+    private SalasServices salasServices = null;
     
     @RequestMapping(method = RequestMethod.PUT, path = "/Users/{userEmail:.+}")
     public ResponseEntity<?> manejadorInicio(@PathVariable String userEmail, @RequestBody String body) {
         try {
-            Usuario us = (Usuario) services.getElement(userEmail);
+            Usuario us = (Usuario) usuarioServices.getElement(userEmail);
             JSONObject obj = new JSONObject(body);
             String newPassword = obj.optString("newPassword");
             String oldPassword = obj.optString("oldPassword");
@@ -58,13 +56,13 @@ public class UsuarioAPIController{
                 String oldPsswdHash = sb.toString();
 
                 if(oldPsswdHash.equals(us.getContra()))
-                    services.updatePassword(us,newPsswdHash);
+                    usuarioServices.updatePassword(us,newPsswdHash);
                 else
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             Integer saldo = obj.optInt("amount", -1);
             if(saldo > 0)
-                services.recargarSaldoUsuario(us,saldo);
+                usuarioServices.recargarSaldoUsuario(us,saldo);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
@@ -75,7 +73,7 @@ public class UsuarioAPIController{
     @RequestMapping(path = "/Users/{userEmail:.+}", method = RequestMethod.GET)
     public  ResponseEntity<?> getUsers(@PathVariable String userEmail){
         try{
-            return new ResponseEntity<>((Usuario) services.getElement(userEmail), HttpStatus.OK);
+            return new ResponseEntity<>((Usuario) usuarioServices.getElement(userEmail), HttpStatus.OK);
         } catch (RoulettePersistenceException e) {
             e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
@@ -96,9 +94,9 @@ public class UsuarioAPIController{
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             String psswdHash = sb.toString();
-            Usuario u = (Usuario) services.getElement(username);
+            Usuario u = (Usuario) usuarioServices.getElement(username);
             if(u.getContra().equals(psswdHash))
-                return new ResponseEntity<>(services.getElement(username), HttpStatus.OK);
+                return new ResponseEntity<>(usuarioServices.getElement(username), HttpStatus.OK);
             else
                 return new ResponseEntity<>("Wrong password", HttpStatus.UNAUTHORIZED);
 
@@ -123,7 +121,7 @@ public class UsuarioAPIController{
         Usuario us = new Usuario(obj.getInt("TaxID"), obj.getString("name"), obj.getString("lastname"), obj.getString("email"), psswdHash);
         System.out.println("Va a ingreas");
         try {
-            services.insertarUsuario(us);
+            usuarioServices.insertarUsuario(us);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
             Logger.getLogger(UsuarioAPIController.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,12 +135,12 @@ public class UsuarioAPIController{
        try {
            
             JSONObject obj = new JSONObject(body);
-            Usuario us = (Usuario) services.getElement(obj.getString("usuario"));
+            Usuario us = (Usuario) usuarioServices.getElement(obj.getString("usuario"));
             String numero = obj.getString("numero");
             System.out.println(obj.getString("sala"));
-            Sala sal = (Sala) servicess.getElement(obj.getString("sala"));
+            Sala sal = (Sala) salasServices.getElement(obj.getString("sala"));
             System.out.println(us.getCorreo()+" asdasd "+numero+" sala "+sal.getNombre());
-            services.apostar(us,numero,sal);
+            usuarioServices.apostar(us,numero,sal);
             return new ResponseEntity<>("OK", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("ERROR AL INSERTAR APUESTA", HttpStatus.FORBIDDEN);

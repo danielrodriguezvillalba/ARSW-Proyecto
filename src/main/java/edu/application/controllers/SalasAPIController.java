@@ -8,13 +8,11 @@ package edu.application.controllers;
 import edu.application.model.Sala;
 import edu.application.model.Usuario;
 import edu.application.services.impl.SalasServices;
-import java.util.ArrayList;
-import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.application.services.impl.UsuarioServices;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
