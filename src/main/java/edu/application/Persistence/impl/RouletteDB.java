@@ -23,7 +23,7 @@ public class RouletteDB{
     static String urlDatabase = "jdbc:postgresql://ec2-23-21-115-109.compute-1.amazonaws.com:5432/dcjlcvlpuum728";
     static String usuarioDb = "unkwzcvdxtrfys";
     static String passwordDb= "03eaed5577b5eadb70f2bbe4de0d68e23a967ab611eff45138dc2b690b0fe052";
-    static Connection conn = null;
+    static Connection c = null;
 
     //Main provicional para realizar pruebas a la base de datos
     /**public void main(String[] args) throws RoulettePersistenceException{
@@ -40,7 +40,7 @@ public class RouletteDB{
     public void realizaConexion() throws RoulettePersistenceException{
         try {
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
+            c = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
             System.out.println("La conexion se realizo sin problemas!");
         } catch (ClassNotFoundException e) {
             System.out.println("Ocurrio un error not found: "+e.getMessage());
@@ -51,7 +51,6 @@ public class RouletteDB{
     
     public static void createTable(){
         //Recupera conexion y crea Statement para el db
-        Connection c = conn;
         Statement stmt = null;
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
@@ -88,7 +87,6 @@ public class RouletteDB{
     public void insertarUsuario(Usuario user){
         //Recupera conexion y crea Statement para el db
         Usuario usr = user;
-        Connection c = conn;
         Statement stmt = null;
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
@@ -110,7 +108,7 @@ public class RouletteDB{
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
-            c.close();
+            //c.close();
             System.out.println("Se ingreso correctamente el usuario");
         }catch(Exception e){
             System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());
@@ -120,7 +118,6 @@ public class RouletteDB{
     
     public static void insertarRegistro(){
         //Recupera conexion y crea Statement para el db
-        Connection c = conn;
         Statement stmt = null;
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
@@ -154,7 +151,6 @@ public class RouletteDB{
     
     public static void selectRegistros(){
         //Recupera conexion y crea Statement para el db
-        Connection c = conn;
         Statement stmt = null;
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
@@ -200,7 +196,7 @@ public class RouletteDB{
     }
 
     public void updateUsuario(Usuario us){
-        Connection c = conn;
+
         Statement stmt = null;
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
@@ -223,7 +219,7 @@ public class RouletteDB{
             int n = stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
-            c.close();
+            //c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -234,7 +230,6 @@ public class RouletteDB{
     public Usuario getUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
         System.err.println(user);
-        Connection c = conn;
         Statement stmt = null;
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
@@ -264,7 +259,7 @@ public class RouletteDB{
             }
             rs.close();
             stmt.close();
-            c.close();
+            //c.close();
             //System.out.println("Operation done successfully");
             //System.out.println(rsl);
             return u;

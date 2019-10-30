@@ -21,10 +21,11 @@ public class UsuarioPersistence implements Persistences{
     RouletteDB rb = new RouletteDB(); 
 
     
-    public void alterarSaldo(Usuario us, float valor) {
+    public Usuario alterarSaldo(Usuario us, float valor) {
         
         us.setSaldo(us.getSaldo()+valor);
         rb.updateUsuario(us);
+        return us;
     }
 
     @Override

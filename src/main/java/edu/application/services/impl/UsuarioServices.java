@@ -29,10 +29,15 @@ public class UsuarioServices implements Services{
     
     @Autowired
     UsuarioPersistence rtp = null;
-    
-    public void recargarSaldoUsuario(Usuario us, float recarga){
 
-        rtp.alterarSaldo(us,recarga);
+    public UsuarioServices(){
+        rtp = new UsuarioPersistence();
+    };
+    
+    public Usuario updateSaldoUsuario(Usuario us, float value){
+
+        rtp.alterarSaldo(us,value);
+        return us;
     }
     /**
     public String ConsultarUsuario(String user) throws RoulettePersistenceException{
