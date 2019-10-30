@@ -99,7 +99,7 @@ public class SalasServices implements Services {
         Sala s = (Sala) getElement(salaNombre);
         Usuario us = (Usuario) usuarioServices.getElement(userEmail);
         s.apuesteNum(us,casillero);
+        usuarioServices.updateSaldoUsuario(us, s.getBetValue().floatValue() * -1);
     }
-
 
 }

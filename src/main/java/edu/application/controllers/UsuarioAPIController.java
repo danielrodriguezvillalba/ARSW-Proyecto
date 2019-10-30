@@ -62,7 +62,7 @@ public class UsuarioAPIController{
             }
             Integer saldo = obj.optInt("amount", -1);
             if(saldo > 0)
-                usuarioServices.recargarSaldoUsuario(us,saldo);
+                usuarioServices.updateSaldoUsuario(us,saldo);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {

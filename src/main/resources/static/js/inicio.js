@@ -169,6 +169,10 @@ var  inicioModule = (function () {
                 updateTableSalas(JSON.parse(eventbody.body));
             });
 
+            stompClient.subscribe('/topic/userSaldo/'+dataToSend.usuario, function (eventbody) {
+                document.getElementById("saldoHeader").innerHTML = eventbody.body;
+            });
+
             stompClient.subscribe('/topic/apuestas/'+salaNombre, function (eventbody) {
                 console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
             });

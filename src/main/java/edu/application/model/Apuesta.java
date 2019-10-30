@@ -75,15 +75,15 @@ public class Apuesta {
         Double valor = 0.0;
         valor += apuestas.get(numeroGanador) * 36;
         int numero = Integer.parseInt(numeroGanador);
-        if(numero <= 1 && numero <=18)
+        if(numero >= 1 && numero <=18)
             valor += apuestas.get("1to18") * 2;
-        else if(numero <= 19 && numero <=36)
+        else if(numero >= 19 && numero <=36)
             valor += apuestas.get("19to36") * 2;
-        if(numero <= 1 && numero <=12)
+        if(numero >= 1 && numero <=12)
             valor += apuestas.get("1to12") * 3;
-        else if(numero <= 13 && numero <=24)
+        else if(numero >= 13 && numero <=24)
             valor += apuestas.get("13to24") * 3;
-        else if(numero <= 25 && numero <=36)
+        else if(numero >= 25 && numero <=36)
             valor += apuestas.get("25to36") * 3;
         if(numero!=0 && numero % 2 == 0)
             valor += apuestas.get("odd") * 2;

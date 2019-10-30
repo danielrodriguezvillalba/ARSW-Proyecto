@@ -5,11 +5,15 @@
  */
 package edu.application.model;
 
+import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.controllers.SalasSocketController;
+import edu.application.services.impl.UsuarioServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +28,10 @@ import java.util.logging.Logger;
 
 /*@Component
 @Scope("prototype")*/
+
 public class Sala extends Thread{
+
+    private UsuarioServices usuarioServices = new UsuarioServices();
 
     private static final int maxJugadores = 5;
     private static final int tiempoEspera = 15;
@@ -137,7 +144,9 @@ public class Sala extends Thread{
             }
             
             long startTime = System.currentTimeMillis();
-            SalasSocketController.startCountDown(this.Nombre);
+            numeroGanador = Integer.toString(rdn.nextInt(37));
+
+            SalasSocketController.startCountDown(this.Nombre, numeroGanador);
             
             while(System.currentTimeMillis() < startTime + tiempoEspera * 1000){
                 this.yield();
@@ -145,10 +154,22 @@ public class Sala extends Thread{
 
             numeroGanador = Integer.toString(rdn.nextInt(37));
             for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
-                Usuario usuario = entry.getKey();
+
+                Usuario usuario = null;
+                try {
+                    usuario = (Usuario) usuarioServices.getElement(entry.getKey().getCorreo());
+                } catch (RoulettePersistenceException e) {
+                    e.printStackTrace();
+                }
                 Apuesta apuesta = entry.getValue();
-                
-                usuario.setSaldo(usuario.getSaldo() + apuesta.ganancia(numeroGanador).floatValue());
+
+                try {
+                    usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                SalasSocketController.sendUpdatedBalance(usuario.getCorreo(), usuario.getSaldo());
             }
             reinicieApuestas();
         }
