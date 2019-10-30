@@ -52,7 +52,7 @@ public class SalasSocketController {
         salasServices.apostar(salaNombre,userEmail,casillero);
         mgt.convertAndSend("/topic/userSaldo/"+userEmail, Integer.toString((int)(((Usuario) usuarioServices.getElement(userEmail)).getSaldo())));
         int winningNumber = new Random().nextInt(37);
-        mgt.convertAndSend("/topic/apuestas/"+salaNombre, "{\"player\": \"" + userEmail + "\", \"casillero\":"+casillero+"}");
+        mgt.convertAndSend("/topic/apuestas/"+salaNombre, "{\"player\": \"" + userEmail + "\", \"casillero\":\""+casillero+"\"}");
         //mgt.convertAndSend("/topic/startcountdown."+salaNombre,Integer.toString(winningNumber));
         System.out.println("in the function");
     }
