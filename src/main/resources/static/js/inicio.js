@@ -175,6 +175,31 @@ var  inicioModule = (function () {
 
             stompClient.subscribe('/topic/apuestas/'+salaNombre, function (eventbody) {
                 console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
+                var player =  (JSON.parse(eventbody.body)).player;
+                var casilleroVal = (JSON.parse(eventbody.body)).casillero;
+                if(player != dataToSend.usuario) {
+                    var lugar = document.getElementById(casilleroVal);
+                    var _x = lugar.offsetLeft;
+                    var _y = lugar.offsetTop;
+                    var img = document.createElement('img');
+                    img.src = "../imagen/fichaAzul.png";
+                    img.style.zIndex = "0";
+                    img.style.position = "absolute";
+
+                    var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+                    var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+
+                    img.style.left = (_x + rX) + "px";
+                    img.style.top = (_y + rY + 150) + "px";
+
+                    img.style.width = "20px";
+                    img.style.pointerEvents = "none";
+                    document.body.appendChild(img);
+
+                    if (chips[casilleroVal] == null) chips[casilleroVal] = new Array(0);
+                    chips[casilleroVal].push(img);
+                    bets.push(casilleroVal);
+                }
             });
 
             stompClient.subscribe('/topic/startcountdown.'+dataToSend.salaNombre, function (eventbody) {
