@@ -140,14 +140,10 @@ public class Sala extends Thread{
             SalasSocketController.startCountDown(this.Nombre);
             
             while(System.currentTimeMillis() < startTime + tiempoEspera * 1000){
-                try {
-                    Thread.sleep(5);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                this.yield();
             }
 
-            numeroGanador = Integer.toString(numero);
+            numeroGanador = Integer.toString(rdn.nextInt(37));
             for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
                 Usuario usuario = entry.getKey();
                 Apuesta apuesta = entry.getValue();
@@ -162,7 +158,7 @@ public class Sala extends Thread{
      * This function verifies if at least one player placed a bet in the room
      * @return returns a boolean indicating if at least a user placed a bet
      */
-    private boolean atLeastOnePlayedBet(){
+    public boolean atLeastOnePlayedBet(){
         boolean test = false;
         for(Apuesta a : apuestas.values()){
             if(a.aposto())
