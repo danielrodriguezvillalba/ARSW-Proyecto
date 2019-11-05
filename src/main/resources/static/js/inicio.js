@@ -126,32 +126,37 @@ var  inicioModule = (function () {
             var userEmail = cookieModule.getCookies("usuario");
             dataToUser.numero = casilleroVal;
             dataToUser.sala =  document.getElementById("tableNombre").innerHTML;
+            if(manageModule.getSaldo() > 0.000001){
+                stompClient.send("/app/apostar/"+ dataToSend.salaNombre + "/" + userEmail + "/" +  casilleroVal, {}, null);
+                //postApuestaUsuario();
 
-            stompClient.send("/app/apostar/"+ dataToSend.salaNombre + "/" + userEmail + "/" +  casilleroVal, {}, null);
-            //postApuestaUsuario();
-            
-            
-            var lugar = document.getElementById(casilleroVal);
-            var _x =  lugar.offsetLeft;
-            var _y = lugar.offsetTop;
-            var img = document.createElement('img');
-            img.src="../imagen/ficha.png";
-            img.style.zIndex="0";
-            img.style.position="absolute";
 
-            var rX=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
-            var rY=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+                var lugar = document.getElementById(casilleroVal);
+                var _x =  lugar.offsetLeft;
+                var _y = lugar.offsetTop;
+                var img = document.createElement('img');
+                img.src="../imagen/ficha.png";
+                img.style.zIndex="0";
+                img.style.position="absolute";
 
-            img.style.left=(_x+rX)+"px";
-            img.style.top=(_y+rY+150)+"px";
+                var rX=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+                var rY=Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
 
-            img.style.width="20px";
-            img.style.pointerEvents="none";
-            document.body.appendChild(img);
-            
-            if(chips[casilleroVal]==null)chips[casilleroVal]=new Array(0);
-            chips[casilleroVal].push(img);
-            bets.push(casilleroVal);
+                img.style.left=(_x+rX)+"px";
+                img.style.top=(_y+rY+150)+"px";
+
+                img.style.width="20px";
+                img.style.pointerEvents="none";
+                document.body.appendChild(img);
+
+                if(chips[casilleroVal]==null)chips[casilleroVal]=new Array(0);
+                chips[casilleroVal].push(img);
+                bets.push(casilleroVal);
+            }
+            else{
+                alert("Saldo insuficiente");
+            }
+
 
         },
 

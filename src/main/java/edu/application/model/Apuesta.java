@@ -61,7 +61,7 @@ public class Apuesta {
     public void apostar(String casilla, Double value){
         value += apuestas.get(casilla);
         apuestas.put(casilla, value);
-        System.out.println(value);
+        //System.out.println(value);
         aposto = true;
     }
     
@@ -86,9 +86,9 @@ public class Apuesta {
         else if(numero >= 25 && numero <=36)
             valor += apuestas.get("25to36") * 3;
         if(numero!=0 && numero % 2 == 0)
-            valor += apuestas.get("odd") * 2;
-        else if(numero!=0 && numero % 2 != 0)
             valor += apuestas.get("even") * 2;
+        else if(numero!=0 && numero % 2 != 0)
+            valor += apuestas.get("odd") * 2;
         
         if(stringArrayContains(negro, numeroGanador))
             valor += apuestas.get("black") * 2;
@@ -96,15 +96,15 @@ public class Apuesta {
             valor += apuestas.get("red") * 2;
         
         if(stringArrayContains(twotoone1, numeroGanador))
-            valor += apuestas.get("2to1-1") * 2;
+            valor += apuestas.get("2to1-1") * 3;
         
         else if(stringArrayContains(twotoone2, numeroGanador))
-            valor += apuestas.get("2to1-2") * 2;
+            valor += apuestas.get("2to1-2") * 3;
         
         else if(stringArrayContains(twotoone3, numeroGanador))
-            valor += apuestas.get("2to1-3") * 2;
-        
-        
+            valor += apuestas.get("2to1-3") * 3;
+
+
         return valor;
     }   
     

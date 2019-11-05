@@ -43,8 +43,7 @@ var manageModule = (function () {
         return putPromise;
     };
 
-
-
+    var sald = null;
     return{
 
         updateSaldo: function () {
@@ -56,6 +55,7 @@ var manageModule = (function () {
                 dataToSend.newPassword=null;
                 dataToSend.oldPassword=null;
                 dataToSend.amount=null;
+                alert("Recarga exitosa");
                 document.getElementById("saldoRecargar").value='';
             })
 
@@ -73,6 +73,7 @@ var manageModule = (function () {
                 dataToSend.amount=null;
                 document.getElementById("newPassword").value='';
                 document.getElementById("oldPassword").value='';
+                alert("Contraseña modificada satisfactoriamente");
             })
         },
 
@@ -80,8 +81,11 @@ var manageModule = (function () {
             dataToSend.mail = cookieModule.getCookies("usuario");
 
             getUser().then(function (data) {
+
+                sald=data.saldo;
                 document.getElementById("saldoHeader").innerHTML = data.saldo;
             })
+            return sald;
         }
 
 

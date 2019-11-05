@@ -164,6 +164,12 @@ public class Sala extends Thread{
                 Apuesta apuesta = entry.getValue();
 
                 try {
+
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
                 }catch (Exception e){
                     e.printStackTrace();
