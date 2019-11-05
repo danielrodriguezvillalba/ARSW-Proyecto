@@ -123,6 +123,10 @@ var  inicioModule = (function () {
         },
 
         apostar: function (casilleroVal) {
+            console.log(rouletteModule.apostando());
+            if( rouletteModule.apostando() ){
+
+
             var userEmail = cookieModule.getCookies("usuario");
             dataToUser.numero = casilleroVal;
             dataToUser.sala =  document.getElementById("tableNombre").innerHTML;
@@ -155,6 +159,7 @@ var  inicioModule = (function () {
             }
             else{
                 alert("Saldo insuficiente");
+            }
             }
 
 

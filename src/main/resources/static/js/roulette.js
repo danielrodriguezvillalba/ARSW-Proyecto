@@ -96,9 +96,13 @@ $mask.text(maskDefault);
 
 
 var  rouletteModule = (function () {
-
+    var jugando=true;
 
     return{
+        apostando: function (){
+            return jugando;
+        },
+
         countdown : function (winningNumber) {
             var timeleft = 16;
             var downloadTimer = setInterval(function(){
@@ -107,14 +111,19 @@ var  rouletteModule = (function () {
                 if(timeleft <= 0){
                     clearInterval(downloadTimer);
                     $inner.attr('data-spinto', winningNumber).find('li:nth-child('+ winningNumber +') input').prop('checked','checked');
+
                     $mask.text('No More Bets');
+
 
                     setTimeout(function() {
                         $mask.text('No More Bets');
                     }, timer/2);
 
+                    jugando=false;
                     setTimeout(function() {
                         $mask.text(maskDefault);
+                        jugando = true;
+
                     }, timer+500);
 
 
