@@ -153,6 +153,12 @@ public class Sala extends Thread{
             }
 
             numeroGanador = Integer.toString(rdn.nextInt(37));
+
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
 
                 Usuario usuario = null;
@@ -165,11 +171,6 @@ public class Sala extends Thread{
 
                 try {
 
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                     usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
                 }catch (Exception e){
                     e.printStackTrace();
