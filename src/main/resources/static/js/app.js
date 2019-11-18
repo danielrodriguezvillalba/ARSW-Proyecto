@@ -76,7 +76,7 @@ var module =(function(){
                  'Operación Exitosa',
                   'Se registró satisfactoriamente!',
                   'success'
-                  )
+             )
         }   
     };
 })();

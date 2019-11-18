@@ -45,21 +45,30 @@ var manageModule = (function () {
 
     var sald = null;
     return{
-
         updateSaldo: function () {
             dataToSend.amount = document.getElementById("saldoRecargar").value;
             dataToSend.mail = cookieModule.getCookies("usuario");
+            if(dataToSend.amount > 0){
+                Swal.fire(
+                    'Operación Exitosa',
+                    'Su recarga ha sido exitosa!',
+                    'success'
+                )
+            }
+            else{
+                Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'Monto a recargar incorrecto!',
+                });
+            }
 
             putUserSaldo().then(getUser).then(function (data) {
                 document.getElementById("saldoHeader").innerHTML = data.saldo;
                 dataToSend.newPassword=null;
                 dataToSend.oldPassword=null;
                 dataToSend.amount=null;
-                Swal.fire(
-                     'Operación Exitosa',
-                     'Su recarga ha sido exitosa!',
-                     'success'
-                 )
+
                 document.getElementById("saldoRecargar").value='';
             })
 

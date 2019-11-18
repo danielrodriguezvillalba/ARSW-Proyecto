@@ -158,7 +158,11 @@ var  inicioModule = (function () {
                 bets.push(casilleroVal);
             }
             else{
-                alert("Saldo insuficiente");
+                Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'Saldo insuficiente!',
+                });
             }
             }
 
@@ -229,8 +233,18 @@ var  inicioModule = (function () {
         nuevaSala: function () {
             var salaNombre = document.getElementById("nuevaSalaNombre").value;
             var defaultBet = document.getElementById("nuevaSalaBetValue").value;
-            dataToSend.salaNombre = salaNombre;
-            stompClient.send("/app/createSala."+salaNombre+"."+ defaultBet, {}, null);
+            if (defaultBet > 0 && salaNombre != ""){
+                dataToSend.salaNombre = salaNombre;
+                stompClient.send("/app/createSala."+salaNombre+"."+ defaultBet, {}, null);
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                     title: 'Oops...',
+                     text: 'Datos de sala incorrectos!',
+                });
+            }
+
             //postSala(salaNombre).then(getSalas);
         },
 
