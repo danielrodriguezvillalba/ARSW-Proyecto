@@ -55,7 +55,11 @@ var manageModule = (function () {
                 dataToSend.newPassword=null;
                 dataToSend.oldPassword=null;
                 dataToSend.amount=null;
-                alert("Recarga exitosa");
+                Swal.fire(
+                     'Operación Exitosa',
+                     'Su recarga ha sido exitosa!',
+                     'success'
+                 )
                 document.getElementById("saldoRecargar").value='';
             })
 
@@ -73,7 +77,11 @@ var manageModule = (function () {
                 dataToSend.amount=null;
                 document.getElementById("newPassword").value='';
                 document.getElementById("oldPassword").value='';
-                alert("Contraseña modificada satisfactoriamente");
+                Swal.fire(
+                  'Operación Exitosa',
+                  'Su contraseña ha sido cambiada!',
+                  'success'
+                )
             })
         },
 

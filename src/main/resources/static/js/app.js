@@ -38,7 +38,11 @@ var module =(function(){
                     location.href ="inicio.html";
                 },
                 error: function () {
-                    alert("Credenciales incorectas");
+                    Swal.fire({
+                          icon: 'error',
+                          title: 'Oops...',
+                          text: 'Credenciales incorrectas!',
+                    });
                 }
             });
             
@@ -66,7 +70,13 @@ var module =(function(){
                     
                 }
             });
-            alert("Se registro satisfactoriamente");
+
+
+            Swal.fire(
+                 'Operación Exitosa',
+                  'Se registró satisfactoriamente!',
+                  'success'
+                  )
         }   
     };
 })();
