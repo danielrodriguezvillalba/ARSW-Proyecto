@@ -96,13 +96,13 @@ public class Apuesta {
             valor += apuestas.get("red") * 2;
         
         if(stringArrayContains(twotoone1, numeroGanador))
-            valor += apuestas.get("2to1-1") * 2;
+            valor += apuestas.get("2to1-1") *3;
         
         else if(stringArrayContains(twotoone2, numeroGanador))
-            valor += apuestas.get("2to1-2") * 2;
+            valor += apuestas.get("2to1-2") * 3;
         
         else if(stringArrayContains(twotoone3, numeroGanador))
-            valor += apuestas.get("2to1-3") * 2;
+            valor += apuestas.get("2to1-3") * 3;
 
 
         return valor;

@@ -170,7 +170,7 @@ public class Sala extends Thread{
                 Apuesta apuesta = entry.getValue();
 
                 try {
-
+                    System.out.println(apuesta.ganancia(numeroGanador).floatValue());
                     usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
                 }catch (Exception e){
                     e.printStackTrace();
