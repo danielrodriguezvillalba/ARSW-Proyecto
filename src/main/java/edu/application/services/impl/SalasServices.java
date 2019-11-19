@@ -42,6 +42,7 @@ public class SalasServices implements Services {
         return salas;
     }
 
+
     @Override
     public Object getElement(Object obj) {
         Sala temp = null;
@@ -91,9 +92,11 @@ public class SalasServices implements Services {
         return response;
     }
 
+
     public int getNumeroGanador(Sala sala){
         return sala.getNumeroGanador();
     }
+
 
     public void apostar(String salaNombre, String userEmail, String casillero) throws RoulettePersistenceException {
         Sala s = (Sala) getElement(salaNombre);

@@ -8,13 +8,6 @@ package edu.application.model;
 import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.controllers.SalasSocketController;
 import edu.application.services.impl.UsuarioServices;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
