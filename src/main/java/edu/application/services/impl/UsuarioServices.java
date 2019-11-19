@@ -10,11 +10,8 @@ import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.Persistence.impl.UsuarioPersistence;
 import edu.application.model.Usuario;
 import edu.application.model.Sala;
-
 import edu.application.services.Services;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,23 +27,27 @@ public class UsuarioServices implements Services{
     @Autowired
     UsuarioPersistence rtp = null;
 
+
     public UsuarioServices(){
         rtp = new UsuarioPersistence();
     };
-    
+
+
     public Usuario updateSaldoUsuario(Usuario us, float value){
 
         rtp.alterarSaldo(us,value);
         return us;
     }
+
+
     /**
     public String ConsultarUsuario(String user) throws RoulettePersistenceException{
         return rtp.ConsultarUsuario(user);
     }*/
-    
     public void insertarUsuario(Usuario user){
         rtp.insertarUsuario(user);
     }
+
 
     @Override
     public ArrayList<Object> allElements() {

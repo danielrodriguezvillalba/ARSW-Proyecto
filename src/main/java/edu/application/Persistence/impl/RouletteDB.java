@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package edu.application.Persistence.impl;
 
 import edu.application.model.*;
@@ -11,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import org.springframework.stereotype.Service;
 import edu.application.Exceptions.RoulettePersistenceException;
 
 /**
@@ -38,6 +38,7 @@ public class RouletteDB{
     
     
     public void realizaConexion() throws RoulettePersistenceException{
+
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
@@ -55,6 +56,7 @@ public class RouletteDB{
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
+
             try {
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
@@ -63,6 +65,7 @@ public class RouletteDB{
             }
             System.out.println("La conexion se realizo sin problemas! ");
         }
+
         try{
             Class.forName("org.postgresql.Driver");
             stmt = c.createStatement();
@@ -91,6 +94,7 @@ public class RouletteDB{
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
+
             try {
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 System.out.println("La conexion se realizo sin problemas!");
@@ -98,6 +102,7 @@ public class RouletteDB{
                 System.out.println("Ocurrio un error : "+e.getMessage());
             }
         }
+
         try{
             Class.forName("org.postgresql.Driver");
             c.setAutoCommit(false);
@@ -155,6 +160,7 @@ public class RouletteDB{
         
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
+
             try {
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
@@ -163,6 +169,7 @@ public class RouletteDB{
             }
             System.out.println("La conexion se realizo sin problemas! =) ");
         }
+
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT * FROM COMPANY;" );
@@ -241,6 +248,7 @@ public class RouletteDB{
             }
             //System.out.println("La conexion se realizo sin problemas! =) ");
         }
+
         try{
             Class.forName("org.postgresql.Driver");
             c.setAutoCommit(false);
@@ -267,6 +275,8 @@ public class RouletteDB{
         }catch(Exception e){
             System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());
         }
+
         return null;
+
     }
 }

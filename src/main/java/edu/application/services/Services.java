@@ -6,7 +6,7 @@
 package edu.application.services;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -16,4 +16,5 @@ public interface Services {
     public ArrayList<Object> allElements();
     
     public Object getElement( Object obj) throws Exception;
+
 }
