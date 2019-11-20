@@ -125,16 +125,16 @@ var inicioModule = (function () {
 
 
                 var userEmail = cookieModule.getCookies("usuario");
-                dataToUser.numero = casilleroVal;
+                dataToUser.numero = casilleroVal.value;
                 dataToUser.sala = document.getElementById("tableNombre").innerHTML;
                 //alert(dataToSend.salaNombre)
                 if (manageModule.getSaldo() > 0) {
                     
-                        stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal, {}, null);
+                        stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal.value, {}, null);
                         //postApuestaUsuario();
 
 
-                        var lugar = document.getElementById(casilleroVal);
+                        var lugar = document.getElementById(casilleroVal.value);
                         var _x = lugar.offsetLeft;
                         var _y = lugar.offsetTop;
                         var img = document.createElement('img');
@@ -145,17 +145,17 @@ var inicioModule = (function () {
                         var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
                         var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
 
-                        img.style.left = (_x + rX) + "px";
+                        img.style.left = (_x + rX+ 250) + "px";
                         img.style.top = (_y + rY + 150) + "px";
 
                         img.style.width = "20px";
                         img.style.pointerEvents = "none";
                         document.body.appendChild(img);
 
-                        if (chips[casilleroVal] == null)
-                            chips[casilleroVal] = new Array(0);
-                        chips[casilleroVal].push(img);
-                        bets.push(casilleroVal);
+                        if (chips[casilleroVal.value] == null)
+                            chips[casilleroVal.value] = new Array(0);
+                        chips[casilleroVal.value].push(img);
+                        bets.push(casilleroVal.value);
                     
                     
                 }
@@ -173,9 +173,13 @@ var inicioModule = (function () {
         joinSala: function (salaNombre) {
             dataToSend.salaNombre = salaNombre;
             dataToSend.usuario = cookieModule.getCookies("usuario");
+            
+            window.open('/inicio.html', salaNombre);
+            document.title = salaNombre;
 
             stompClient.send("/app/joinSala." + dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
             document.getElementById("main").style.display = '';
+            document.getElementById("mySidenav").style.display = 'none';
             document.getElementById("Welcome").style.display = 'none';
             document.getElementById("tableNombre").innerHTML = salaNombre;
 
@@ -204,7 +208,7 @@ var inicioModule = (function () {
                     var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
                     var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
 
-                    img.style.left = (_x + rX) + "px";
+                    img.style.left = (_x + rX+ 150) + "px";
                     img.style.top = (_y + rY + 150) + "px";
 
                     img.style.width = "20px";
