@@ -208,7 +208,7 @@ var inicioModule = (function () {
                     var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
                     var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
 
-                    img.style.left = (_x + rX+ 150) + "px";
+                    img.style.left = (_x + rX+ 250) + "px";
                     img.style.top = (_y + rY + 150) + "px";
 
                     img.style.width = "20px";

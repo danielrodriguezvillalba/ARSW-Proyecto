@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class UsuarioCache {
 
-    Map<String, Usuario> usuarioMap = new HashMap<String, Usuario>();
+    private static Map<String, Usuario> usuarioMap = new HashMap<String, Usuario>();
 
     public Usuario getCachedUsuario(String email){
         return usuarioMap.get(email);
