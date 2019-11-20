@@ -8,6 +8,7 @@ package edu.application.services.impl;
 
 import edu.application.Exceptions.RoulettePersistenceException;
 import edu.application.Persistence.impl.UsuarioPersistence;
+import edu.application.cache.UsuarioCache;
 import edu.application.model.Usuario;
 import edu.application.model.Sala;
 import edu.application.services.Services;
@@ -23,15 +24,46 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServices implements Services{
     
-    
     @Autowired
-    UsuarioPersistence rtp = null;
+    private UsuarioCache usuarioCache = null;
+
+    @Autowired
+    private UsuarioPersistence rtp = null;
 
 
     public UsuarioServices(){
         rtp = new UsuarioPersistence();
+        usuarioCache = new UsuarioCache();
     };
 
+    public void updateCachedUsuarioInDB(String email) throws RoulettePersistenceException {
+        if(!usuarioCache.containsUsuario(email)){
+            usuarioCache.putUsuarioCache(rtp.getUsuario(email));
+        }
+        rtp.updateUsuario(usuarioCache.getCachedUsuario(email));
+    }
+
+
+    public Usuario getCachedUsuario(String email) throws RoulettePersistenceException {
+        if(!usuarioCache.containsUsuario(email)){
+            usuarioCache.putUsuarioCache(rtp.getUsuario(email));
+        }
+        return usuarioCache.getCachedUsuario(email);
+    }
+
+    public float getSaldoUsuario(String email) throws RoulettePersistenceException {
+        if(!usuarioCache.containsUsuario(email)){
+            usuarioCache.putUsuarioCache(rtp.getUsuario(email));
+        }
+        return usuarioCache.getCachedUsuario(email).getSaldo();
+    }
+
+    public void updateSaldoUsuarioCache(String email, float value) throws RoulettePersistenceException {
+        if(!usuarioCache.containsUsuario(email)){
+            usuarioCache.putUsuarioCache(rtp.getUsuario(email));
+        }
+        usuarioCache.updateUsuarioSaldo(email,value);
+    }
 
     public Usuario updateSaldoUsuario(Usuario us, float value){
 

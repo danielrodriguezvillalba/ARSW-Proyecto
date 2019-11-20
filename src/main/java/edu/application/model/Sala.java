@@ -154,22 +154,23 @@ public class Sala extends Thread{
             }
             for (Map.Entry<Usuario, Apuesta> entry : apuestas.entrySet()) {
 
-                Usuario usuario = null;
-                try {
-                    usuario = (Usuario) usuarioServices.getElement(entry.getKey().getCorreo());
-                } catch (RoulettePersistenceException e) {
-                    e.printStackTrace();
-                }
+
                 Apuesta apuesta = entry.getValue();
 
                 try {
                     System.out.println(apuesta.ganancia(numeroGanador).floatValue());
-                    usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
+                    //usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
+                    usuarioServices.updateSaldoUsuarioCache(entry.getKey().getCorreo(), apuesta.ganancia(numeroGanador).floatValue());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
 
-                SalasSocketController.sendUpdatedBalance(usuario.getCorreo(), usuario.getSaldo());
+                try {
+                    usuarioServices.updateCachedUsuarioInDB(entry.getKey().getCorreo());
+                    SalasSocketController.sendUpdatedBalance(entry.getKey().getCorreo(), usuarioServices.getSaldoUsuario(entry.getKey().getCorreo()));
+                } catch (RoulettePersistenceException e) {
+                    e.printStackTrace();
+                }
             }
             reinicieApuestas();
         }

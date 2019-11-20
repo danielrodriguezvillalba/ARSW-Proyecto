@@ -50,8 +50,7 @@ public class SalasSocketController {
     @MessageMapping("/apostar/{salaNombre}/{userEmail}/{casillero}")
     public void apostarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail, @DestinationVariable String casillero) throws RoulettePersistenceException {
         salasServices.apostar(salaNombre,userEmail,casillero);
-        mgt.convertAndSend("/topic/userSaldo/"+userEmail, Integer.toString((int)(((Usuario) usuarioServices.getElement(userEmail)).getSaldo())));
-        int winningNumber = new Random().nextInt(37);
+        mgt.convertAndSend("/topic/userSaldo/"+userEmail, Integer.toString((int) usuarioServices.getSaldoUsuario(userEmail)));
         mgt.convertAndSend("/topic/apuestas/"+salaNombre, "{\"player\": \"" + userEmail + "\", \"casillero\":\""+casillero+"\"}");
         //mgt.convertAndSend("/topic/startcountdown."+salaNombre,Integer.toString(winningNumber));
         System.out.println("in the function");

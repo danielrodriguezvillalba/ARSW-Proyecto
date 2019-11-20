@@ -128,7 +128,7 @@ var inicioModule = (function () {
                 dataToUser.numero = casilleroVal.value;
                 dataToUser.sala = document.getElementById("tableNombre").innerHTML;
                 //alert(dataToSend.salaNombre)
-                if (manageModule.getSaldo() > 0) {
+                if (document.getElementById("saldoHeader").innerHTML > 0) {
                     
                         stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal.value, {}, null);
                         //postApuestaUsuario();

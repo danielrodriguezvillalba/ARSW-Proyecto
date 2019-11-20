@@ -100,9 +100,9 @@ public class SalasServices implements Services {
 
     public void apostar(String salaNombre, String userEmail, String casillero) throws RoulettePersistenceException {
         Sala s = (Sala) getElement(salaNombre);
-        Usuario us = (Usuario) usuarioServices.getElement(userEmail);
+        usuarioServices.updateSaldoUsuarioCache(userEmail, s.getBetValue().floatValue() * -1);
+        Usuario us = usuarioServices.getCachedUsuario(userEmail);
         s.apuesteNum(us,casillero);
-        usuarioServices.updateSaldoUsuario(us, s.getBetValue().floatValue() * -1);
     }
 
 }

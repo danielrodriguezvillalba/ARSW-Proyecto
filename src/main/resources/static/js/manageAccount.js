@@ -99,7 +99,7 @@ var manageModule = (function () {
 
                 sald = data.saldo;
                 document.getElementById("saldoHeader").innerHTML = data.saldo;
-            })
+            });
             return sald;
         }
 
