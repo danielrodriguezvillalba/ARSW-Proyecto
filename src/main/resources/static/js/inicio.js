@@ -258,13 +258,22 @@ var inicioModule = (function () {
         init: function () {
             var socket = new SockJS('/stompendpoint');
             stompClient = Stomp.over(socket);
+            usuario = cookieModule.getCookies("usuario");
 
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
                 stompClient.subscribe('/topic/salas', function (eventbody) {
                     updateTableSalas(JSON.parse(eventbody.body));
                 });
+
+                stompClient.subscribe('/topic/ganancias/'+usuario, function (eventbody) {
+                    $.notify("Ha ganado $"+ eventbody.body, "success");
+                });
             });
+        },
+
+        leave: function () {
+            stompClient.send("/app/quitarSala/" + dataToSend.salaNombre + "/" + userEmail, {}, null);
         }
 
     };

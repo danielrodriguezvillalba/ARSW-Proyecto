@@ -156,17 +156,20 @@ public class Sala extends Thread{
 
 
                 Apuesta apuesta = entry.getValue();
+                float ganancias = 0;
 
                 try {
                     System.out.println(apuesta.ganancia(numeroGanador).floatValue());
                     //usuario = usuarioServices.updateSaldoUsuario(usuario, apuesta.ganancia(numeroGanador).floatValue());
-                    usuarioServices.updateSaldoUsuarioCache(entry.getKey().getCorreo(), apuesta.ganancia(numeroGanador).floatValue());
+                     ganancias = apuesta.ganancia(numeroGanador).floatValue();
+                    usuarioServices.updateSaldoUsuarioCache(entry.getKey().getCorreo(), ganancias);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
 
                 try {
                     usuarioServices.updateCachedUsuarioInDB(entry.getKey().getCorreo());
+                    SalasSocketController.sendGanancias(entry.getKey().getCorreo(), ganancias);
                     SalasSocketController.sendUpdatedBalance(entry.getKey().getCorreo(), usuarioServices.getSaldoUsuario(entry.getKey().getCorreo()));
                 } catch (RoulettePersistenceException e) {
                     e.printStackTrace();
