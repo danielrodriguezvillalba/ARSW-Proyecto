@@ -8,9 +8,9 @@ package edu.application.model;
 import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.controllers.SalasSocketController;
 import edu.application.services.impl.UsuarioServices;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +42,7 @@ public class Sala extends Thread{
 
     public Sala() {
         historial = new HistorialJugadas();
-        apuestas = new HashMap< Usuario, Apuesta>();
+        apuestas = new ConcurrentHashMap<Usuario, Apuesta>();
         numJugadores = 0;
     }
 

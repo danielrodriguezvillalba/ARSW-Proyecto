@@ -5,8 +5,8 @@
  */
 package edu.application.model;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -36,7 +36,7 @@ public class Apuesta {
    
     
     public Apuesta() {
-        apuestas = new HashMap<String, Double>();
+        apuestas = new ConcurrentHashMap<String, Double>();
         for(String s : numbers){
             apuestas.put(s, 0.0);
         }
