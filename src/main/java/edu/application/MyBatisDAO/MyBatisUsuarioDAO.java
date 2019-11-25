@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.MyBatisDAO;
+package edu.application.mybatisdao;
 
-import edu.application.DAO.UsuarioDAO;
-import edu.application.Persistence.impl.UsuarioPersistence;
+import edu.application.dao.UsuarioDAO;
+import edu.application.persistence.impl.UsuarioPersistence;
 import edu.application.model.Usuario;
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

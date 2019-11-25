@@ -3,7 +3,7 @@ package edu.application.controllers;
 
 import edu.application.model.Sala;
 import edu.application.model.Usuario;
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.services.impl.UsuarioServices;
 import edu.application.services.impl.SalasServices;
 

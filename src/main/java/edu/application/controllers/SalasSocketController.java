@@ -1,23 +1,15 @@
 package edu.application.controllers;
 
 
-import edu.application.Exceptions.RoulettePersistenceException;
-import edu.application.model.Usuario;
+import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.services.impl.SalasServices;
 import edu.application.services.impl.UsuarioServices;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.socket.messaging.SessionConnectEvent;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import javax.annotation.PostConstruct;
 import java.util.Random;

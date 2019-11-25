@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.Persistence.impl;
+package edu.application.persistence.impl;
 
 
-import edu.application.Persistence.Persistences;
+import edu.application.persistence.Persistences;
 import edu.application.model.Usuario;
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 import org.springframework.stereotype.Service;
 
 

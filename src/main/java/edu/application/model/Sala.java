@@ -5,7 +5,7 @@
  */
 package edu.application.model;
 
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.controllers.SalasSocketController;
 import edu.application.services.impl.UsuarioServices;
 import java.util.HashMap;

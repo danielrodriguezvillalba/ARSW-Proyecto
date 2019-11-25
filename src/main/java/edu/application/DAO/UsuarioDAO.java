@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.application.DAO;
+package edu.application.dao;
 
 import edu.application.model.Usuario;
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 
 /**
  *

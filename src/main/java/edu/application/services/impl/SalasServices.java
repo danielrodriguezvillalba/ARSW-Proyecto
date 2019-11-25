@@ -5,7 +5,7 @@ package edu.application.services.impl;
  * and open the template in the editor.
  */
 
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.model.Sala;
 import edu.application.model.Usuario;
 import edu.application.services.Services;

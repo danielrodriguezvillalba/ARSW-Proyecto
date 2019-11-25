@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-package edu.application.Persistence.impl;
+package edu.application.persistence.impl;
 
-import edu.application.model.*;
+import edu.application.model.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import edu.application.Exceptions.RoulettePersistenceException;
+import edu.application.exceptions.RoulettePersistenceException;
 
 /**
  *

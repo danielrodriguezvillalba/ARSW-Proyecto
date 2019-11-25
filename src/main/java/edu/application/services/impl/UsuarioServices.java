@@ -6,8 +6,8 @@ package edu.application.services.impl;
  */
 
 
-import edu.application.Exceptions.RoulettePersistenceException;
-import edu.application.Persistence.impl.UsuarioPersistence;
+import edu.application.exceptions.RoulettePersistenceException;
+import edu.application.persistence.impl.UsuarioPersistence;
 import edu.application.cache.UsuarioCache;
 import edu.application.model.Usuario;
 import edu.application.model.Sala;
