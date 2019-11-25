@@ -44,7 +44,7 @@ public class SalasSocketController {
     @MessageMapping("/joinSala.{salaNombre}")
     public void joinSala(String dataToSend, @DestinationVariable String salaNombre) throws RoulettePersistenceException {
         JSONObject obj = new JSONObject(dataToSend);
-        salasServices.addUsuario(salaNombre, obj.getString("usuario"));
+        salasServices.addUsuario(salaNombre, usuarioServices.getCachedUsuario(obj.getString("usuario")));
         mgt.convertAndSend("/topic/salas", salasServices.createSalasListResponse().toString());
     }
 
