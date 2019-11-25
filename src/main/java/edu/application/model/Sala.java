@@ -145,7 +145,7 @@ public class Sala extends Thread{
                 this.yield();
             }
 
-            numeroGanador = Integer.toString(rdn.nextInt(37));
+            //numeroGanador = Integer.toString(rdn.nextInt(37));
 
             try {
                 Thread.sleep(10000);
