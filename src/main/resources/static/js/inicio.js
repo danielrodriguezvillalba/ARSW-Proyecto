@@ -141,7 +141,7 @@ var inicioModule = (function () {
                     var _x;
                     var _y;
                     if (lugar.innerHTML === '0') {
-                        alert("Entraaaa")
+                        
                         _x = lugar.offsetLeft + 60;
                         _y = lugar.offsetTop + 50;
                     }
@@ -213,15 +213,24 @@ var inicioModule = (function () {
                 var casilleroVal = (JSON.parse(eventbody.body)).casillero;
                 if (player != dataToSend.usuario) {
                     var lugar = document.getElementById(casilleroVal);
-                    var _x = lugar.offsetLeft;
-                    var _y = lugar.offsetTop;
+                    var _x;
+                    var _y;
+                    if (lugar.innerHTML === '0') {
+                        
+                        _x = lugar.offsetLeft + 60;
+                        _y = lugar.offsetTop + 50;
+                    }
+                    else {
+                        _x = lugar.offsetLeft;
+                        _y = lugar.offsetTop;
+                    }
                     var img = document.createElement('img');
                     img.src = "../imagen/fichaAzul.png";
                     img.style.zIndex = "0";
                     img.style.position = "absolute";
 
-                    var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
-                    var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+                    var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
+                    var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
 
                     img.style.left = (_x + rX + 250) + "px";
                     img.style.top = (_y + rY + 150) + "px";
