@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-var module =(function(){
-    
+var module = (function () {
+
     var user = {
-         name: null,
-         lastname: null,
-         TaxID: null,
-         email: null,
-         password1: null
-    }   
+        name: null,
+        lastname: null,
+        TaxID: null,
+        email: null,
+        password1: null
+    }
     var usuario;
     var password;
     var name;
@@ -24,8 +24,7 @@ var module =(function(){
 
 
     return{
-        
-        login: function(){
+        login: function () {
             user.email = document.getElementById("username").value;
             user.password = document.getElementById("password").value;
             $.ajax({
@@ -33,50 +32,84 @@ var module =(function(){
                 type: 'POST',
                 data: JSON.stringify(user),
                 contentType: 'application/json',
-                success:function () {
-                    cookieModule.setCookies("usuario",user.email,0.1);
-                    location.href ="inicio.html";
+                success: function () {
+                    cookieModule.setCookies("usuario", user.email, 0.1);
+                    location.href = "inicio.html";
                 },
                 error: function () {
                     Swal.fire({
-                          icon: 'error',
-                          title: 'Oops...',
-                          text: 'Credenciales incorrectas!',
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Credenciales incorrectas!',
                     });
                 }
             });
-            
+
         },
-        
-        insert: function(){
-            
+        insert: function () {
+
             user.name = document.getElementById("username").value;
             user.lastname = document.getElementById("lastname").value;
             user.TaxID = document.getElementById("TaxID").value;
             user.email = document.getElementById("email").value;
-            user.password1 = document.getElementById("password").value;            
-            
-            var newUser = "{\"id\":"+TaxID+",\"nombre\":'"+name+"',\"apellido\":'"+lastname+"',\"correo\":'"+email+"',\"contra\":'"+password1+"'}";
+            user.password1 = document.getElementById("password").value;
+
+            var newUser = "{\"id\":" + TaxID + ",\"nombre\":'" + name + "',\"apellido\":'" + lastname + "',\"correo\":'" + email + "',\"contra\":'" + password1 + "'}";
             console.log(newUser);
-            var crear = $.ajax({
-                url: "/ruleta/addUser",
-                type: 'POST',
-                data: JSON.stringify(user),
-                contentType: "application/json",
-                success: function(){
-                    location.href ="index.html";
-                },
-                error: function(){
-                    
+            if (user.TaxID > 0) {
+                if ((user.email).includes('@') === true) {
+                    if ((user.email).includes('.') === true) {
+                        Swal.fire(
+                                'Operación Exitosa',
+                                'Se registró satisfactoriamente!',
+                                'success'
+                                )
+                        var crear = $.ajax({
+                            url: "/ruleta/addUser",
+                            type: 'POST',
+                            data: JSON.stringify(user),
+                            contentType: "application/json",
+                            success: function () {
+                                location.href = "index.html";
+                            },
+                            error: function () {
+
+                            }
+
+
+                        });
+                        
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Datos incorrectos!',
+                        });
+                    }
+
                 }
-            });
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Datos incorrectos!',
+                    });
+                }
 
 
-            Swal.fire(
-                 'Operación Exitosa',
-                  'Se registró satisfactoriamente!',
-                  'success'
-             )
-        }   
+
+
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Datos incorrectos!',
+                });
+            }
+
+
+        }
     };
 })();

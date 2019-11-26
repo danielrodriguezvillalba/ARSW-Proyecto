@@ -44,7 +44,7 @@ var inicioModule = (function () {
         data.map(function (val, index) {
             console.log(val + " " + index);
             var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
-                    'onclick="inicioModule.joinSala(this.value)" value="' + val.nombre + '">Join </button></td></tr>';
+                    'onclick="inicioModule.joinSala(this.value,' + val.betValue + ' )" value="' + val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
         })
     }
@@ -120,6 +120,8 @@ var inicioModule = (function () {
             bets = new Array();
         },
         apostar: function (casilleroVal) {
+
+            //alert(casilleroVal)
             console.log(rouletteModule.apostando());
             if (rouletteModule.apostando()) {
 
@@ -127,37 +129,48 @@ var inicioModule = (function () {
                 var userEmail = cookieModule.getCookies("usuario");
                 dataToUser.numero = casilleroVal.value;
                 dataToUser.sala = document.getElementById("tableNombre").innerHTML;
+
                 //alert(dataToSend.salaNombre)
-                if (document.getElementById("saldoHeader").innerHTML > 0) {
-                    
-                        stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal.value, {}, null);
-                        //postApuestaUsuario();
+                if (document.getElementById("saldoHeader").innerHTML - document.getElementById("tableBetValue").innerHTML > 0) {
+
+                    stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal.value, {}, null);
+                    //postApuestaUsuario();
 
 
-                        var lugar = document.getElementById(casilleroVal.value);
-                        var _x = lugar.offsetLeft;
-                        var _y = lugar.offsetTop;
-                        var img = document.createElement('img');
-                        img.src = "../imagen/ficha.png";
-                        img.style.zIndex = "0";
-                        img.style.position = "absolute";
+                    var lugar = document.getElementById(casilleroVal.value);
+                    var _x;
+                    var _y;
+                    if (lugar.innerHTML === '0') {
+                        alert("Entraaaa")
+                        _x = lugar.offsetLeft + 60;
+                        _y = lugar.offsetTop + 50;
+                    }
+                    else {
+                        _x = lugar.offsetLeft;
+                        _y = lugar.offsetTop;
+                    }
 
-                        var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
-                        var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
+                    var img = document.createElement('img');
+                    img.src = "../imagen/ficha.png";
+                    img.style.zIndex = "0";
+                    img.style.position = "absolute";
 
-                        img.style.left = (_x + rX+ 250) + "px";
-                        img.style.top = (_y + rY + 150) + "px";
+                    var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
+                    var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
 
-                        img.style.width = "20px";
-                        img.style.pointerEvents = "none";
-                        document.body.appendChild(img);
+                    img.style.left = (_x + rX + 250) + "px";
+                    img.style.top = (_y + rY + 150) + "px";
 
-                        if (chips[casilleroVal.value] == null)
-                            chips[casilleroVal.value] = new Array(0);
-                        chips[casilleroVal.value].push(img);
-                        bets.push(casilleroVal.value);
-                    
-                    
+                    img.style.width = "20px";
+                    img.style.pointerEvents = "none";
+                    document.body.appendChild(img);
+
+                    if (chips[casilleroVal.value] == null)
+                        chips[casilleroVal.value] = new Array(0);
+                    chips[casilleroVal.value].push(img);
+                    bets.push(casilleroVal.value);
+
+
                 }
                 else {
                     Swal.fire({
@@ -170,10 +183,11 @@ var inicioModule = (function () {
 
 
         },
-        joinSala: function (salaNombre) {
+        joinSala: function (salaNombre, apuestaSala) {
+
             dataToSend.salaNombre = salaNombre;
             dataToSend.usuario = cookieModule.getCookies("usuario");
-            
+
             window.open('/inicio.html', salaNombre);
             document.title = salaNombre;
 
@@ -182,6 +196,7 @@ var inicioModule = (function () {
             document.getElementById("mySidenav").style.display = 'none';
             document.getElementById("Welcome").style.display = 'none';
             document.getElementById("tableNombre").innerHTML = salaNombre;
+            document.getElementById("tableBetValue").innerHTML = apuestaSala;
 
 
             stompClient.subscribe('/topic/salas.' + salaNombre, function (eventbody) {
@@ -208,7 +223,7 @@ var inicioModule = (function () {
                     var rX = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
                     var rY = Math.floor(Math.random() * (16 - (-16) + 1)) + -16;
 
-                    img.style.left = (_x + rX+ 250) + "px";
+                    img.style.left = (_x + rX + 250) + "px";
                     img.style.top = (_y + rY + 150) + "px";
 
                     img.style.width = "20px";
@@ -266,12 +281,11 @@ var inicioModule = (function () {
                     updateTableSalas(JSON.parse(eventbody.body));
                 });
 
-                stompClient.subscribe('/topic/ganancias/'+usuario, function (eventbody) {
-                    $.notify("Ha ganado $"+ eventbody.body, "success");
+                stompClient.subscribe('/topic/ganancias/' + usuario, function (eventbody) {
+                    $.notify("Ha ganado $" + eventbody.body, "success");
                 });
             });
         },
-
         leave: function () {
             stompClient.send("/app/quitarSala/" + dataToSend.salaNombre + "/" + userEmail, {}, null);
         }
