@@ -13,6 +13,7 @@ var module = (function () {
         email: null,
         password1: null
     }
+
     var usuario;
     var password;
     var name;

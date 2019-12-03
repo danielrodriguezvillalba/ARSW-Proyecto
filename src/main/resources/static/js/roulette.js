@@ -104,13 +104,20 @@ var  rouletteModule = (function () {
         },
 
         countdown : function (winningNumber) {
+
             var timeleft = 16;
+
             var downloadTimer = setInterval(function(){
+
                 timeleft -= 1;
                 $mask.text(timeleft+"s");
-                var salaName = document.getElementById("tableNombre").innerHTML;; 
+
+                var salaName = document.getElementById("tableNombre").innerHTML;;
+
                 document.title = salaName+" "+timeleft+"s";
+
                 if(timeleft <= 0){
+
                     clearInterval(downloadTimer);
                     $inner.attr('data-spinto', winningNumber).find('li:nth-child('+ winningNumber +') input').prop('checked','checked');
 
@@ -154,10 +161,12 @@ var  rouletteModule = (function () {
                     }, timer);
 
                     setTimeout(function () {
+
                         $inner.attr('data-spinto','').removeClass('rest');
                         $(this).hide();
                         //$spin.show();
                         $data.removeClass('reveal');
+
                     }, timer + 5000);
 
 
