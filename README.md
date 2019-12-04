@@ -8,10 +8,12 @@
 
 ## Integrantes
 
-* Sergio Alejandro Nuñez Mendivelso
-* Etienne Maxence Eugene Reitz
-* Daniel Felipe Rodriguez Villalba
-* Miguel Angel Rojas Martinez
+Nombres y Apellidos | GitHub Username
+--- | ---
+Sergio Alejandro Nuñez Mendivelso | checho1998
+Etienne Maxence Eugene Reitz | Tylones
+Daniel Felipe Rodriguez Villalba | danielrodriguezvillalba
+Miguel Angel Rojas Martinez | MiguelRmar
 
 ## Resumen 
 
