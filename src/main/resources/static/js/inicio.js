@@ -44,7 +44,7 @@ var inicioModule = (function () {
         data.map(function (val, index) {
             console.log(val + " " + index);
             var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
-                    'onclick="inicioModule.joinSala(this.value,' + val.betValue + ' )" value="' + val.nombre + '">Join </button></td></tr>';
+                    'onclick="inicioModule.joinSala(this.value,' + val.betValue + ',' + val.participantes + ')" value="' + val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
         })
     }
@@ -141,7 +141,7 @@ var inicioModule = (function () {
                     var _x;
                     var _y;
                     if (lugar.innerHTML === '0') {
-                        
+
                         _x = lugar.offsetLeft + 60;
                         _y = lugar.offsetTop + 50;
                     }
@@ -183,76 +183,83 @@ var inicioModule = (function () {
 
 
         },
-        joinSala: function (salaNombre, apuestaSala) {
+        joinSala: function (salaNombre, apuestaSala, participantes) {
+            if (participantes <= 4+1) {
+                dataToSend.salaNombre = salaNombre;
+                dataToSend.usuario = cookieModule.getCookies("usuario");
 
-            dataToSend.salaNombre = salaNombre;
-            dataToSend.usuario = cookieModule.getCookies("usuario");
+                window.open('/inicio.html');
+                document.title = salaNombre;
 
-            window.open('/inicio.html');
-            document.title = salaNombre;
-
-            stompClient.send("/app/joinSala." + dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
-            document.getElementById("main").style.display = '';
-            document.getElementById("mySidenav").style.display = 'none';
-            document.getElementById("Welcome").style.display = 'none';
-            document.getElementById("tableNombre").innerHTML = salaNombre;
-            document.getElementById("tableBetValue").innerHTML = apuestaSala;
+                stompClient.send("/app/joinSala." + dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
+                document.getElementById("main").style.display = '';
+                document.getElementById("mySidenav").style.display = 'none';
+                document.getElementById("Welcome").style.display = 'none';
+                document.getElementById("tableNombre").innerHTML = salaNombre;
+                document.getElementById("tableBetValue").innerHTML = apuestaSala;
 
 
-            stompClient.subscribe('/topic/salas.' + salaNombre, function (eventbody) {
-                updateTableSalas(JSON.parse(eventbody.body));
-            });
+                stompClient.subscribe('/topic/salas.' + salaNombre, function (eventbody) {
+                    updateTableSalas(JSON.parse(eventbody.body));
+                });
 
-            stompClient.subscribe('/topic/userSaldo/' + dataToSend.usuario, function (eventbody) {
-                document.getElementById("saldoHeader").innerHTML = eventbody.body;
-            });
+                stompClient.subscribe('/topic/userSaldo/' + dataToSend.usuario, function (eventbody) {
+                    document.getElementById("saldoHeader").innerHTML = eventbody.body;
+                });
 
-            stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
-                console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
-                var player = (JSON.parse(eventbody.body)).player;
-                var casilleroVal = (JSON.parse(eventbody.body)).casillero;
-                if (player != dataToSend.usuario) {
-                    var lugar = document.getElementById(casilleroVal);
-                    var _x;
-                    var _y;
-                    if (lugar.innerHTML === '0') {
-                        
-                        _x = lugar.offsetLeft + 60;
-                        _y = lugar.offsetTop + 50;
+                stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
+                    console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
+                    var player = (JSON.parse(eventbody.body)).player;
+                    var casilleroVal = (JSON.parse(eventbody.body)).casillero;
+                    if (player != dataToSend.usuario) {
+                        var lugar = document.getElementById(casilleroVal);
+                        var _x;
+                        var _y;
+                        if (lugar.innerHTML === '0') {
+
+                            _x = lugar.offsetLeft + 60;
+                            _y = lugar.offsetTop + 50;
+                        }
+                        else {
+                            _x = lugar.offsetLeft;
+                            _y = lugar.offsetTop;
+                        }
+                        var img = document.createElement('img');
+                        img.src = "../imagen/fichaAzul.png";
+                        img.style.zIndex = "0";
+                        img.style.position = "absolute";
+
+                        var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
+                        var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
+
+                        img.style.left = (_x + rX + 250) + "px";
+                        img.style.top = (_y + rY + 150) + "px";
+
+                        img.style.width = "20px";
+                        img.style.pointerEvents = "none";
+                        document.body.appendChild(img);
+
+                        if (chips[casilleroVal] == null)
+                            chips[casilleroVal] = new Array(0);
+                        chips[casilleroVal].push(img);
+                        bets.push(casilleroVal);
                     }
-                    else {
-                        _x = lugar.offsetLeft;
-                        _y = lugar.offsetTop;
+                });
+
+                stompClient.subscribe('/topic/startcountdown.' + dataToSend.salaNombre, function (eventbody) {
+                    if (waiting == false) {
+                        waiting = true;
+                        rouletteModule.countdown(eventbody.body);
                     }
-                    var img = document.createElement('img');
-                    img.src = "../imagen/fichaAzul.png";
-                    img.style.zIndex = "0";
-                    img.style.position = "absolute";
-
-                    var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
-                    var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
-
-                    img.style.left = (_x + rX + 250) + "px";
-                    img.style.top = (_y + rY + 150) + "px";
-
-                    img.style.width = "20px";
-                    img.style.pointerEvents = "none";
-                    document.body.appendChild(img);
-
-                    if (chips[casilleroVal] == null)
-                        chips[casilleroVal] = new Array(0);
-                    chips[casilleroVal].push(img);
-                    bets.push(casilleroVal);
-                }
-            });
-
-            stompClient.subscribe('/topic/startcountdown.' + dataToSend.salaNombre, function (eventbody) {
-                if (waiting == false) {
-                    waiting = true;
-                    rouletteModule.countdown(eventbody.body);
-                }
-            });
-
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sala llena!',
+                });
+            }
             /*putUsuarioSala().then(getSalas).then(function () {
              document.getElementById("main").style.display ='';
              document.getElementById("Welcome").style.display ='none';
