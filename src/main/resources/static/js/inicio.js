@@ -217,17 +217,31 @@ var inicioModule = (function () {
                         var _y;
                         if (lugar.innerHTML === '0') {
 
-                            _x = lugar.offsetLeft + 60;
-                            _y = lugar.offsetTop + 50;
-                        }
-                        else {
-                            _x = lugar.offsetLeft;
-                            _y = lugar.offsetTop;
-                        }
-                        var img = document.createElement('img');
-                        img.src = "../imagen/fichaAzul.png";
-                        img.style.zIndex = "0";
-                        img.style.position = "absolute";
+            stompClient.subscribe('/topic/heartbeat/' + salaNombre, function (eventbody) {
+               stompClient.send('/app/heartbeat/' + salaNombre + '/' + dataToSend.usuario, {}, "");
+            });
+
+            stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
+                console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
+                var player = (JSON.parse(eventbody.body)).player;
+                var casilleroVal = (JSON.parse(eventbody.body)).casillero;
+                if (player != dataToSend.usuario) {
+                    var lugar = document.getElementById(casilleroVal);
+                    var _x;
+                    var _y;
+                    if (lugar.innerHTML === '0') {
+                        
+                        _x = lugar.offsetLeft + 60;
+                        _y = lugar.offsetTop + 50;
+                    }
+                    else {
+                        _x = lugar.offsetLeft;
+                        _y = lugar.offsetTop;
+                    }
+                    var img = document.createElement('img');
+                    img.src = "../imagen/fichaAzul.png";
+                    img.style.zIndex = "0";
+                    img.style.position = "absolute";
 
                         var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
                         var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;

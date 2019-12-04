@@ -62,6 +62,11 @@ public class SalasServices implements Services {
         salas.add(nuevaSala);
     }
 
+    public void updateActiveUserHeartbeat(String nombre, String userEmail){
+        Sala s = (Sala) getElement(nombre);
+        s.updateActiveUser(userEmail);
+    }
+
     public void addUsuario(String nombre, Usuario us) {
         Sala s = (Sala) getElement(nombre);
         s.inserteUsuario(us);

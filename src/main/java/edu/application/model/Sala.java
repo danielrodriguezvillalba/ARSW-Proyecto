@@ -8,6 +8,8 @@ package edu.application.model;
 import edu.application.exceptions.RoulettePersistenceException;
 import edu.application.controllers.SalasSocketController;
 import edu.application.services.impl.UsuarioServices;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,11 +36,63 @@ public class Sala extends Thread{
         "2to1-2", "2to1-3", "1to12", "13to24", "25to36"};
     private int numJugadores;
     private HistorialJugadas historial;
-    private Map< Usuario, Apuesta> apuestas;
-    private String Nombre , numeroGanador;
+    protected Map< Usuario, Apuesta> apuestas;
+    protected String Nombre , numeroGanador;
     private int numero = 90;
     private Random rdn = new Random();
     private Double betValue;
+
+    private HeartBeat heartBeat = new HeartBeat();
+
+
+
+    class HeartBeat extends Thread{
+        private HashMap<String, Boolean> activeUsers = new HashMap<String, Boolean>();
+
+        private void updateActiveUser(String userEmail) {
+            activeUsers.put(userEmail, true);
+        }
+
+
+
+        @Override
+        public void run(){
+
+             for(Map.Entry<Usuario, Apuesta> entrySet : apuestas.entrySet()){
+                 activeUsers.put(entrySet.getKey().getCorreo(), false);
+             }
+            for(int i = 0; i < 3; i++){
+                SalasSocketController.heartbeatSala(Nombre);
+            }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            for(Map.Entry<String,Boolean> entrySet: activeUsers.entrySet()){
+                if(!entrySet.getValue()){
+                    for (Map.Entry<Usuario, Apuesta> entrySet2 : apuestas.entrySet()) {
+                        Usuario key = entrySet2.getKey();
+                        if(key.getCorreo().equals(entrySet.getKey())){
+                            try {
+                                if(!entrySet2.getValue().aposto())
+                                    elimineUsuario(key);
+                            } catch (RuletaException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        }
+                    }
+
+                }
+            }
+            SalasSocketController.updateSalasList();
+
+        }
+    }
+
+
 
     public Sala() {
         historial = new HistorialJugadas();
@@ -94,6 +148,10 @@ public class Sala extends Thread{
         }
     }
 
+    public void updateActiveUser(String userEmail){
+        heartBeat.updateActiveUser(userEmail);
+    }
+
     /**
      * This function removes a user from the room
      * @param us the user to be removed
@@ -128,8 +186,13 @@ public class Sala extends Thread{
     @Override
     public void run() {
         while (true) {
+            long initTime = System.currentTimeMillis();
             while(apuestas.size()==0 || !atLeastOnePlayedBet()){
                 try {
+                    if(System.currentTimeMillis() - initTime > 10000){
+                        heartBeat.run();
+                        initTime = System.currentTimeMillis();
+                    }
                     Thread.sleep(5);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,6 +238,9 @@ public class Sala extends Thread{
                     e.printStackTrace();
                 }
             }
+
+
+            heartBeat.run();
             reinicieApuestas();
         }
     }

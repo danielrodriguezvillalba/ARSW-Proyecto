@@ -28,9 +28,12 @@ public class SalasSocketController {
 
     private static SimpMessagingTemplate mgt2;
 
+    private static SalasServices ss2;
+
     @PostConstruct
     private void initMgt2 () {
         mgt2 = this.mgt;
+        ss2 = this.salasServices;
     }
 
     @MessageMapping("/joinSala.{salaNombre}")
@@ -60,6 +63,15 @@ public class SalasSocketController {
         System.out.println("youhou!");
     }
 
+    @MessageMapping("/heartbeat/{salaNombre}/{userEmail}")
+    public void isActiveUserSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail){
+        salasServices.updateActiveUserHeartbeat(salaNombre,userEmail);
+    }
+
+    public static void updateSalasList(){
+        mgt2.convertAndSend("/topic/salas", ss2.createSalasListResponse().toString());
+    }
+
     public static void startCountDown(String salaNombre, String winningNumber){
         mgt2.convertAndSend("/topic/startcountdown."+salaNombre,winningNumber);
     }
@@ -70,6 +82,10 @@ public class SalasSocketController {
 
     public static void sendGanancias(String userEmail, float value){
         mgt2.convertAndSend("/topic/ganancias/"+userEmail, (int) value);
+    }
+
+    public static void heartbeatSala(String salaNombre){
+        mgt2.convertAndSend("/topic/heartbeat/"+salaNombre, "");
     }
 
 }
