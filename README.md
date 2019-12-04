@@ -35,7 +35,7 @@ El proyecto que se realizara es una aplicación web, representando una ruleta de
 
 - El usuario puede estar jugando en varias salas al mismo tiempo.
 - Historial de los ultimos numeros que han caido desde el momento en el que el usuario ingreso a una sala determinada.
-- Abra un premio acumulado de todas las salas, que se jugara en cualquier momento, en una sala al azar y con un numero al azar. 
+- Usted como usuario podra ver en tiempo real las apuestas de las otras personas que esten con usted en la sala . 
 
 ## Reglas de la Ruleta
 
