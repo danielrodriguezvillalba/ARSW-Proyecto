@@ -184,7 +184,7 @@ var inicioModule = (function () {
 
         },
         joinSala: function (salaNombre, apuestaSala, participantes) {
-            if (participantes <= 4+1) {
+            if (participantes+1 <= 4) {
                 dataToSend.salaNombre = salaNombre;
                 dataToSend.usuario = cookieModule.getCookies("usuario");
 
