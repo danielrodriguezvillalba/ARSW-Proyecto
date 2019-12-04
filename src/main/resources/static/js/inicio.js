@@ -188,7 +188,7 @@ var inicioModule = (function () {
             dataToSend.salaNombre = salaNombre;
             dataToSend.usuario = cookieModule.getCookies("usuario");
 
-            window.open('/inicio.html', salaNombre);
+            window.open('/inicio.html');
             document.title = salaNombre;
 
             stompClient.send("/app/joinSala." + dataToSend.salaNombre, {}, JSON.stringify(dataToSend));
