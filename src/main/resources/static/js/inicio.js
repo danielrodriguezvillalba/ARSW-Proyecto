@@ -28,12 +28,12 @@ var inicioModule = (function () {
         });
 
         postPromise.then(
-                function () {
-                    console.info('Post OK');
-                },
-                function () {
-                    console.info('Post NOK');
-                }
+            function () {
+                console.info('Post OK');
+            },
+            function () {
+                console.info('Post NOK');
+            }
         );
 
         return postPromise;
@@ -44,7 +44,7 @@ var inicioModule = (function () {
         data.map(function (val, index) {
             console.log(val + " " + index);
             var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
-                    'onclick="inicioModule.joinSala(this.value,' + val.betValue + ',' + val.participantes + ')" value="' + val.nombre + '">Join </button></td></tr>';
+                'onclick="inicioModule.joinSala(this.value,' + val.betValue + ',' + val.participantes + ')" value="' + val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
         })
     }
@@ -53,12 +53,12 @@ var inicioModule = (function () {
         var getPromise = $.get("/Salas");
 
         getPromise.then(
-                function (data) {
-                    updateTableSalas(JSON.parse(data));
-                },
-                function () {
-                    console.log('get failed');
-                }
+            function (data) {
+                updateTableSalas(JSON.parse(data));
+            },
+            function () {
+                console.log('get failed');
+            }
         );
 
         return getPromise;
@@ -74,12 +74,12 @@ var inicioModule = (function () {
         });
 
         putPromise.then(
-                function () {
-                    console.info('PUT OK');
-                },
-                function () {
-                    console.info('PUT NOK');
-                }
+            function () {
+                console.info('PUT OK');
+            },
+            function () {
+                console.info('PUT NOK');
+            }
         );
 
         return putPromise;
@@ -94,12 +94,12 @@ var inicioModule = (function () {
         });
 
         postPromise.then(
-                function () {
-                    console.info('POST OK');
-                },
-                function () {
-                    console.info('POST NOK');
-                }
+            function () {
+                console.info('POST OK');
+            },
+            function () {
+                console.info('POST NOK');
+            }
         );
 
         return postPromise;
@@ -207,6 +207,10 @@ var inicioModule = (function () {
                     document.getElementById("saldoHeader").innerHTML = eventbody.body;
                 });
 
+                stompClient.subscribe('/topic/heartbeat/' + salaNombre, function (eventbody) {
+                    stompClient.send('/app/heartbeat/' + salaNombre + '/' + dataToSend.usuario, {}, "");
+                });
+
                 stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
                     console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
                     var player = (JSON.parse(eventbody.body)).player;
@@ -217,31 +221,17 @@ var inicioModule = (function () {
                         var _y;
                         if (lugar.innerHTML === '0') {
 
-            stompClient.subscribe('/topic/heartbeat/' + salaNombre, function (eventbody) {
-               stompClient.send('/app/heartbeat/' + salaNombre + '/' + dataToSend.usuario, {}, "");
-            });
-
-            stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
-                console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
-                var player = (JSON.parse(eventbody.body)).player;
-                var casilleroVal = (JSON.parse(eventbody.body)).casillero;
-                if (player != dataToSend.usuario) {
-                    var lugar = document.getElementById(casilleroVal);
-                    var _x;
-                    var _y;
-                    if (lugar.innerHTML === '0') {
-                        
-                        _x = lugar.offsetLeft + 60;
-                        _y = lugar.offsetTop + 50;
-                    }
-                    else {
-                        _x = lugar.offsetLeft;
-                        _y = lugar.offsetTop;
-                    }
-                    var img = document.createElement('img');
-                    img.src = "../imagen/fichaAzul.png";
-                    img.style.zIndex = "0";
-                    img.style.position = "absolute";
+                            _x = lugar.offsetLeft + 60;
+                            _y = lugar.offsetTop + 50;
+                        }
+                        else {
+                            _x = lugar.offsetLeft;
+                            _y = lugar.offsetTop;
+                        }
+                        var img = document.createElement('img');
+                        img.src = "../imagen/fichaAzul.png";
+                        img.style.zIndex = "0";
+                        img.style.position = "absolute";
 
                         var rX = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
                         var rY = Math.floor(Math.random() * (10 - (-10) + 1)) + -10;
