@@ -52,6 +52,42 @@ A continuación encontrará una rápida descripción de las diferentes reglas de
 - Rojo o negro (red or black) Apostar exclusivamente por el color que saldrá.El cero no cuenta ni para uno ni para otro. Gana lo equivalente a su apuesta si ésta resulta ganadora.
 - Par o impar (Odd or even) Apostar exclusivamente por que el número que salga sea par o impar. El cero no cuenta ni para uno ni para otro. Gana lo equivalente a su apuesta si ésta resulta ganadora siguiendo las reglas de la ruleta de casino.
 
+## Atributos No funcionales
+
+### Usabilidad
+
+#### Escenarios
+
+Escenarios donde esta un usuario en varias salas
+
+1. Cliente: Usuario de la aplicacion
+2. Estimulo: Saber cuando la otra sala esta en juego
+3. Artefactos: Front end
+4. Ambiente: Bajo condiciones normales de la aplicacion
+5. Respuesta: Muestra los segundos que hacen falta para no dejar apostar mas y ponerse en juego
+6. Medida de Respuesta: El usuario despues de haber apostado en una sala e ir a otra puede ver el tiempo restante de todas las salas en sus respectivas pestañas de su navegador.
+
+Escenario:
+
+
+## Git 
+
+
+Escenarios donde dos Usuarios apuestan al tiempo
+
+1. Cliente: Todos los usuarios del sistema
+2. Estimulo: Tener una idea de donde estan apostando los otros usuarios en la misma sala con fichas de otro color y dar mayor realtime a la aplicacion
+3. Artefactos: Front end, servidor de la base de datos y cache.
+4. Ambiente: Bajo condiciones normales de la aplicacion.
+5. Respuesta: Facilidad al ver las apuestas en nuestro tablero de los otros usuarios que estan en la misma sala.
+6. Medida de Respuesta: Por cada click de los otros usuarios en el tablero de ellos se vera una ficha de otro color a el de nuestra apuesta en nuestro tablero y viceversa.
+
+Escenario:
+
+
+## Git 
+
+
 ## Interfaz de usuario 
 
 La particularidad de nuestra aplicación es que permite a los usuarios jugar hasta 3 mesas diferentes al mismo tiempo. Por lo tanto, la interfaz debe ser capaz de adaptarse a un jugador que juega de 1 a 3 mesas al mismo tiempo : 
