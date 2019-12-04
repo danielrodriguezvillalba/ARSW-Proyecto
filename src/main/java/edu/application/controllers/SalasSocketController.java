@@ -88,4 +88,8 @@ public class SalasSocketController {
         mgt2.convertAndSend("/topic/heartbeat/"+salaNombre, "");
     }
 
+    public static void endOfGame(String salaNombre){
+        mgt2.convertAndSend("/topic/endgame/"+salaNombre, "");
+    }
+
 }

@@ -52,11 +52,15 @@ public class SalasAPIController {
     public ResponseEntity<?> joinSala(@RequestBody String body, @PathVariable String salaNombre){
         try {
             JSONObject obj = new JSONObject(body);
-            Usuario us = (Usuario) usuarioServices.getElement(obj.getString("usuario"));
-            if(!salasServices.containsUsuario(salaNombre,us))
-                salasServices.addUsuario(salaNombre,us);
-
+            Usuario us = usuarioServices.getCachedUsuario(obj.getString("usuario"));
+            if(!salasServices.containsUsuario(salaNombre,us)){
+                salasServices.addUsuario(salaNombre, us);
+            }
+            SalasSocketController.updateSalasList();
+            if(salasServices.ongoingGame(salaNombre))
+                return new ResponseEntity<>("ONGOING", HttpStatus.OK);
             return new ResponseEntity<>("OK", HttpStatus.OK);
+
         }catch(Exception e){
             return new ResponseEntity<>("ERROR AL CREAR SALA", HttpStatus.FORBIDDEN);
         }

@@ -110,4 +110,9 @@ public class SalasServices implements Services {
         s.apuesteNum(us,casillero);
     }
 
+    public boolean ongoingGame(String salaNombre){
+        Sala s = (Sala) getElement(salaNombre);
+        return s.atLeastOnePlayedBet();
+    }
+
 }

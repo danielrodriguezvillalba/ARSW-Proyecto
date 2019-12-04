@@ -242,6 +242,7 @@ public class Sala extends Thread{
 
             heartBeat.run();
             reinicieApuestas();
+            SalasSocketController.endOfGame(Nombre);
         }
     }
     

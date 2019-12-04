@@ -103,6 +103,16 @@ var  rouletteModule = (function () {
             return jugando;
         },
 
+        playing: function(){
+            jugando=false;
+            $mask.text("Espera");
+        },
+
+        endgame: function(){
+            jugando = true;
+            $mask.text("Place Your Bets");
+        },
+
         countdown : function (winningNumber) {
 
             var timeleft = 16;
