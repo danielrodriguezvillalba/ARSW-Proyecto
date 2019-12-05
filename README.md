@@ -68,10 +68,7 @@ Escenarios donde esta un usuario en varias salas
 6. Medida de Respuesta: El usuario despues de haber apostado en una sala e ir a otra puede ver el tiempo restante de todas las salas en sus respectivas pestañas de su navegador.
 
 Escenario:
-
-
-## Git 
-
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/tiempoNavegador.gif)
 
 Escenarios donde dos Usuarios apuestan al tiempo
 
@@ -84,8 +81,8 @@ Escenarios donde dos Usuarios apuestan al tiempo
 
 Escenario:
 
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/apuestasSockets.gif)
 
-## Git 
 
 
 ## Interfaz de usuario 
