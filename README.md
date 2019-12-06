@@ -29,7 +29,7 @@ Ademas podemos encontrar el diagrama del proceso principal de nuestra aplicacion
 
 Para mayor entendimiento de la aplicacion a continuación se presenta el diagrama de casos de uso, despliegue y componentes.
 
-![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Casosdeuso.png)
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Casosdeuso.PNG)
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Despliegue.png)
 
