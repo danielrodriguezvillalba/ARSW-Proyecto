@@ -27,6 +27,14 @@ Ademas podemos encontrar el diagrama del proceso principal de nuestra aplicacion
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Bizagi.png)
 
+Para mayor entendimiento de la aplicacion a continuación se presenta el diagrama de casos de uso, despliegue y componentes.
+
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Casosdeuso.png)
+
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Despliegue.png)
+
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/componentes.png)
+
 ## Descripcion
 
 El proyecto que se realizara es una aplicación web, representando una ruleta de casino, permitiendo asi la experiencia multiusuario, haciendo asi que cada uno apueste una cuota definida y se ganara con las reglas normales de una ruleta ademas tendra un valor agregado para que la aplicacion sea mas atractiva para los usuarios, en caso de no haber ningun ganador, la aplicacion es la que se queda con el total apostado.
