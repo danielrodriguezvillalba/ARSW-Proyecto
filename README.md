@@ -91,6 +91,55 @@ Escenario:
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/apuestasSockets.gif)
 
+### Performance
+
+Escenarios donde el usuario aposta con el sistema con y sin cache
+
+1. Cliente: Todos los usuarios del sistema
+2. Estimulo: El usuario apostará y nosotros calcularemos el tiempo para actualizar su saldo.
+3. Artefactos: Servidor de la base de datos y cache.
+4. Ambiente: Bajo condiciones normales de la aplicacion.
+5. Respuesta: Mejora el tiempo de respuesta de la aplicación y permite apostar más rápido. Mejor experiencia de usuario
+6. Medida de Respuesta: 
+
+*Tiempo para la actualización del saldo con y sin caché :*
+
+Attempt Number | Without Cache | With Cache
+--- | --- | ---
+1 | 448ms | 14ms
+2 | 426ms | 9ms
+3 | 440ms | 11ms
+4 | 455ms | 15ms
+5 | 434ms | 11ms
+6 | 436ms | 6ms
+7 | 437ms | 4ms
+8 | 433ms | 7ms
+9 | 424ms | 14ms
+10 | 441ms | 14ms
+**Average** | **437ms** | **10ms**
+
+### Seguridad
+
+Escenario en el que el usuario intenta realizar una inyección SQL
+
+1. Cliente: Usuario de la aplicacion
+2. Estimulo: Proteger la aplicación de inyecciones de SQL
+3. Artefactos: Back-end
+4. Ambiente: Bajo condiciones normales de la aplicacion
+5. Respuesta: Los intentos del usuario no le permiten conectarse y no tienen ningún efecto en la base de datos.
+6. Medida de Respuesta: Uso de "prepared statements" para proteger la aplicación de inyecciones SQL
+
+```java
+public Usuario getUsuario(String user){
+    PreparedStatement stmt = null;
+    stmt = c.prepareStatement("Select * from usuario where correo = ?");
+    stmt.setString(1, user);
+    ResultSet rs = stmt.executeQuery();
+    /*...*/
+}
+
+```
+
 
 
 ## Interfaz de usuario 

@@ -7,11 +7,9 @@
 package edu.application.persistence.impl;
 
 import edu.application.model.Usuario;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
+
 import edu.application.exceptions.RoulettePersistenceException;
 
 /**
@@ -237,7 +235,7 @@ public class RouletteDB{
     public Usuario getUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
         System.err.println(user);
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){
             try {
@@ -252,12 +250,11 @@ public class RouletteDB{
         try{
             Class.forName("org.postgresql.Driver");
             c.setAutoCommit(false);
-            stmt = c.createStatement();
+            stmt = c.prepareStatement("Select * from usuario where correo = ?");
+            stmt.setString(1, user);
             //SQL de ejemplo mientras se define lo que se va a ingresar a la base de datos
-            String sql = "Select * from usuario where correo ='"+user+"';";
-            System.out.println(sql);
             String rsl = null;
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
             Usuario u = null;
             while (rs.next()) {
                  rsl = rs.getString("contraseña");
