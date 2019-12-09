@@ -33,7 +33,7 @@ Para mayor entendimiento de la aplicacion a continuación se presenta el diagram
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/Despliegue.png)
 
-![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/componentes.png)
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/DiagramaComponentes2.png)
 
 ## Descripcion
 
