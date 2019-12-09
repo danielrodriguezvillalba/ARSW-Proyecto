@@ -91,9 +91,24 @@ Escenario:
 
 ![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/apuestasSockets.gif)
 
+### Escalabilidad 
+
+Escalabilidad vertical: Escenarios donde muchos usuarios apuestan con el sistema
+
+1. Cliente: Todos los usuarios del sistema
+2. Estimulo: Muchos usuarios realizan operaciones sobre el sistema al tiempo
+3. Artefactos: Servidor de la aplicacion.
+4. Ambiente: Bajo condiciones extremas de la aplicación.
+5. Respuesta: Mejora las caracteristicas de la maquina bajo una gran cantidad de operaciones sobre la aplicación, ademas de generar mayor disponibilidad en el sistema
+6. Medida de Respuesta: 
+
+En la imagen siguiente se muestra como el sistema (Dyno) al verse sometido a grandes cargas de peticiones, aumenta su capacidad, generando asi una mayor y mejor respuesta a los usuarios.
+
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/vertical.gif)
+
 ### Performance
 
-Escenarios donde el usuario aposta con el sistema con y sin cache
+Escenarios donde el usuario apuesta con el sistema con y sin cache
 
 1. Cliente: Todos los usuarios del sistema
 2. Estimulo: El usuario apostará y nosotros calcularemos el tiempo para actualizar su saldo.
