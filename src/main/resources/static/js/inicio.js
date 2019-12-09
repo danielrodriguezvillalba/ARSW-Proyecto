@@ -131,7 +131,7 @@ var inicioModule = (function () {
                 dataToUser.sala = document.getElementById("tableNombre").innerHTML;
 
                 //alert(dataToSend.salaNombre)
-                if (document.getElementById("saldoHeader").innerHTML - document.getElementById("tableBetValue").innerHTML > 0) {
+                if (document.getElementById("saldoHeader").innerHTML - document.getElementById("tableBetValue").innerHTML => 0) {
 
                     stompClient.send("/app/apostar/" + dataToSend.salaNombre + "/" + userEmail + "/" + casilleroVal.value, {}, null);
                     //postApuestaUsuario();
