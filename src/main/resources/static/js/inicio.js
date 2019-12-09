@@ -204,6 +204,7 @@ var inicioModule = (function () {
                     document.getElementById("Welcome").style.display = 'none';
                     document.getElementById("tableNombre").innerHTML = salaNombre;
                     document.getElementById("tableBetValue").innerHTML = apuestaSala;
+                    document.getElementById("Recargar").href = "#";
 
 
                     stompClient.subscribe('/topic/salas.' + salaNombre, function (eventbody) {
