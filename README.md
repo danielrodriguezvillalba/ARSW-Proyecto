@@ -104,7 +104,7 @@ Escalabilidad vertical: Escenarios donde muchos usuarios apuestan con el sistema
 
 En la imagen siguiente se muestra como el sistema (Dyno) al verse sometido a grandes cargas de peticiones, aumenta su capacidad, generando asi una mayor y mejor respuesta a los usuarios.
 
-![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/vertical.gif)
+![Imagenes](https://github.com/danielrodriguezvillalba/ARSW-Proyecto/blob/master/imagenes/vertical.PNG)
 
 ### Performance
 
