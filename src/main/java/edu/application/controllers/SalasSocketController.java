@@ -55,12 +55,12 @@ public class SalasSocketController {
         mgt.convertAndSend("/topic/userSaldo/"+userEmail, Integer.toString((int) usuarioServices.getSaldoUsuario(userEmail)));
         mgt.convertAndSend("/topic/apuestas/"+salaNombre, "{\"player\": \"" + userEmail + "\", \"casillero\":\""+casillero+"\"}");
         //mgt.convertAndSend("/topic/startcountdown."+salaNombre,Integer.toString(winningNumber));
-        System.out.println("in the function");
+        //System.out.println("in the function");
     }
 
     @MessageMapping("/quitarSala/{salaNombre}/{userEmail}")
     public void quitarSala(@DestinationVariable String salaNombre, @DestinationVariable String userEmail){
-        System.out.println("youhou!");
+        //System.out.println("youhou!");
     }
 
     @MessageMapping("/heartbeat/{salaNombre}/{userEmail}")

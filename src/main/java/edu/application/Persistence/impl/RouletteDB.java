@@ -40,7 +40,7 @@ public class RouletteDB{
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
-            System.out.println("La conexion se realizo sin problemas!");
+            //System.out.println("La conexion se realizo sin problemas!");
         } catch (ClassNotFoundException e) {
         } catch (SQLException e) {
         }        
@@ -161,12 +161,12 @@ public class RouletteDB{
                 int age  = rs.getInt("age");
                 String  address = rs.getString("address");
                 float salary = rs.getFloat("salary");
-                System.out.println( "ID = " + id );
-                System.out.println( "NAME = " + name );
-                System.out.println( "AGE = " + age );
-                System.out.println( "ADDRESS = " + address );
-                System.out.println( "SALARY = " + salary );
-                System.out.println();
+                //System.out.println( "ID = " + id );
+                //System.out.println( "NAME = " + name );
+                //System.out.println( "AGE = " + age );
+                //System.out.println( "ADDRESS = " + address );
+                //System.out.println( "SALARY = " + salary );
+                //System.out.println();
             }
             rs.close();
             stmt.close();
@@ -214,7 +214,7 @@ public class RouletteDB{
     
     public Usuario getUsuario(String user) throws RoulettePersistenceException {
         //Recupera conexion y crea Statement para el db
-        System.err.println(user);
+        //System.err.println(user);
         PreparedStatement stmt = null;
         //Valida si existe una conexion abierta al db y si no trata de abrir una
         if(c == null){

@@ -123,7 +123,7 @@ public class UsuarioAPIController{
         }
         String psswdHash = sb.toString();
         Usuario us = new Usuario(obj.getInt("TaxID"), obj.getString("name"), obj.getString("lastname"), obj.getString("email"), psswdHash);
-        System.out.println("Va a ingreas");
+        //System.out.println("Va a ingreas");
         try {
             usuarioServices.insertarUsuario(us);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -141,9 +141,9 @@ public class UsuarioAPIController{
             JSONObject obj = new JSONObject(body);
             Usuario us = (Usuario) usuarioServices.getElement(obj.getString("usuario"));
             String numero = obj.getString("numero");
-            System.out.println(obj.getString("sala"));
+            //System.out.println(obj.getString("sala"));
             Sala sal = (Sala) salasServices.getElement(obj.getString("sala"));
-            System.out.println(us.getCorreo()+" asdasd "+numero+" sala "+sal.getNombre());
+            //System.out.println(us.getCorreo()+" asdasd "+numero+" sala "+sal.getNombre());
             usuarioServices.apostar(us,numero,sal);
             return new ResponseEntity<>("OK", HttpStatus.OK);
         }catch(Exception e){
