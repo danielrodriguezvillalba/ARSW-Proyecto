@@ -29,10 +29,8 @@ var inicioModule = (function () {
 
         postPromise.then(
             function () {
-                console.info('Post OK');
             },
             function () {
-                console.info('Post NOK');
             }
         );
 
@@ -42,7 +40,6 @@ var inicioModule = (function () {
     var updateTableSalas = function (data) {
         $("#salasTable tbody").empty();
         data.map(function (val, index) {
-            console.log(val + " " + index);
             var toAdd = '<tr><td>' + val.nombre + '</td><td>' + val.participantes + '</td><td>' + val.betValue + '</td> <td><button type="button" class="btn btn-secondary" ' +
                 'onclick="inicioModule.joinSala(this.value,' + val.betValue + ',' + val.participantes + ')" value="' + val.nombre + '">Join </button></td></tr>';
             $("#salasTable tbody").append(toAdd);
@@ -57,7 +54,6 @@ var inicioModule = (function () {
                 updateTableSalas(JSON.parse(data));
             },
             function () {
-                console.log('get failed');
             }
         );
 
@@ -75,10 +71,8 @@ var inicioModule = (function () {
 
         putPromise.then(
             function () {
-                console.info('PUT OK');
             },
             function () {
-                console.info('PUT NOK');
             }
         );
 
@@ -95,10 +89,8 @@ var inicioModule = (function () {
 
         postPromise.then(
             function () {
-                console.info('POST OK');
             },
             function () {
-                console.info('POST NOK');
             }
         );
 
@@ -122,7 +114,6 @@ var inicioModule = (function () {
         apostar: function (casilleroVal) {
 
             //alert(casilleroVal)
-            console.log(rouletteModule.apostando());
             if (rouletteModule.apostando()) {
 
 
@@ -189,7 +180,6 @@ var inicioModule = (function () {
                 dataToSend.usuario = cookieModule.getCookies("usuario");
 
                 putUsuarioSala().then(function (data) {
-                    console.log(data);
 
 
                     window.open('/inicio.html');
@@ -224,7 +214,6 @@ var inicioModule = (function () {
                     });
 
                     stompClient.subscribe('/topic/apuestas/' + salaNombre, function (eventbody) {
-                        console.log('El jugador : ' + (JSON.parse(eventbody.body)).player + ' aposta en el casillero : ' + (JSON.parse(eventbody.body)).casillero);
                         var player = (JSON.parse(eventbody.body)).player;
                         var casilleroVal = (JSON.parse(eventbody.body)).casillero;
                         if (player != dataToSend.usuario) {
@@ -311,7 +300,6 @@ var inicioModule = (function () {
             usuario = cookieModule.getCookies("usuario");
 
             stompClient.connect({}, function (frame) {
-                console.log('Connected: ' + frame);
                 stompClient.subscribe('/topic/salas', function (eventbody) {
                     updateTableSalas(JSON.parse(eventbody.body));
                 });
@@ -326,6 +314,4 @@ var inicioModule = (function () {
         }
 
     };
-
-
-})();
+S})();

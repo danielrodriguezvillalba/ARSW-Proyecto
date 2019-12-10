@@ -56,7 +56,6 @@ var module = (function () {
             user.password1 = document.getElementById("password").value;
 
             var newUser = "{\"id\":" + TaxID + ",\"nombre\":'" + name + "',\"apellido\":'" + lastname + "',\"correo\":'" + email + "',\"contra\":'" + password1 + "'}";
-            console.log(newUser);
             if (user.TaxID > 0) {
                 if ((user.email).includes('@') === true) {
                     if ((user.email).includes('.') === true) {

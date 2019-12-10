@@ -42,9 +42,7 @@ public class RouletteDB{
             c = DriverManager.getConnection(urlDatabase,  usuarioDb, passwordDb);
             System.out.println("La conexion se realizo sin problemas!");
         } catch (ClassNotFoundException e) {
-            System.out.println("Ocurrio un error not found: "+e.getMessage());
         } catch (SQLException e) {
-            System.out.println("Ocurrio un error : "+e.getMessage());
         }        
     }
     
@@ -59,9 +57,7 @@ public class RouletteDB{
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexion se realizo sin problemas! ");
         }
 
         try{
@@ -77,10 +73,8 @@ public class RouletteDB{
             stmt.close();
             c.close();
         } catch ( Exception e ) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Table created successfully");
   
     }
     
@@ -95,9 +89,7 @@ public class RouletteDB{
 
             try {
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
-                System.out.println("La conexion se realizo sin problemas!");
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
         }
 
@@ -112,9 +104,7 @@ public class RouletteDB{
             stmt.close();
             c.commit();
             //c.close();
-            System.out.println("Se ingreso correctamente el usuario");
         }catch(Exception e){
-            System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());
         }
     }
     
@@ -129,9 +119,7 @@ public class RouletteDB{
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexi�n se realizo sin problemas! =) ");
         }
         
         try {
@@ -145,10 +133,8 @@ public class RouletteDB{
             c.commit();
             c.close();
         } catch (Exception e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Records created successfully");
          
     }
     
@@ -163,9 +149,7 @@ public class RouletteDB{
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexion se realizo sin problemas! =) ");
         }
 
         try {
@@ -187,9 +171,7 @@ public class RouletteDB{
             rs.close();
             stmt.close();
             c.close();
-            System.out.println("Operation done successfully");
         } catch ( Exception e ) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
         
@@ -209,9 +191,7 @@ public class RouletteDB{
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
-            System.out.println("La conexion se realizo sin problemas! =) ");
         }
 
         try {
@@ -242,7 +222,6 @@ public class RouletteDB{
                 c = DriverManager.getConnection(urlDatabase,usuarioDb, passwordDb);
                 c.setAutoCommit(false);
             } catch (Exception e) {
-                System.out.println("Ocurrio un error : "+e.getMessage());
             }
             //System.out.println("La conexion se realizo sin problemas! =) ");
         }
@@ -258,7 +237,6 @@ public class RouletteDB{
             Usuario u = null;
             while (rs.next()) {
                  rsl = rs.getString("contraseña");
-                 System.out.println(rsl);
                  u = new Usuario(rs.getInt("numerocedula"),rs.getString("nombre"), rs.getString("apellido"),
                          rs.getString("correo"), rs.getString("contraseña"), rs.getFloat("saldo"));
             }
@@ -270,7 +248,6 @@ public class RouletteDB{
             return u;
             
         }catch(Exception e){
-            System.out.println("Ocurrio un error ingresando el usuario : "+e.getMessage());
         }
 
         return null;

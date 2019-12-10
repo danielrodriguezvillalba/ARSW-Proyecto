@@ -15,10 +15,8 @@ var manageModule = (function () {
 
         getPromise.then(
                 function (data) {
-                    console.log(data);
                 },
                 function () {
-                    console.log('User not found');
                 }
         );
 
@@ -37,10 +35,8 @@ var manageModule = (function () {
 
         putPromise.then(
                 function () {
-                    console.info('PUT OK');
                 },
                 function () {
-                    console.info('PUT NOK');
                 }
         );
 
@@ -123,16 +119,7 @@ var manageModule = (function () {
                 sald = data.saldo;
                 document.getElementById("saldoHeader").innerHTML = data.saldo;
             });
-
             return sald;
-
         }
-
-
     };
-
-
-
-
-
 })();
